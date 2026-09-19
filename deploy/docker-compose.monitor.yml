@@ -1,0 +1,26 @@
+# 可选监控栈：docker compose -f deploy/docker-compose.monitor.yml up -d
+# 依赖主 compose 的 backend 网络；仅演示 Prometheus/Grafana 配置基线。
+version: "3.8"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: pharmareg
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  grafana_data:

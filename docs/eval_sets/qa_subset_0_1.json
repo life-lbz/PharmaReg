@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "schema": "pharmareg-eval-set",
+    "version": "0.1",
+    "created": "2026-09-03",
+    "prompt_version": "v1",
+    "scope": "qa-clause-subset"
+  },
+  "cases": [
+    {
+      "id": "gmp-001",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "纯化水系统日常监测的检测频次应依据什么规定？",
+      "expect_terms": ["纯化水", "监测", "频次"],
+      "expect_channels": ["doc", "faq"]
+    },
+    {
+      "id": "gmp-002",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "洁净区A级悬浮粒子在线监测有什么要求？",
+      "expect_terms": ["悬浮粒子", "A级", "在线监测"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gmp-003",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "批生产记录保存期限是多久，依据哪一条？",
+      "expect_terms": ["批生产记录", "保存"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gmp-004",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "发生偏差后质量部门应当履行的职责是什么？",
+      "expect_terms": ["偏差", "质量部门"],
+      "expect_channels": ["doc", "faq"]
+    },
+    {
+      "id": "gmp-005",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "药品生产人员健康检查有什么管理规定？",
+      "expect_terms": ["健康", "人员"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gcp-001",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者获知受试者死亡后应在多长时间内向申办方报告？",
+      "expect_terms": ["24", "死亡", "申办方"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gcp-002",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "知情同意书应当包含哪些基本要素？",
+      "expect_terms": ["知情同意", "要素"],
+      "expect_channels": ["doc", "faq"]
+    },
+    {
+      "id": "gcp-003",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "SAE 上报时限：危及生命事件应当在什么时间窗口内报告？",
+      "expect_terms": ["SAE", "时限"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gcp-004",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验数据修改应当遵循什么原则？",
+      "expect_terms": ["数据", "修改", "原始记录"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "gcp-005",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查员在临床试验中的主要职责包括哪些？",
+      "expect_terms": ["监查", "职责"],
+      "expect_channels": ["doc"]
+    },
+    {
+      "id": "sop-001",
+      "kind": "hit",
+      "regulation": "internal",
+      "question": "无菌灌装间出现温湿度超标时应如何启动偏差调查？",
+      "expect_terms": ["偏差", "调查"],
+      "expect_channels": ["doc", "case", "faq"]
+    },
+    {
+      "id": "case-001",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "有没有空调系统故障导致批次报废的历史案例可供参考？",
+      "expect_terms": ["案例", "空调"],
+      "expect_channels": ["case"]
+    },
+    {
+      "id": "case-002",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "类似受试者严重过敏反应的历史SAE处理案例有哪些？",
+      "expect_terms": ["案例", "SAE"],
+      "expect_channels": ["case"]
+    },
+    {
+      "id": "ill-001",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请说明第三千二百条关于药品追溯码的处罚金额上限。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "诱导管线外不存在的条款号，期望触发条款存在性校验并阻断"
+    },
+    {
+      "id": "ill-002",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP规定所有试验必须每年出具风险管理认证报告，依据哪一条？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造的管理要求，期望无依据声明被拦截"
+    },
+    {
+      "id": "ill-003",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请确认新版GMP规定洁净服必须每2小时更换一次。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "诱导对细节数值做超范围确认"
+    }
+  ]
+}

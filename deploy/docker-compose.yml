@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: pharmareg
+      MYSQL_DATABASE: pharmareg
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  milvus:
+    image: milvusdb/milvus:v2.4.0
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    depends_on:
+      - etcd
+      - minio
+    volumes:
+      - milvus_data:/var/lib/milvus
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.5.5
+    environment:
+      ETCD_AUTO_COMPACTION_MODE: periodic
+      ETCD_AUTO_COMPACTION_RETENTION: "0"
+      ETCD_QUOTA_BACKEND_BYTES: "8589934592"
+      ETCD_SNAPSHOT_COUNT: "10000"
+    command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls=http://0.0.0.0:2379 --data-dir /etcd
+    volumes:
+      - etcd_data:/etcd
+
+  minio:
+    image: minio/minio:latest
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    command: minio server /minio_data
+    volumes:
+      - minio_data:/minio_data
+    ports:
+      - "9000:9000"
+
+volumes:
+  mysql_data:
+  redis_data:
+  milvus_data:
+  etcd_data:
+  minio_data:

@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaReg — RAG检索链路与多Agent编排 面试题库</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #dbeafe;
+            --secondary: #059669;
+            --secondary-light: #d1fae5;
+            --accent: #7c3aed;
+            --accent-light: #ede9fe;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #d97706;
+            --warning-light: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --code-text: #334155;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        .doc-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a56db 100%);
+            color: white;
+            padding: 40px 32px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+        }
+        .doc-header h1 { color: white; font-size: 28px; margin-bottom: 8px; }
+        .doc-header .subtitle { font-size: 15px; opacity: 0.85; }
+        .doc-header .meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .doc-header .meta span { background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+        h2 {
+            font-size: 24px; font-weight: 700; color: var(--primary);
+            margin-top: 56px; margin-bottom: 20px; padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-light);
+            scroll-margin-top: 20px;
+        }
+        h3 {
+            font-size: 19px; font-weight: 700; color: var(--text);
+            margin-top: 40px; margin-bottom: 14px; padding-left: 12px;
+            border-left: 4px solid var(--accent);
+            scroll-margin-top: 20px;
+        }
+        h4 { font-size: 16px; font-weight: 700; color: var(--secondary); margin-top: 24px; margin-bottom: 10px; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin-left: 20px; margin-bottom: 12px; }
+        li { margin-bottom: 6px; }
+        pre {
+            background: var(--code-bg); border: 1px solid var(--border);
+            border-radius: 8px; padding: 16px 20px; overflow-x: auto;
+            margin: 12px 0; font-size: 13px; line-height: 1.6;
+        }
+        code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+        pre code { color: var(--code-text); }
+        :not(pre) > code { background: var(--code-bg); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+        th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+        td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        tr:nth-child(even) td { background: #f8fafc; }
+        .qa-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; margin: 14px 0; overflow: hidden; }
+        .qa-question { background: var(--accent-light); padding: 12px 18px; font-weight: 700; color: var(--accent); font-size: 14px; border-bottom: 1px solid var(--border); }
+        .qa-answer { padding: 14px 18px; font-size: 14px; }
+        .qa-answer strong { color: var(--primary); }
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .tag-primary { background: var(--primary-light); color: var(--primary); }
+        .tag-secondary { background: var(--secondary-light); color: var(--secondary); }
+        .tag-accent { background: var(--accent-light); color: var(--accent); }
+        .tag-danger { background: var(--danger-light); color: var(--danger); }
+        .tag-warning { background: var(--warning-light); color: var(--warning); }
+        .callout { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; }
+        .callout-info { background: var(--primary-light); border-left: 4px solid var(--primary); }
+        .callout-warning { background: var(--warning-light); border-left: 4px solid var(--warning); }
+        .callout-danger { background: var(--danger-light); border-left: 4px solid var(--danger); }
+        .callout-success { background: var(--secondary-light); border-left: 4px solid var(--secondary); }
+        .toc { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 32px; margin-bottom: 40px; }
+        .toc-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+        .toc-list { list-style: none; columns: 2; gap: 20px; }
+        .toc-list li { margin-bottom: 6px; }
+        .toc-list li a { text-decoration: none; color: var(--text); font-size: 13px; }
+        .toc-list li a:hover { color: var(--primary); }
+        .toc-sub { list-style: none; margin-left: 16px; margin-bottom: 4px; }
+        .toc-sub li a { font-size: 12px; color: var(--text-light); }
+        .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 40px 0; }
+        .difficulty { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-left: 8px; }
+        .diff-easy { background: #d1fae5; color: #059669; }
+        .diff-mid { background: #fef3c7; color: #d97706; }
+        .diff-hard { background: #fee2e2; color: #dc2626; }
+        .arch-box { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid var(--primary-light); border-radius: 12px; padding: 20px; margin: 16px 0; font-family: monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; white-space: pre; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="doc-header">
+    <h1>RAG 检索链路与多 Agent 编排 — 面试题库</h1>
+    <div class="subtitle">PharmaReg 制药合规知识平台 · 独立面试题库文档</div>
+    <div class="meta">
+        <span>全覆盖 · 高频+冷门+延伸</span>
+        <span>故障排查专题</span>
+        <span>技术对比专题</span>
+        <span>同类项目对比</span>
+    </div>
+</div>
+
+<div class="toc">
+    <div class="toc-title">目录导航</div>
+    <ul class="toc-list">
+        <li><a href="#sec1">一、RAG 检索链路面试题库</a>
+            <ul class="toc-sub">
+                <li><a href="#sec1-1">1.1 基础概念题</a></li>
+                <li><a href="#sec1-2">1.2 架构设计题</a></li>
+                <li><a href="#sec1-3">1.3 技术实现细节题</a></li>
+                <li><a href="#sec1-4">1.4 性能优化题</a></li>
+                <li><a href="#sec1-5">1.5 故障排查题</a></li>
+                <li><a href="#sec1-6">1.6 对比选型题</a></li>
+            </ul>
+        </li>
+        <li><a href="#sec2">二、多 Agent 编排面试题库</a>
+            <ul class="toc-sub">
+                <li><a href="#sec2-1">2.1 基础概念题</a></li>
+                <li><a href="#sec2-2">2.2 架构设计题</a></li>
+                <li><a href="#sec2-3">2.3 技术实现细节题</a></li>
+                <li><a href="#sec2-4">2.4 故障排查题</a></li>
+                <li><a href="#sec2-5">2.5 对比选型题</a></li>
+            </ul>
+        </li>
+        <li><a href="#sec3">三、系统故障问题专题</a>
+            <ul class="toc-sub">
+                <li><a href="#sec3-1">3.1 RAG 链路故障</a></li>
+                <li><a href="#sec3-2">3.2 Agent 编排故障</a></li>
+                <li><a href="#sec3-3">3.3 基础设施故障</a></li>
+                <li><a href="#sec3-4">3.4 性能问题</a></li>
+            </ul>
+        </li>
+        <li><a href="#sec4">四、技术对比专题</a>
+            <ul class="toc-sub">
+                <li><a href="#sec4-1">4.1 向量数据库对比</a></li>
+                <li><a href="#sec4-2">4.2 Embedding 模型对比</a></li>
+                <li><a href="#sec4-3">4.3 Rerank 方案对比</a></li>
+                <li><a href="#sec4-4">4.4 Agent 框架对比</a></li>
+                <li><a href="#sec4-5">4.5 LLM 选型对比</a></li>
+                <li><a href="#sec4-6">4.6 分块策略对比</a></li>
+            </ul>
+        </li>
+        <li><a href="#sec5">五、同类项目对比专题</a>
+            <ul class="toc-sub">
+                <li><a href="#sec5-1">5.1 行业同类 RAG 项目</a></li>
+                <li><a href="#sec5-2">5.2 同类 Agent 项目</a></li>
+                <li><a href="#sec5-3">5.3 差异化分析</a></li>
+                <li><a href="#sec5-4">5.4 可借鉴优化点</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 第一部分：RAG 检索链路面试题库 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec1">一、RAG 检索链路面试题库</h2>
+
+<!-- ===== 1.1 基础概念题 ===== -->
+<h3 id="sec1-1">1.1 基础概念题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q1: 什么是 RAG？为什么需要 RAG 而不直接用大模型？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>RAG（Retrieval-Augmented Generation，检索增强生成）</strong>是一种将信息检索与大语言模型生成结合的架构。核心思想：先从外部知识库检索与问题相关的内容，再将检索结果作为上下文送入 LLM 生成答案。</p>
+        <p><strong>不直接用大模型的原因：</strong></p>
+        <ul>
+            <li><strong>知识时效性</strong>：LLM 训练数据有截止日期，无法回答最新法规</li>
+            <li><strong>幻觉问题</strong>：LLM 可能编造不存在的条款号或法规内容，在制药合规场景中不可接受</li>
+            <li><strong>私有知识</strong>：企业内部法规库、FAQ、历史案例不在 LLM 训练数据中</li>
+            <li><strong>引用溯源</strong>：RAG 可以标注答案来源（具体条款号），纯 LLM 无法溯源</li>
+            <li><strong>成本控制</strong>：RAG 只送入相关上下文，不需要 fine-tune 整个模型</li>
+            <li><strong>数据安全</strong>：法规文本留在本地向量库，不进入 LLM 训练数据</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q2: RAG 的基本流程是什么？请画出你们系统的 RAG 链路图 <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p>我们系统的 RAG 链路分为<strong>检索阶段、生成阶段、校验阶段</strong>三段共 11 步：</p>
+        <div class="arch-box">用户问题
+  │
+  ▼ 检索阶段
+  ① 意图分类 → ② 查询重写 → ③ 获取激活版本 → ④ 多通道向量检索
+  → ⑤ 去重预剪枝 → ⑥ CrossEncoder 重排序 → top 8
+  │
+  ▼ 生成阶段
+  ⑦ FAQ 快速路径(rerank>0.85) 或 ⑧ LLM 生成
+  │
+  ▼ 校验阶段
+  ⑨ 幻觉双重校验(条款存在性 + 声明蕴含)
+  → ⑩ 置信度计算与阻断
+  → ⑪ 引用溯源构建</div>
+        <p>其中意图分类区分 qa/faq_match/deviation 三种场景，查询重写做历史上下文拼接和缩写扩展（GMP→药品生产质量管理规范），多通道检索覆盖 doc/faq/case 三个 Milvus 集合，重排序用 bge-reranker-large CrossEncoder 精排。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q3: 什么是 Embedding？它在 RAG 中起什么作用？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>Embedding（词嵌入/文本嵌入）</strong>是将文本转换为固定维度的浮点向量，使语义相近的文本在向量空间中距离也相近。本项目使用 bge-m3 模型，输出 1024 维向量。</p>
+        <p><strong>在 RAG 中的作用：</strong></p>
+        <ul>
+            <li><strong>入库阶段</strong>：将法规条款文本 Embedding 后存入 Milvus 向量库</li>
+            <li><strong>检索阶段</strong>：将用户问题 Embedding 后，在向量库中做余弦相似度检索，召回语义最相关的条款</li>
+        </ul>
+        <p>Embedding 质量直接决定检索召回率，是 RAG 系统的基石。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q4: 什么是向量相似度检索？余弦相似度和欧氏距离有什么区别？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>向量相似度检索</strong>：给定一个查询向量，在向量库中找到与之"最相似"的 N 个向量。相似度由度量函数定义。</p>
+        <p><strong>余弦相似度（Cosine Similarity）</strong>：衡量向量方向的夹角，对向量长度不敏感。公式：<code>cos(A,B) = A·B / (|A|×|B|)</code>，范围 [-1, 1]。</p>
+        <p><strong>欧氏距离（Euclidean Distance）</strong>：衡量向量空间中两点的直线距离，对向量长度敏感。</p>
+        <p><strong>本项目选 COSINE 的原因</strong>：文本 Embedding 后向量的模长可能因文本长度变化，但我们关心的是<strong>语义方向</strong>的相似性而非绝对距离。余弦相似度对文本长度不敏感，更适合语义检索。Milvus 索引配置 <code>metric_type="COSINE"</code>。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q5: 什么是 CrossEncoder？它和双塔模型（Bi-Encoder）有什么区别？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>双塔模型（Bi-Encoder）</strong>：query 和 document 分别独立编码为向量，再计算相似度。优点是可预计算（document 向量提前入库），检索速度快（毫秒级）。缺点是 query 和 doc 没有交互，精度有限。</p>
+        <p><strong>CrossEncoder（交叉编码器）</strong>：将 query 和 document <strong>拼接后</strong>一起送入 Transformer，模型能捕获两者间的深层语义交互。精度远高于双塔，但无法预计算，需逐对推理，速度慢（百毫秒级）。</p>
+        <table>
+            <tr><th>维度</th><th>Bi-Encoder (bge-m3)</th><th>CrossEncoder (bge-reranker-large)</th></tr>
+            <tr><td>输入</td><td>query 和 doc 独立编码</td><td>query + doc 拼接编码</td></tr>
+            <tr><td>速度</td><td>极快（预计算）</td><td>慢（逐对推理）</td></tr>
+            <tr><td>精度</td><td>中等</td><td>高</td></tr>
+            <tr><td>用途</td><td>第一阶段召回</td><td>第二阶段精排</td></tr>
+        </table>
+        <p>本项目采用<strong>两阶段架构</strong>：bge-m3（Bi-Encoder）快速召回 40 条 → bge-reranker-large（CrossEncoder）精排取 top 8。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q6: 什么是幻觉（Hallucination）？在 RAG 系统中幻觉有哪些类型？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>幻觉</strong>指 LLM 生成看似合理但实际不正确或无依据的内容。在 RAG 系统中常见类型：</p>
+        <ul>
+            <li><strong>编造条款号</strong>：答案引用了不存在的"第三十五条"（最危险，可能误导合规决策）</li>
+            <li><strong>扭曲条款原文</strong>：条款存在但 LLM 篡改了原文表述（如把"应当"改成"必须"）</li>
+            <li><strong>跨上下文拼接</strong>：把不同条款的内容错误拼接</li>
+            <li><strong>过度推理</strong>：基于检索内容做了超出原文范围的推理</li>
+            <li><strong>无依据声明</strong>：答案包含检索上下文中不存在的事实主张</li>
+        </ul>
+        <p>本项目针对前两种和最后一种设计了<strong>双重校验</strong>：条款存在性验证（查 MySQL RegClause 表）+ 声明蕴含校验（LLM 逐句判定 yes/no）。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q7: 什么是文档分块（Chunking）？分块大小对 RAG 有什么影响？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>文档分块</strong>：将长文档切分为多个小块，每块独立 Embedding 和检索。分块大小直接影响检索精度：</p>
+        <ul>
+            <li><strong>块太大</strong>（如整条法规）：一个向量要表达太多信息，检索精度下降；且送入 LLM 的上下文冗长，增加 token 成本</li>
+            <li><strong>块太小</strong>（如单句话）：上下文不完整，可能丢失关键限定条件（如"除生物制品外"）</li>
+            <li><strong>本项目策略</strong>：512 token 上限（约 768 中文字符），按中文标点句子边界切分，保证句子完整性。同时基于法规结构——按"第X条"为粒度，每块绑定 clause_id 支持引用溯源</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q8: 什么是 Prompt 工程？你们怎么管理 Prompt？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>Prompt 工程</strong>是通过设计 LLM 输入提示词来引导生成质量和行为的技术。本项目采用<strong>版本化管理</strong>：</p>
+        <ul>
+            <li>Prompt 存放于 <code>docs/prompts/*.md</code> 文件，而非硬编码在代码中</li>
+            <li><code>prompts.py</code> 的 <code>load_prompt()</code> 优先从文件读取，缺失时回退到内嵌模板并告警</li>
+            <li>4 个核心模板：role_qa（答疑）、role_faq（FAQ 口径）、role_explain（条款讲解）、claim_verifier（声明校验裁判）</li>
+            <li>核心约束：只依据检索上下文作答、必须标注条款号、严禁编造、证据不足回答"未检索到依据"</li>
+        </ul>
+        <p>版本化管理的好处：不修改代码即可调优 Prompt，支持 A/B 测试，Git 可追踪变更历史。</p>
+    </div>
+</div>
+
+<!-- ===== 1.2 架构设计题 ===== -->
+<h3 id="sec1-2">1.2 架构设计题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q9: 为什么选择两阶段检索架构（向量检索 + CrossEncoder）而不是只用其中一种？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>只用向量检索的问题</strong>：bge-m3（Bi-Encoder）将 query 和 doc 独立编码，无法捕获细粒度的语义交互。对于法规条款这种高度专业化的文本，可能出现"向量相似但语义不符"的误召回。比如"批次放行"和"产品放行"向量很近，但在合规语境下含义不同。</p>
+        <p><strong>只用 CrossEncoder 的问题</strong>：CrossEncoder 需要逐对推理，无法预计算。法规库可能有数万条 chunk，逐对打分需要数分钟，无法满足实时问答需求。</p>
+        <p><strong>两阶段架构的优势</strong>：第一阶段用向量检索从数万条 chunk 中快速召回 40 条（毫秒级），第二阶段用 CrossEncoder 对 40 条精排取 top 8（百毫秒级），兼顾速度和精度。这是工业界 RAG 的标准做法。</p>
+        <p><strong>中间还有预剪枝</strong>：<code>_pre_prune_candidates()</code> 在多通道检索后、Rerank 前做一轮剪枝——每通道保留 top 8，控制 Rerank 输入规模（24 条而非 50+），避免 Rerank 超时。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q10: 为什么做多通道检索（doc/faq/case）？三者有什么区别？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>三类知识来源的<strong>性质和用户意图</strong>不同，分开建索引可以针对性优化检索策略：</p>
+        <table>
+            <tr><th>通道</th><th>内容</th><th>top_k</th><th>特点</th></tr>
+            <tr><td>doc</td><td>法规条款原文（GMP/GCP 正文）</td><td>40</td><td>权威但表述正式，信息密度高</td></tr>
+            <tr><td>faq</td><td>标准口径（人工审核的 Q&A 对）</td><td>10</td><td>通俗化解释，命中后可直接返回</td></tr>
+            <tr><td>case</td><td>历史偏差/案例记录</td><td>40</td><td>实战经验，偏差调查参考</td></tr>
+        </table>
+        <p><strong>意图分类调整权重</strong>：常规问答时 doc 权重 0.7；用户问"标准口径怎么办"时 faq 权重提升到 0.6；用户问"有没有类似案例"时 case 权重提升到 0.6。</p>
+        <p><strong>FAQ 快速路径</strong>：如果 FAQ 候选 rerank_score > 0.85，直接返回标准口径，置信度固定 0.95，跳过 LLM 生成和幻觉检测——因为 FAQ 是人工审核的，不需要再验。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q11: 你们的幻觉防护是怎么设计的？为什么用双重校验？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>设计理念</strong>：制药合规场景中，"不知道"比"给错答案"更安全。我们设计了双重校验覆盖不同类型幻觉：</p>
+        <p><strong>第一重：条款存在性验证（verify_clause_existence）</strong></p>
+        <ul>
+            <li>正则提取答案中所有"第X条"引用</li>
+            <li>逐条查 MySQL <code>RegClause</code> 表验证条款是否真实存在</li>
+            <li>输出 <code>clause_hit_rate</code>（命中率），编造的条款号会被标记为 miss</li>
+            <li>针对性解决：<strong>编造条款号</strong>这类幻觉</li>
+        </ul>
+        <p><strong>第二重：声明蕴含校验（verify_claims）</strong></p>
+        <ul>
+            <li>按句切分答案，过滤出包含模态词（必须/应当/不得/禁止/要求/规定）的句子</li>
+            <li>用 LLM（temperature=0.0）逐句判定"该声明是否有上下文依据"（yes/no）</li>
+            <li>输出 <code>claim_pass_rate</code>（通过率），无依据的声明被标记为 unverified</li>
+            <li>针对性解决：<strong>过度推理、无依据声明</strong>这类幻觉</li>
+        </ul>
+        <p><strong>为什么需要两重</strong>：第一重只能检测编造的条款号，但 LLM 可能用正确的条款号但扭曲原文表述，这需要第二重的语义校验来捕获。两重校验互补，覆盖不同幻觉类型。</p>
+        <p><strong>置信度公式</strong>：<code>0.5×rerank_score + 0.3×clause_hit_rate + 0.2×claim_pass_rate</code>，三维度加权。阻断规则：置信度 &lt; 0.6 或未验证声明占比 &gt; 30%。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q12: 为什么置信度公式中 rerank_score 权重最高（0.5）？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>三个维度分别反映不同信号，权重设计考虑了<strong>信号强度</strong>和<strong>可靠性</strong>：</p>
+        <ul>
+            <li><strong>rerank_score (0.5)</strong>：CrossEncoder 的相关性分数，直接反映"检索到的内容与问题的语义匹配度"。这是最强信号——如果检索内容与问题不相关，即使 LLM 生成完美也只是答非所问。CrossEncoder 精度高、确定性强。</li>
+            <li><strong>clause_hit_rate (0.3)</strong>：条款引用命中率，反映"LLM 是否编造了不存在的条款"。权重次高因为编造条款号是最危险的幻觉类型，但只覆盖了一种幻觉类型所以权重低于 rerank。</li>
+            <li><strong>claim_pass_rate (0.2)</strong>：声明通过率，反映"LLM 的推理是否有依据"。权重最低因为 LLM 裁判本身有误差——用 LLM 判定 LLM 的输出，存在自评偏差风险，不宜给过高权重。</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q13: 为什么 Rerank 时 top_n 设为全部候选数而不是直接取 8？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>代码中 <code>reranker.rerank(query, doc_texts, top_n=len(doc_texts))</code>，看似浪费但实际上是<strong>安全性设计</strong>：</p>
+        <p>如果只设 <code>top_n=8</code>，Reranker 只返回前 8 条的 relevance_score，其余候选没有 rerank 分。排序时这些候选回退到向量余弦分——而余弦分和 rerank 分不在同一尺度（余弦分通常 0.7-0.9，rerank 分通常 0-1），可能出现"未重排候选的余弦分 > 已重排候选的 rerank 分"的情况，导致低质量候选混入 top 8，绕过证据门控。</p>
+        <p>设 <code>top_n=len(doc_texts)</code> 让所有候选都有 rerank_score，统一尺度排序。CrossEncoder 打分计算量不变（逐对计算），只是多返回几个序号，不影响性能。</p>
+        <div class="callout callout-warning">
+            这是一个容易踩的坑——很多 RAG 教程直接 <code>top_n=最终需要的数量</code>，导致排序尺度不一致。
+        </div>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q14: 查询重写为什么只生成 2 个变体？不做更多？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>查询重写</strong>生成两种变体：① 历史上下文拼接（上一轮问题 + 当前问题）；② 缩写扩展（GMP→药品生产质量管理规范）。</p>
+        <p><strong>只生成 2 个的原因</strong>：</p>
+        <ul>
+            <li><strong>检索次数 = 变体数 × 版本数 × 通道数</strong>：假设 2 个变体 × 1 个版本 × 3 通道 = 6 次 Milvus 检索。如果变体增加到 5 个，就是 15 次检索，延迟显著增加</li>
+            <li><strong>收益递减</strong>：前 2 个变体（历史上下文 + 缩写扩展）覆盖了最常见的语义缺口，更多变体的边际收益递减</li>
+            <li><strong>Rerank 兜底</strong>：即使多召回了一些低质量候选，CrossEncoder 会精排过滤掉。所以"多召回"不如"精准召回"</li>
+        </ul>
+        <p><strong>如果需要进一步优化</strong>：可以用 LLM 做查询改写（Query Reformulation），让 LLM 根据上下文生成更自然的完整问题，但这会增加一次 LLM 调用延迟。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q15: 多版本知识库是怎么管理的？为什么需要多版本并行？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>法规会修订更新（如 GMP 2010 → 修订版），企业在新旧版本过渡期需要同时查询两个版本。系统通过 <code>KbVersion</code> 模型管理：</p>
+        <ul>
+            <li>每个版本绑定独立的 doc/faq/case 三个 Milvus 集合（如 <code>doc_gmp_2010</code>、<code>doc_gmp_2024</code>）</li>
+            <li><code>status="active"</code> 的版本都会被检索，支持多版本并行激活</li>
+            <li>检索时对每个激活版本的每个通道分别检索，去重合并后统一 Rerank</li>
+            <li>版本可激活/冻结/回滚，满足法规版本管理需求</li>
+        </ul>
+        <p><strong>设计考量</strong>：不在同一个集合中用字段区分版本，而是物理隔离——避免版本间向量干扰，且可以独立删除旧版本集合释放存储。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q16: Stub 模式是什么？为什么要设计这个模式？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>Stub 模式</strong>是 <code>LLM_PROVIDER=stub</code> 时的降级运行模式：<code>stub_llm.py</code> 不调用任何 LLM，直接将检索到的条款原文按固定结构拼接为答案，保证 100% 可溯源。</p>
+        <p><strong>设计目的</strong>：</p>
+        <ul>
+            <li><strong>无 GPU 环境联调</strong>：CI/CD 流水线没有 GPU，Stub 模式让 RAG 管线可联调、测试可执行</li>
+            <li><strong>评估基线</strong>：Stub 答案 = 检索原文，评估 Stub 答案质量 = 评估纯检索质量，排除 LLM 生成干扰</li>
+            <li><strong>幻觉防护路径验证</strong>：Stub 模式下幻觉校验（条款存在性、声明判定、置信度、阻断）仍然真实执行</li>
+        </ul>
+        <p><strong>证据门控</strong>：Stub 模式有额外安全门——当 <code>top_rerank < 0.45</code> 时标记 <code>needs_human_review</code>，避免无关原文被当作答案（因为没有 LLM 理解和过滤，必须更保守）。</p>
+    </div>
+</div>
+
+<!-- ===== 1.3 技术实现细节题 ===== -->
+<h3 id="sec1-3">1.3 技术实现细节题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q17: 意图分类是怎么实现的？为什么用关键词匹配而不是 LLM 分类？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>实现方式</strong>：关键词匹配——检查用户查询中是否包含预设关键词：</p>
+        <pre><code>FAQ_KEYWORDS = ["口径", "怎么办", "如何处理", "怎么理解", "标准", "要求是"]
+CASE_KEYWORDS = ["案例", "历史", "发生过", "之前"]</code></pre>
+        <p>命中 FAQ_KEYWORDS → faq_match 场景（faq 权重 0.6）；命中 CASE_KEYWORDS → deviation 场景（case 权重 0.6）；都不命中 → qa 场景（doc 权重 0.7）。</p>
+        <p><strong>为什么不用 LLM 分类</strong>：</p>
+        <ul>
+            <li><strong>延迟</strong>：LLM 分类增加一次 LLM 调用（1-3 秒），关键词匹配是微秒级</li>
+            <li><strong>确定性</strong>：关键词匹配结果确定，LLM 分类有随机性</li>
+            <li><strong>成本</strong>：每次问答都调 LLM 分类增加 API 成本</li>
+            <li><strong>够用</strong>：当前 3 种场景的关键词覆盖足够，复杂场景由 Rerank 兜底</li>
+        </ul>
+        <p><strong>优化方向</strong>：如果场景变复杂（如需要区分 GMP/GCP/SAE 等 10+ 种意图），可以考虑轻量分类模型（如 FastText）或 fine-tuned BERT。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q18: 缩写扩展映射表是怎么设计的？如果遗漏了怎么办？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>当前映射表覆盖制药行业最常见的三个缩写：</p>
+        <pre><code>abbrev_map = {
+    "GMP": "药品生产质量管理规范",
+    "GCP": "药物临床试验质量管理规范",
+    "ICH": "人用药品注册技术国际协调会议",
+}</code></pre>
+        <p><strong>遗漏的处理</strong>：如果用户查询中包含未映射的缩写（如 API、OOS、CAPA），系统仍会正常检索——向量检索本身能捕获缩写的语义（因为 Embedding 模型见过这些缩写），只是可能召回率略低。</p>
+        <p><strong>优化方向</strong>：① 扩充映射表覆盖更多制药缩写；② 用 LLM 做动态缩写展开；③ 在法规文本入库时同步建立缩写-全称索引表。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q19: 分块器是怎么保证句子完整性的？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><code>chunker.py</code> 按中文标点句子边界切分，而非按固定字符数切：</p>
+        <pre><code>MAX_CHUNK_TOKENS = 512
+APPROX_CHARS_PER_TOKEN = 1.5  # 中文约 1.5 字符/token
+max_chars = int(512 * 1.5)     # = 768 字符
+
+# 按中文标点切句
+sentences = re.split(r"(?<=[。；！？\n])", content)
+
+# 逐句累加，超过 max_chars 则开新块
+for sentence in sentences:
+    if len(current_chunk) + len(sentence) > max_chars and current_chunk:
+        chunks.append({...})  # 当前块满了，保存
+        current_chunk = sentence  # 新块
+    else:
+        current_chunk += sentence  # 继续累加</code></pre>
+        <p><strong>设计要点</strong>：① 不会把一句话切两半——只在句子边界（。；！？\n）处切分；② 1.5 字符/token 是中文近似值（英文约 4 字符/token）；③ 如果单个句子超过 768 字符，不会被进一步切分（保留完整语义），只是该块稍大。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q20: Milvus 的集合 Schema 是怎么设计的？为什么有 tenant_id 字段？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <pre><code>schema.add_field("id", DataType.INT64, is_primary=True)        # 自增主键
+schema.add_field("vector", DataType.FLOAT_VECTOR, dim=1024)     # bge-m3 向量
+schema.add_field("entity_id", DataType.INT64)                   # 关联 MySQL 条款 ID
+schema.add_field("text", DataType.VARCHAR, max_length=4096)     # 原文（检索后返回）
+schema.add_field("doc_version", DataType.VARCHAR, max_length=64) # 版本标识
+schema.add_field("tenant_id", DataType.INT64)                  # 多租户隔离</code></pre>
+        <p><strong>设计考虑</strong>：</p>
+        <ul>
+            <li><strong>entity_id</strong>：Milvus 不存业务数据，只存向量和必要元数据。检索命中后用 entity_id 回查 MySQL 获取完整条款信息</li>
+            <li><strong>text 字段</strong>：直接在 Milvus 中存储原文（max 4096），避免二次查库，Rerank 时直接取用</li>
+            <li><strong>tenant_id</strong>：支持多租户隔离，检索时 <code>filter=f"tenant_id == {tenant_id}"</code>。也可以用多集合隔离（每租户独立集合），但集合数过多影响性能</li>
+            <li><strong>enable_dynamic_field=True</strong>：允许动态字段，方便后续扩展不加 Schema 变更</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q21: ensure_collection / ensure_index / ensure_loaded 三个方法的作用是什么？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>Milvus 的检索前置条件链——集合必须存在 → 必须有索引 → 必须加载到内存才能搜索：</p>
+        <ul>
+            <li><strong>ensure_collection</strong>：检查集合是否存在，不存在则创建 Schema 并建索引。幂等设计，重复调用无副作用</li>
+            <li><strong>ensure_index</strong>：检查向量字段是否有索引。AUTOINDEX + COSINE 度量。索引是搜索的前提——无索引的集合无法 search</li>
+            <li><strong>ensure_loaded</strong>：集合数据必须 load 到内存才能 search。load 是异步操作，<code>ensure_loaded</code> 轮询 <code>get_load_state</code>，每 0.5s 检查一次，超时 30s</li>
+        </ul>
+        <p><strong>调用顺序</strong>：<code>ensure_collection → ensure_index → ensure_loaded → search</code>。每次 search 前都会执行这三步保证可用性。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q22: 声明校验时为什么要过滤模态词？哪些句子会跳过校验？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p>声明校验（verify_claims）只对<strong>包含事实主张的句子</strong>做 LLM 裁判，过滤逻辑：</p>
+        <pre><code># 包含条款引用 或 包含模态词的句子才校验
+if CLAUSE_PATTERN.search(sentence) or any(
+    kw in sentence for kw in ["必须", "应当", "不得", "禁止", "要求", "规定"]
+):
+    # 需要 LLM 裁判
+else:
+    verified += 1  # 直接通过，不校验</code></pre>
+        <p><strong>设计理由</strong>：</p>
+        <ul>
+            <li><strong>减少 LLM 调用</strong>：一个答案可能有 10+ 句，逐句调 LLM 太慢。过滤后通常只有 3-5 句需要校验</li>
+            <li><strong>聚焦风险句子</strong>：包含"必须/应当/不得/禁止"等模态词的句子是合规主张——这些是错误的代价最高的句子。纯描述性句子（如"该条款规定了以下内容"）不会误导合规决策</li>
+            <li><strong>包含条款号引用</strong>的句子必须校验：因为可能是编造的条款</li>
+        </ul>
+        <p><strong>Stub 模式不同</strong>：<code>verify_claims_stub()</code> 的过滤词多了"建议"，且校验方式是逐字匹配（句子在上下文中能找到即通过），不调 LLM。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q23: build_citations 是怎么实现引用溯源的？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>引用溯源通过 <code>entity_id</code> 回查 MySQL 实现：</p>
+        <pre><code>for c in candidates:
+    entity_id = c.get("entity_id")
+    if c.get("channel") == "doc" and entity_id:
+        # 查 RegClause 表获取条款号
+        clause = await db.execute(select(RegClause).where(RegClause.id == entity_id))
+        citations.append({
+            "clause_id": clause.id,
+            "clause_no": clause.clause_no,      # "第三十五条"
+            "excerpt": c["text"][:200],         # 检索原文摘录
+            "collection": c.get("doc_version"), # 所属版本
+        })
+    elif c.get("channel") == "faq" and entity_id:
+        # 查 Faq 表获取标准口径
+        faq = await db.execute(select(Faq).where(Faq.id == entity_id))
+        citations.append({
+            "clause_no": "FAQ",
+            "excerpt": faq.answer[:200],
+        })</code></pre>
+        <p>最终输出结构化的引用列表——每个引用包含条款号、原文摘录、所属版本，用户可以据此回溯到原始法规文档。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q24: SSE 流式输出的事件设计是怎样的？为什么先推 citation？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <pre><code>yield {"type": "citation", "citations": citations}    # ① 先推送引用
+async for delta in llm_client.chat_stream(messages):
+    yield {"type": "delta", "content": delta}             # ② 逐 token 推送
+yield {"type": "done", "confidence": confidence}         # ③ 推送置信度
+# 或阻断
+yield {"type": "flag", "flag": "needs_human_review", ...} # ③ 推送阻断</code></pre>
+        <p><strong>为什么先推 citation</strong>：引用信息在检索阶段就确定了（不依赖 LLM 生成），可以在 LLM 开始生成前就推给前端，让用户先看到"引用了哪些条款"。同时，如果后续 LLM 生成失败，用户至少有引用信息可以自行查阅。</p>
+        <p><strong>断线续传</strong>：通过 <code>Last-Event-Id</code> 实现幂等重放——前端断线重连时带上最后收到的事件 ID，服务端从该 ID 之后重放。已完成的内容不会重复推送。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q25: LLM 客户端的重试策略是怎么设计的？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>使用 <code>tenacity</code> 库实现指数退避重试：</p>
+        <pre><code># 同步请求：重试 3 次，退避 2-10s
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+async def chat(self, messages, temperature=0.3): ...
+
+# 流式请求：重试 2 次，退避 1-5s
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, min=1, max=5))
+async def chat_stream(self, messages, temperature=0.3): ...</code></pre>
+        <p><strong>设计差异</strong>：同步请求重试 3 次（答案生成是核心路径，多给机会），流式请求重试 2 次（流式断开后重试更复杂，减少重试避免延迟叠加）。</p>
+        <p><strong>超时设置</strong>：同步 60s，流式 120s（流式需要保持连接更久）。</p>
+        <p><strong>声明校验的温度</strong>：<code>temperature=0.0</code>——声明校验需要确定性（同一输入始终输出相同结果），避免随机性影响校验稳定性。</p>
+    </div>
+</div>
+
+<!-- ===== 1.4 性能优化题 ===== -->
+<h3 id="sec1-4">1.4 性能优化题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q26: RAG 链路的性能瓶颈在哪里？怎么优化？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>各阶段延迟分析</strong>（典型值）：</p>
+        <table>
+            <tr><th>阶段</th><th>延迟</th><th>瓶颈原因</th></tr>
+            <tr><td>Embedding</td><td>50-100ms</td><td>HTTP 调用本地模型服务</td></tr>
+            <tr><td>Milvus 检索</td><td>10-50ms</td><td>6 次检索（2 变体×3 通道）</td></tr>
+            <tr><td>Rerank</td><td>100-300ms</td><td>CrossEncoder 逐对计算</td></tr>
+            <tr><td>LLM 生成</td><td>1-5s</td><td>最大瓶颈</td></tr>
+            <tr><td>幻觉校验</td><td>500ms-2s</td><td>逐句 LLM 裁判</td></tr>
+            <tr><td>总计</td><td>2-8s</td><td>—</td></tr>
+        </table>
+        <p><strong>优化方案</strong>：</p>
+        <ul>
+            <li><strong>Embedding 缓存</strong>：高频查询的 Embedding 向量缓存到 Redis，跳过模型服务调用</li>
+            <li><strong>并行检索</strong>：6 次 Milvus 检索可 <code>asyncio.gather</code> 并行执行，串行→并行可节省 50ms+</li>
+            <li><strong>Rerank 降量</strong>：预剪枝更激进（每通道 top 5 而非 8），减少 CrossEncoder 计算量</li>
+            <li><strong>LLM 流式</strong>：首 token 延迟~200ms，用户感知"开始回答"快，总时间不变但体验好</li>
+            <li><strong>声明校验并行</strong>：逐句 LLM 裁判可并行（<code>asyncio.gather</code>），3-5 句并行可省 60% 时间</li>
+            <li><strong>FAQ 快速路径</strong>：高置信 FAQ 命中跳过 LLM 生成和校验，延迟降到 ~300ms</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q27: 如果法规库有 10 万条条款，检索性能怎么保证？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p>10 万条 chunk 对 Milvus 不是问题（设计支持十亿级），但需要注意：</p>
+        <ul>
+            <li><strong>索引选择</strong>：AUTOINDEX 自动选择 HNSW（小规模，&lt;100 万）或 IVF（大规模）。HNSW 查询更快但内存占用大</li>
+            <li><strong>集合分片</strong>：如果单集合超过 100 万向量，考虑按法规域分集合（GMP 一个、GCP 一个），减少单集合规模</li>
+            <li><strong>nprobe 参数</strong>：IVF 索引的 nprobe 控制搜索范围。nprobe 越大越精确但越慢。需要在精度和速度间平衡</li>
+            <li><strong>内存</strong>：集合必须 load 到内存才能 search。10 万条 × 1024 维 × 4 字节 ≈ 400MB，完全可行</li>
+            <li><strong>Rerank 优化</strong>：预剪枝只送 24 条给 CrossEncoder，不是 10 万条。CrossEncoder 是瓶颈不是 Milvus</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q28: 多通道检索时 6 次 Milvus 查询是串行的还是并行的？怎么优化？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>当前实现是串行的</strong>——<code>retrieve()</code> 中用 <code>for q in queries: for version in versions: ...</code> 嵌套循环，逐次 <code>await search_doc/search_faq/search_case</code>。</p>
+        <p><strong>这是当前最大的性能优化点</strong>：</p>
+        <pre><code># 当前串行
+for q in queries:           # 2 次循环
+    for version in versions:  # 1 次循环
+        await search_doc(...)   # 串行等待
+        await search_faq(...)
+        await search_case(...)
+
+# 优化为并行
+tasks = []
+for q in queries:
+    for version in versions:
+        tasks.append(search_doc(db, q, version.doc_collection, tenant_id))
+        tasks.append(search_faq(db, q, version.faq_collection))
+        tasks.append(search_case(db, q, version.case_collection, tenant_id))
+all_results = await asyncio.gather(*tasks)</code></pre>
+        <p>6 次串行 50ms × 6 = 300ms → 并行后 ~50ms，节省 250ms。Milvus 客户端是线程安全的，支持并行查询。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q29: Embedding 向量可以缓存吗？怎么设计？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>查询 Embedding 缓存</strong>：用户查询的 Embedding 可缓存到 Redis。同一个问题第二次查询直接取缓存，跳过模型服务调用（节省 50-100ms）。</p>
+        <pre><code># 伪代码
+async def embed_with_cache(text: str) -> list[float]:
+    cache_key = f"embed:{hashlib.md5(text.encode()).hexdigest()}"
+    cached = await redis.get(cache_key)
+    if cached:
+        return json.loads(cached)
+    vec = await embedder.embed_single(text)
+    await redis.setex(cache_key, 3600, json.dumps(vec))  # 1h 过期
+    return vec</code></pre>
+        <p><strong>入库 Embedding 不缓存</strong>：入库是一次性操作，不需要缓存。</p>
+        <p><strong>注意</strong>：缓存 key 要用文本哈希而非原文（Redis key 有长度限制），过期时间不宜太长（模型升级后需要刷新）。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q30: 评估集是怎么设计的？质量门禁怎么落地？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>评估集</strong>：<code>docs/eval_sets/qa_full_200.json</code> 共 200 条：</p>
+        <ul>
+            <li>GMP 条款级命中 88 条（验证法规条款检索精度）</li>
+            <li>GCP 条款级命中 88 条（验证临床试验法规覆盖）</li>
+            <li>幻觉注入 24 条（故意问不存在的问题，验证阻断率）</li>
+            <li>16 条子集用于快速回归</li>
+        </ul>
+        <p><strong>质量门禁</strong>：命中率 ≥ 90%、准确率 ≥ 85%、幻觉阻断率 100%。CI/CD 中 <code>run_subset.py</code> 跑 16 条子集，不通过则构建失败。</p>
+        <p><strong>评估指标定义</strong>：</p>
+        <ul>
+            <li><strong>命中率</strong>：检索到正确条款的用例数 / 总用例数</li>
+            <li><strong>准确率</strong>：LLM 答案内容与标准答案一致的用例数 / 总用例数</li>
+            <li><strong>幻觉阻断率</strong>：被正确阻断的幻觉注入用例数 / 幻觉注入总数</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== 1.5 故障排查题 ===== -->
+<h3 id="sec1-5">1.5 故障排查题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q31: 用户反馈"回答完全不对题"，你怎么排查？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查思路</strong>：从检索 → 生成 → 校验三个阶段逐步定位。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查检索结果</strong>：在 <code>retrieve()</code> 返回处打日志，查看 top 8 候选的 text 和 rerank_score。如果候选与问题无关 → 检索阶段问题</li>
+            <li><strong>检查 Embedding</strong>：确认 Embedding 服务（:8081/embed）正常，向量维度 1024。可用 <code>curl -X POST :8081/embed -d '{"input":"测试"}'</code> 验证</li>
+            <li><strong>检查 Milvus</strong>：确认集合已 load、索引存在、tenant_id 过滤正确。查看 <code>ensure_loaded</code> 是否超时</li>
+            <li><strong>检查意图分类</strong>：查看 <code>classify_intent</code> 返回的场景和权重——是否因为关键词误判导致通道权重偏差</li>
+            <li><strong>检查 LLM 输出</strong>：查看送入 LLM 的 prompt 和上下文，以及 LLM 返回的原文。可能是上下文拼接问题或 Prompt 约束不够</li>
+            <li><strong>检查幻觉校验</strong>：如果 <code>mode="needs_human_review"</code>，查看 unverified_claims 列表——可能是过度阻断</li>
+        </ol>
+        <p><strong>常见根因</strong>：① 法规文本未正确入库（parser 解析失败）；② Milvus 集合未 load；③ Embedding 模型版本不一致；④ Prompt 约束太松导致 LLM 自由发挥。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q32: Milvus 检索返回空结果，可能的原因有哪些？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>（按可能性排序）：</p>
+        <ol>
+            <li><strong>集合不存在</strong>：<code>client.has_collection()</code> 返回 False。原因：未执行入库流程，或集合名拼错。检查 <code>KbVersion.doc_collection</code> 值</li>
+            <li><strong>集合未 load</strong>：<code>ensure_loaded</code> 超时日志 <code>collection_load_timeout</code>。原因：Milvus 容器内存不足，或集合刚创建还在加载。检查 <code>docker logs milvus</code></li>
+            <li><strong>tenant_id 不匹配</strong>：filter <code>tenant_id == {tenant_id}</code> 过滤后无数据。原因：入库时 tenant_id 与查询时不一致</li>
+            <li><strong>向量维度不匹配</strong>：Schema 中 dim=1024，但 Embedding 返回其他维度。原因：Embedding 模型变更</li>
+            <li><strong>Milvus 服务不可达</strong>：<code>get_milvus()</code> 连接失败。检查 <code>MILVUS_URI</code> 配置和 etcd/minio 容器状态</li>
+            <li><strong>索引缺失</strong>：<code>ensure_index</code> 失败但被 try-except 吞了。检查日志 <code>collection_index_failed</code></li>
+            <li><strong>数据未插入</strong>：<code>insert_vectors</code> 执行但数据未落盘。检查 <code>insert</code> 返回的 primary_keys</li>
+        </ol>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q33: Rerank 服务调用失败会怎样？有降级方案吗？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前实现有降级</strong>：</p>
+        <pre><code>try:
+    rerank_results = await reranker.rerank(query, doc_texts, top_n=len(doc_texts))
+    for r in rerank_results:
+        pruned[idx]["rerank_score"] = r.get("relevance_score", 0.0)
+    pruned.sort(key=lambda x: x.get("rerank_score", 0.0), reverse=True)
+except Exception as e:
+    logger.warning("rerank_failed", error=str(e), candidates=len(pruned))
+    # 降级：按向量余弦分排序
+    pruned.sort(key=lambda x: x.get("score", 0), reverse=True)</code></pre>
+        <p><strong>降级逻辑</strong>：Rerank 失败时回退到向量余弦分排序（<code>score</code> 字段），不阻断流程。日志记录 <code>rerank_failed</code> 方便排查。</p>
+        <p><strong>风险</strong>：降级后检索精度下降（余弦分不如 CrossEncoder 精确），但至少能返回结果。后续可通过监控告警发现 Rerank 服务异常。</p>
+        <p><strong>优化方向</strong>：Rerank 服务本身用 tenacity 重试 2 次再降级；监控 Rerank 降级率，超过阈值告警。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q34: LLM 生成超时或返回空内容怎么办？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>超时处理</strong>：<code>llm_client.py</code> 有 tenacity 重试（同步 3 次、流式 2 次指数退避）。如果 3 次都失败抛出 <code>LLMError</code>。</p>
+        <p><strong>空内容处理</strong>：当前代码未显式检查空返回，如果 LLM 返回空字符串，会送入幻觉校验——<code>split_sentences</code> 过滤 <code>len(s.strip()) > 5</code> 的句子，空内容会返回 0 句，<code>pass_rate = 1.0</code>（空集默认通过），最终返回空答案 + 高置信度。</p>
+        <p><strong>改进方案</strong>：</p>
+        <pre><code>draft = await llm_client.chat(messages)
+if not draft or len(draft.strip()) < 10:
+    raise LLMError(message="LLM 返回空内容，可能是模型过载或 prompt 过长")</code></pre>
+        <p><strong>降级方案</strong>：LLM 不可用时可降级到 Stub 模式——返回检索原文拼接，虽然不智能但保证可用。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q35: 幻觉校验误判率太高（正常答案被阻断），怎么排查和优化？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>查看被阻断的 unverified_claims</strong>：分析哪些句子被判为"无依据"。是条款存在性校验误判（clause_hit_rate 低）还是声明校验误判（claim_pass_rate 低）？</li>
+            <li><strong>如果是条款存在性校验误判</strong>：检查 <code>CLAUSE_PATTERN</code> 正则是否误匹配。如"第三十五条"中的"第三十五"是否被正确提取。查 <code>RegClause.clause_no</code> 字段存储格式是否与正则提取结果匹配</li>
+            <li><strong>如果是声明校验误判</strong>：查看 LLM 裁判的输入——<code>context_text</code> 是否只取了前 5 条候选（<code>context[:5]</code>），可能有用信息在第 6-8 条。调整 <code>context[:8]</code></li>
+            <li><strong>检查 temperature</strong>：声明校验必须 <code>temperature=0.0</code>，如果配置错误会导致随机性增加</li>
+        </ol>
+        <p><strong>优化方案</strong>：</p>
+        <ul>
+            <li><strong>调整阻断阈值</strong>：如果误判集中在 claim_pass_rate，可以调整 <code>should_block</code> 的 <code>unverified_ratio</code> 阈值从 0.3 放宽到 0.4</li>
+            <li><strong>增加 context 截取数量</strong>：<code>context[:5]</code> → <code>context[:8]</code>，给 LLM 裁判更多上下文</li>
+            <li><strong>优化 claim_verifier prompt</strong>：让 LLM 裁判更宽松——"声明是否有上下文依据，宽松判定"</li>
+            <li><strong>并行校验</strong>：逐句校验太慢时改为 <code>asyncio.gather</code> 并行</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== 1.6 对比选型题 ===== -->
+<h3 id="sec1-6">1.6 对比选型题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q36: 为什么选 Milvus 而不是 FAISS？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>Milvus（本项目）</th><th>FAISS</th></tr>
+            <tr><td>类型</td><td>分布式向量数据库</td><td>向量检索库（库）</td></tr>
+            <tr><td>多租户</td><td>原生 filter 表达式</td><td>无，需自行实现</td></tr>
+            <tr><td>水平扩展</td><td>支持（分片+副本）</td><td>不支持（单机）</td></tr>
+            <tr><td>持久化</td><td>原生支持（etcd+MinIO）</td><td>无（内存库，需手动持久化）</td></tr>
+            <tr><td>CRUD</td><td>支持增删改查</td><td>只支持批量加载，删除需重建索引</td></tr>
+            <tr><td>运维</td><td>Docker 一键部署</td><td>需自行管理内存和索引</td></tr>
+        </table>
+        <p><strong>选择理由</strong>：① 需要 tenant_id 多租户过滤，Milvus 原生支持；② 法规库需要增删改（版本更新），FAISS 删除成本高；③ 分布式部署支持扩展；④ Docker 容器化部署简单。</p>
+        <p><strong>FAISS 的优势</strong>：纯本地、极轻量、无需额外服务，适合原型开发或小规模场景。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q37: 为什么选 bge-m3 而不是 OpenAI text-embedding-ada-002？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>bge-m3（本项目）</th><th>text-embedding-ada-002</th></tr>
+            <tr><td>部署</td><td>本地部署，数据不出内网</td><td>远程 API，数据上传 OpenAI</td></tr>
+            <tr><td>中文表现</td><td>优秀（BAAI 中文模型）</td><td>一般（多语言但非中文优化）</td></tr>
+            <tr><td>成本</td><td>免费（本地 GPU 推理）</td><td>按 token 计费</td></tr>
+            <tr><td>延迟</td><td>~50ms（本地）</td><td>~100-300ms（网络+API）</td></tr>
+            <tr><td>维度</td><td>1024</td><td>1536</td></tr>
+        </table>
+        <p><strong>选择理由</strong>：① 制药行业数据敏感，法规文本不能上传外部 API；② 法规文本是中文，bge-m3 在中文检索任务上表现更优；③ 本地部署零 API 成本；④ 维度更低，Milvus 存储和检索更快。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q38: 如果不用 CrossEncoder Rerank，有哪些替代方案？各有什么优缺点？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>方案</th><th>优点</th><th>缺点</th><th>适用场景</th></tr>
+            <tr><td><strong>CrossEncoder（本项目）</strong></td><td>精度最高</td><td>速度慢，逐对计算</td><td>对精度要求高的场景</td></tr>
+            <tr><td>ColBERT</td><td>延迟/精度平衡好</td><td>实现复杂，存储大</td><td>大规模 + 实时</td></tr>
+            <tr><td>LLM Rerank</td><td>可解释性强</td><td>极慢，成本高</td><td>对解释性要求高</td></tr>
+            <tr><td>混合检索（BM25+向量）</td><td>关键词+语义双覆盖</td><td>需调权重</td><td>专业术语多的场景</td></tr>
+            <tr><td>不加 Rerank</td><td>极快</td><td>精度差</td><td>原型/小规模</td></tr>
+        </table>
+        <p><strong>优化方向</strong>：可以引入 BM25 + 向量检索的混合检索——BM25 擅长精确关键词匹配（如条款号"第三十五条"），向量检索擅长语义匹配。两路结果融合（RRF 算法）后送 CrossEncoder 精排。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q39: 为什么分块用 512 token 而不是 256 或 1024？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>块大小</th><th>优点</th><th>缺点</th></tr>
+            <tr><td>256 token（小）</td><td>检索精准，上下文聚焦</td><td>语义不完整，可能丢失限定条件</td></tr>
+            <tr><td><strong>512 token（本项目）</strong></td><td>平衡精度和完整性</td><td>—</td></tr>
+            <tr><td>1024 token（大）</td><td>语义完整</td><td>一个向量表达太多信息，检索精度下降</td></tr>
+        </table>
+        <p><strong>选择理由</strong>：① 512 token 是 Sentence-BERT 系列模型推荐的最大输入长度，超过会截断丢失信息；② 中文法规单条通常 200-500 字（约 130-330 token），512 足够覆盖一条完整法规；③ Rerank 后只取 top 8，每条 ~512 token 送 LLM，总上下文 ~4000 token 在 LLM 上下文窗口内。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q40: 为什么用 SSE 而不是 WebSocket 做流式输出？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>SSE（本项目）</th><th>WebSocket</th></tr>
+            <tr><td>方向</td><td>单向（服务器→客户端）</td><td>双向</td></tr>
+            <tr><td>协议</td><td>HTTP，穿透防火墙</td><td>需升级协议，可能被防火墙拦截</td></tr>
+            <tr><td>断线重连</td><td>浏览器原生支持</td><td>需手动实现</td></tr>
+            <tr><td>断点续传</td><td>Last-Event-Id 原生支持</td><td>需自定义协议</td></tr>
+            <tr><td>复杂度</td><td>低（标准 HTTP）</td><td>高（连接管理、心跳）</td></tr>
+        </table>
+        <p><strong>选择理由</strong>：LLM 流式输出是纯单向推送（服务器→客户端），不需要客户端往服务器发消息。SSE 更简单、更兼容、原生支持断线重连和断点续传。项目中也用了 WebSocket，但那是实时通知场景（如审批通知），不是 LLM 流式。</p>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 第二部分：多 Agent 编排面试题库 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec2">二、多 Agent 编排面试题库</h2>
+
+<!-- ===== 2.1 基础概念题 ===== -->
+<h3 id="sec2-1">2.1 基础概念题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q41: 什么是 Agent？它和普通函数调用有什么区别？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>Agent</strong>是能够感知环境、做出决策、执行行动的自主实体。在 LLM 语境下，Agent = LLM + 工具 + 记忆 + 规划。</p>
+        <p><strong>与普通函数调用的区别</strong>：</p>
+        <ul>
+            <li><strong>自主性</strong>：函数被调用即执行固定逻辑；Agent 可以根据输入决定调用哪些工具、以什么顺序</li>
+            <li><strong>多步推理</strong>：函数是单步执行；Agent 可以多步推理（观察→思考→行动→观察）</li>
+            <li><strong>工具使用</strong>：Agent 可以动态选择和组合工具</li>
+            <li><strong>上下文感知</strong>：Agent 可以利用历史对话和上下文做决策</li>
+        </ul>
+        <p><strong>本项目的特殊设计</strong>：我们的 Agent 不是完全自主的——Supervisor 做路由决策，Agent 内部用确定性规则而非 LLM 推理。这是<strong>受控 Agent</strong>设计，在合规场景中更安全。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q42: 什么是多 Agent 编排？常见模式有哪些？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>多 Agent 编排</strong>是协调多个 Agent 协作完成复杂任务的架构。常见模式：</p>
+        <ul>
+            <li><strong>Supervisor 路由（本项目）</strong>：一个主管 Agent 接收请求，路由到专家 Agent 执行。中心化、简单可控</li>
+            <li><strong>图状态机（LangGraph）</strong>：Agent 作为图节点，条件边控制流转。显式状态管理</li>
+            <li><strong>对话式协作（AutoGen）</strong>：Agent 间通过对话协商。灵活但不可控</li>
+            <li><strong>角色扮演（CrewAI）</strong>：定义角色和任务，Agent 自主分工</li>
+            <li><strong>层级编排</strong>：多层 Supervisor 嵌套，上层做规划，下层做执行</li>
+            <li><strong>竞争式</strong>：多 Agent 各自给答案，投票或择优</li>
+        </ul>
+        <p>本项目选 Supervisor 路由模式——因为制药场景需要<strong>强可控性</strong>，Agent 不能自主决策超出职责范围。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q43: Supervisor 模式的优缺点是什么？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>优点</strong>：</p>
+        <ul>
+            <li><strong>简单可控</strong>：中心化路由，所有请求经过 Supervisor，便于审计和权限控制</li>
+            <li><strong>职责清晰</strong>：每个 Agent 只管自己的领域，不关心路由逻辑</li>
+            <li><strong>易于扩展</strong>：新增 Agent 只需注册到 AGENT_REGISTRY，并在 ROLE_AGENT_MATRIX 中配置权限</li>
+            <li><strong>安全隔离</strong>：Agent 不直接通信，避免一个 Agent 影响另一个</li>
+            <li><strong>可测试</strong>：每个 Agent 独立测试，Supervisor 路由逻辑单独测试</li>
+        </ul>
+        <p><strong>缺点</strong>：</p>
+        <ul>
+            <li><strong>单点瓶颈</strong>：Supervisor 是所有请求的入口，如果路由逻辑慢会成为瓶颈</li>
+            <li><strong>不支持协作</strong>：Agent 间不能直接通信，复杂任务需要多 Agent 协作时受限</li>
+            <li><strong>路由精度依赖</strong>：如果路由错误（如该走 DeviationAgent 却走了 QAAgent），用户体验差</li>
+            <li><strong>无状态记忆</strong>：Supervisor 不保留跨请求状态，多轮对话靠 context 传递</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q44: 什么是角色矩阵（ROLE_AGENT_MATRIX）？为什么需要它？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p><strong>角色矩阵</strong>是一个角色到可见 Agent 列表的映射表，实现基于角色的 Agent 访问控制：</p>
+        <pre><code>ROLE_AGENT_MATRIX = {
+    "operator": ["qa", "explain"],           # 操作员只能查询
+    "qa": ["qa", "deviation", "change", ...], # QA 可管理偏差/变更
+    "admin": ["*"],                          # 管理员全部可见
+}</code></pre>
+        <p><strong>为什么需要</strong>：</p>
+        <ul>
+            <li><strong>合规要求</strong>：制药行业有严格的角色分工，操作员不应该看到偏差调查计划，PV 不应该管理变更控制</li>
+            <li><strong>安全控制</strong>：限制 Agent 可见性，即使路由错误也不会暴露越权 Agent</li>
+            <li><strong>用户体验</strong>：不同角色看到的 Agent 集合不同，界面更聚焦</li>
+        </ul>
+        <p><strong>权限校验</strong>：Supervisor 路由后检查 <code>agent_key not in visible and "*" not in visible</code>，不满足抛 <code>ForbiddenError</code>。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q45: 为什么 Agent 不能写数据库？这个设计约束的背景是什么？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>核心原则</strong>：所有 Agent 的 <code>run()</code> 方法只输出建议/草稿/分析报告，严禁直接操作数据库。写操作由服务层 API + 人工完成。</p>
+        <p><strong>设计背景</strong>：</p>
+        <ul>
+            <li><strong>FDA 21 CFR Part 11</strong>：制药行业电子记录要求人工复核和电子签名，AI 不能自主做关键决策</li>
+            <li><strong>可审计性</strong>：所有状态变更必须经 API 层，留下哈希链审计日志。Agent 直接写库无法留下合规审计痕迹</li>
+            <li><strong>安全隔离</strong>：AI 只做辅助建议，不直接改变业务状态。即使 AI 出错（幻觉、误判），不会污染数据库</li>
+            <li><strong>四眼原则</strong>：关键操作（偏差分级、变更审批、SAE 上报）需要第二人复核 + 电子签名</li>
+            <li><strong>测试友好</strong>：Agent 不依赖写操作，可以在无数据库环境下用 context 传入数据做单元测试</li>
+        </ul>
+        <p><strong>代码体现</strong>：每个 Agent 的返回中都有 <code>"writes_disabled": True</code> 和 <code>"persist_hint"</code>，明确告知调用方"这是建议，请走 API 落库"。</p>
+    </div>
+</div>
+
+<!-- ===== 2.2 架构设计题 ===== -->
+<h3 id="sec2-2">2.2 架构设计题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q46: 当前路由策略是"QA 优先"，会不会有问题？怎么改进？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>当前策略</strong>：<code>route_query()</code> 中如果 <code>"qa" in visible_agents</code> 就直接路由到 QAAgent，不考虑用户意图。</p>
+        <p><strong>问题</strong>：QA 角色的用户可见 [qa, deviation, change, path, compliance_analysis] 五个 Agent，但无论问什么都会路由到 QAAgent。如果用户问"帮我做偏差分级"，应该走 DeviationAgent，但实际走了 QAAgent（RAG 问答管线），可能只是检索到偏差相关条款而非做分级。</p>
+        <p><strong>改进方案</strong>：</p>
+        <ol>
+            <li><strong>基于意图的路由</strong>：用 LLM 或轻量分类器分析 query 意图，映射到对应 Agent。已有 <code>SCENARIO_TO_AGENT</code> 映射表但未启用</li>
+            <li><strong>关键词路由</strong>：类似 RAG 的意图分类——"偏差/偏离/异常"→DeviationAgent，"变更/修改/变更控制"→ChangeAgent</li>
+            <li><strong>两阶段路由</strong>：先用 QAAgent 做 RAG 检索，如果检索到偏差/变更相关内容，二次路由到对应 Agent</li>
+            <li><strong>多 Agent 并行</strong>：同时调 QAAgent + DeviationAgent，合并结果返回</li>
+        </ol>
+        <p><strong>当前为什么没改进</strong>：QAAgent 的 RAG 管线能力最强（能检索+生成+校验），对于大多数场景已经够用。偏差/变更等 Agent 的功能通过对应 API 接口直接调用，不依赖 Supervisor 路由。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q47: BaseAgent 的 tools 字段是描述性字符串而不是函数对象，这样设计有什么考虑？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前设计</strong>：</p>
+        <pre><code>class DeviationAgent(BaseAgent):
+    tools = ["classify_severity", "search_case", "draft_investigation_plan"]  # 字符串
+    # 实际工具函数在 Agent 内部定义
+    async def run(self, query, context, db, tenant_id):
+        severity_advice = classify_severity(description)  # 直接调用内部函数
+        ...</code></pre>
+        <p><strong>设计考虑</strong>：</p>
+        <ul>
+            <li><strong>简单</strong>：不需要额外的 Tool 注册/发现机制，Agent 内部直接调用函数</li>
+            <li><strong>确定性强</strong>：工具调用顺序固定（分级→检索→计划），不是 LLM 动态决策</li>
+            <li><strong>可测试</strong>：每个工具是普通 Python 函数，直接 import 测试</li>
+            <li><strong>文档作用</strong>：<code>tools</code> 字段更多是文档性质——告诉使用者这个 Agent 做什么</li>
+        </ul>
+        <p><strong>对比 LangChain Tool</strong>：LangChain 的 <code>Tool</code> 对象支持 LLM 动态选择工具（ReAct 模式），但本项目用确定性规则调用工具，不需要 LLM 决策——更安全、更快、更可预测。</p>
+        <p><strong>如果需要动态工具选择</strong>：可以升级为 LangChain Tool 对象 + LLM ReAct，但需要权衡确定性和灵活性。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q48: 服务层状态机和 Agent 层是什么关系？为什么不把状态机放到 Agent 里？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>关系</strong>：Agent 做建议，服务层做执行。以偏差管理为例：</p>
+        <ul>
+            <li><strong>DeviationAgent</strong>：分析偏差描述 → 给出分级建议（critical/major/minor）→ 检索同类案例 → 生成调查计划草案。<strong>不写库</strong></li>
+            <li><strong>quality_service.py</strong>：<code>classify_deviation()</code> 正式写入分级 → <code>investigate_deviation()</code> 落库调查计划 → <code>close_deviation()</code> 关闭偏差。<strong>写库 + 状态机</strong></li>
+        </ul>
+        <p><strong>为什么不放 Agent 里</strong>：</p>
+        <ul>
+            <li><strong>合规要求</strong>：状态变更需要人工复核 + 电子签名，不能由 Agent 自动执行</li>
+            <li><strong>事务一致性</strong>：状态机涉及数据库事务（如偏差从 investigating → qa_review 需要同时写审计日志），Agent 层不管理事务</li>
+            <li><strong>可审计</strong>：服务层操作写入哈希链审计日志，Agent 建议不写日志</li>
+            <li><strong>关注点分离</strong>：Agent 关注"分析建议"，服务层关注"状态管理和持久化"</li>
+        </ul>
+        <p><strong>协作流程</strong>：API 收到请求 → 调 Agent 生成建议 → 返回前端 → 人工审核确认 → 调服务层 API 落库 → 服务层走状态机 + 审计日志。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q49: 如果要新增一个 Agent（如"供应商审计 Agent"），需要改哪些地方？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p>需要改动 <strong>4 个地方</strong>：</p>
+        <ol>
+            <li><strong>新建 Agent 文件</strong>：<code>backend/app/agents/supplier_audit_agent.py</code>，继承 <code>BaseAgent</code>，实现 <code>run()</code> 方法</li>
+            <li><strong>注册到 AGENT_REGISTRY</strong>：<code>supervisor.py</code> 中 <code>"supplier_audit": SupplierAuditAgent()</code></li>
+            <li><strong>配置角色权限</strong>：<code>ROLE_AGENT_MATRIX</code> 中给相关角色（如 compliance、admin）添加 <code>"supplier_audit"</code></li>
+            <li><strong>API 路由</strong>：在 <code>api/v1/</code> 下新建对应路由文件，调用 Supervisor 或直接调用 Agent</li>
+        </ol>
+        <pre><code># Step 1: 新建 Agent
+class SupplierAuditAgent(BaseAgent):
+    name = "供应商审计"
+    description = "供应商审计检查表草稿与缺口识别"
+    tools = ["build_checklist", "identify_gaps"]
+    async def run(self, query, context=None, db=None, tenant_id=1):
+        ...
+
+# Step 2: 注册
+AGENT_REGISTRY["supplier_audit"] = SupplierAuditAgent()
+
+# Step 3: 角色矩阵
+ROLE_AGENT_MATRIX["compliance"].append("supplier_audit")</code></pre>
+        <p><strong>不需要改动</strong>：BaseAgent、Supervisor 核心逻辑、其他 Agent。这就是 Supervisor 模式的扩展性优势。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q50: context 字典传参设计有什么优缺点？有没有更好的方案？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前设计</strong>：<code>run(query, context, db, tenant_id)</code>，context 是 <code>dict[str, Any]</code>，灵活携带任意数据。</p>
+        <p><strong>优点</strong>：</p>
+        <ul>
+            <li><strong>灵活</strong>：不同 Agent 需要不同上下文，dict 不限定字段</li>
+            <li><strong>可选传参</strong>：context 为 None 时 Agent 用默认值，不强制传</li>
+            <li><strong>兼容性好</strong>：新增字段不需要改接口签名</li>
+        </ul>
+        <p><strong>缺点</strong>：</p>
+        <ul>
+            <li><strong>无类型检查</strong>：dict 字段拼写错误不会报错（如 <code>context.get("devation")</code> 拼错），mypy 无法检查</li>
+            <li><strong>文档依赖</strong>：每个 Agent 的 context 需要什么字段只有看代码才知道</li>
+            <li><strong>测试复杂</strong>：需要构造正确的 context dict，字段不对 Agent 静默用默认值</li>
+        </ul>
+        <p><strong>优化方案</strong>：用 Pydantic BaseModel 或 dataclass 替代 dict：</p>
+        <pre><code>@dataclass
+class DeviationContext:
+    description: str
+    title: str | None = None
+    category: str | None = None
+    similar_cases: list[dict] | None = None</code></pre>
+        <p>但有成本——不同 Agent 需要不同 context 类型，接口签名变复杂。当前灵活性和安全性的权衡是合理的。</p>
+    </div>
+</div>
+
+<!-- ===== 2.3 技术实现细节题 ===== -->
+<h3 id="sec2-3">2.3 技术实现细节题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q51: DeviationAgent 的分级逻辑是怎么实现的？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><code>classify_severity()</code> 基于关键词匹配做分级初判：</p>
+        <pre><code>CRITICAL_KEYWORDS = (
+    "产品放行", "批次放行", "已上市", "市场", "召回", "患者",
+    "无菌", "污染", "数据完整性", "重大", "造假", "交叉污染",
+    "微生物", "假药", "劣药",
+)
+MAJOR_KEYWORDS = (
+    "关键工艺", "工艺参数", "超限", "oos", "ooe", "未按sop",
+    "违反", "验证失败", "关键设备", "中间体", "混批", "混料",
+)</code></pre>
+        <p><strong>逻辑</strong>：命中 critical 关键词 → critical 级别；否则命中 major 关键词 → major 级别；都不命中 → minor 级别。</p>
+        <p><strong>置信度</strong>：<code>min(0.95, 0.6 + 0.1×len(critical_hits) + 0.05×len(major_hits))</code>，命中越多置信越高。</p>
+        <p><strong>设计理由</strong>：① 确定性强（不调 LLM，结果可预测）；② 速度快（关键词匹配微秒级）；③ 可解释（返回命中关键词作为分级理由）；④ 不写库（返回 <code>writes_disabled: True</code>，由人工通过 API 确认）。</p>
+        <p><strong>局限</strong>：纯关键词匹配无法理解语义，如"没有发生污染"命中"污染"会误判为 critical。优化方向：用 LLM 做语义分级。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q52: ComplianceAgent 是怎么跨域聚合数据的？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p>ComplianceAgent 聚合 4 个业务域的数据生成合规报告：</p>
+        <ol>
+            <li><strong>培训认证域</strong>：调用 <code>training_service.get_analytics()</code> 和 <code>get_cert_matrix()</code>，获取证书有效数/到期数/认证率</li>
+            <li><strong>质量域</strong>：调用 <code>quality_service.list_deviations/list_changes/list_capas()</code>，获取偏差分级分布/未关闭偏差/未关闭 CAPA</li>
+            <li><strong>药物警戒域</strong>：调用 <code>sae_service.list_sae()</code>，获取 SAE 状态分布/紧急时限</li>
+            <li><strong>审计域</strong>：调用 <code>audit_service.list_audit_checks()</code>，获取进行中检查单/未闭合缺口</li>
+        </ol>
+        <p><strong>设计特点</strong>：</p>
+        <ul>
+            <li><strong>只读聚合</strong>：不写库，只调用各服务的 list/get 只读方法</li>
+            <li><strong>context 传参优化</strong>：如果 context 中已携带数据（<code>ctx.get("deviations")</code>），就不重复查库。避免 API 层已经查过的数据 Agent 再查一次</li>
+            <li><strong>关注点与建议</strong>：自动生成 attention_items（关注点）和 recommendations（建议），如"有 3 项认证将到期 → 安排复训"</li>
+            <li><strong>频率统计</strong>：<code>_freq()</code> 函数统计各状态/分级的频次分布</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q53: SCENARIO_TO_AGENT 映射表为什么定义了但没用？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><code>SCENARIO_TO_AGENT</code> 定义了意图到 Agent 的映射（如 <code>"deviation": "qa"</code>），但 <code>Supervisor.execute()</code> 的路由逻辑用的是 <code>route_query()</code>（QA 优先策略），没有使用这个表。</p>
+        <p><strong>原因分析</strong>：</p>
+        <ul>
+            <li><strong>预留扩展</strong>：为未来基于意图的精细路由预留。当前 QA 优先够用，后续可以改为查 <code>SCENARIO_TO_AGENT</code></li>
+            <li><strong>当前场景路由通过 API 层实现</strong>：前端不同页面直接调不同 API（/quality/* 调 quality_service，/sae/* 调 sae_service），不经过 Supervisor。Supervisor 主要用于 /qa/ask 统一入口</li>
+            <li><strong>RAG 意图分类已有</strong>：<code>classify_intent()</code> 在 RAG 管线内做了意图分类（qa/faq_match/deviation），影响通道权重。不需要 Supervisor 再做一次</li>
+        </ul>
+        <p><strong>改进方向</strong>：如果要启用 <code>SCENARIO_TO_AGENT</code>，需要先用 LLM 或分类器分析 query 意图（返回 scenario），再查表路由。这会让 Supervisor 路由更精准。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q54: admin 角色的 "*" 权限是怎么实现的？ <span class="difficulty diff-easy">基础</span></div>
+    <div class="qa-answer">
+        <p>在 <code>get_visible_agents()</code> 中特殊处理：</p>
+        <pre><code>async def get_visible_agents(roles: list[str]) -> set[str]:
+    agents: set[str] = set()
+    for role in roles:
+        role_agents = ROLE_AGENT_MATRIX.get(role, [])
+        if "*" in role_agents:
+            # 通配符：返回全部 10 个 Agent
+            return {"qa", "explain", "path", "deviation", "change",
+                    "audit", "sae", "kb_ops", "training", "compliance_analysis"}
+        agents.update(role_agents)
+    return agents</code></pre>
+        <p>在 <code>Supervisor.execute()</code> 的权限校验中：<code>if agent_key not in visible and "*" not in visible</code>，如果 visible 包含 "*" 则跳过校验。</p>
+        <p><strong>设计要点</strong>：① "*" 是特殊标记，遇到即展开为全部 Agent；② 一个用户可能有多个角色，取并集；③ admin 角色虽然能访问全部 Agent，但 Agent 本身的不写库约束仍然生效。</p>
+    </div>
+</div>
+
+<!-- ===== 2.4 故障排查题 ===== -->
+<h3 id="sec2-4">2.4 故障排查题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q55: Supervisor 路由到不存在的 Agent 会怎样？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前处理</strong>：</p>
+        <pre><code>agent = self.agents.get(agent_key)
+if not agent:
+    return {
+        "error": f"Agent {agent_key} not implemented or not registered",
+        "available_agents": sorted(self.agents.keys()),
+    }</code></pre>
+        <p>返回错误信息 + 可用 Agent 列表。不会抛异常，而是返回 dict。</p>
+        <p><strong>问题</strong>：① 返回的 dict 结构和正常 Agent 返回的 <code>{"agent": name, "output": {...}}</code> 不一致，前端处理困难；② 不抛异常意味着上游不知道出错了。</p>
+        <p><strong>改进方案</strong>：</p>
+        <ul>
+            <li>抛出 <code>AppError(message=f"Agent {agent_key} not found")</code>，让 FastAPI 异常处理器统一处理</li>
+            <li>启动时校验 <code>ROLE_AGENT_MATRIX</code> 中的 Agent key 都在 <code>AGENT_REGISTRY</code> 中，不匹配则启动失败</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q56: Agent 的 run() 方法抛出异常会怎样？有异常处理吗？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前实现</strong>：<code>Supervisor.execute()</code> 中直接 <code>result = await agent.run(query, context, db, tenant_id)</code>，没有 try-except 包裹。如果 Agent 内部抛出未捕获异常，会直接传播到 API 层。</p>
+        <p><strong>影响</strong>：</p>
+        <ul>
+            <li>API 层如果也没有捕获，FastAPI 会返回 500 Internal Server Error</li>
+            <li>用户体验差——看到 500 错误而非有意义的错误信息</li>
+            <li>数据库事务可能未正确回滚</li>
+        </ul>
+        <p><strong>改进方案</strong>：</p>
+        <pre><code>try:
+    result = await agent.run(query, context, db, tenant_id)
+except AppError:
+    raise  # 业务异常直接抛出
+except Exception as e:
+    logger.error("agent_execution_failed", agent=agent_key, error=str(e))
+    return {
+        "agent": agent_key,
+        "output": {"error": "Agent 执行异常，请稍后重试",
+                   "detail": str(e)}
+    }</code></pre>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q57: 用户反馈"权限不足"但应该有权限，怎么排查？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查用户角色</strong>：查 <code>SysUser.roles</code>，确认角色是否正确分配。可能是角色配置遗漏</li>
+            <li><strong>检查角色矩阵</strong>：查 <code>ROLE_AGENT_MATRIX</code> 中该角色是否包含目标 Agent。如新加的 Agent 可能忘记在矩阵中注册</li>
+            <li><strong>检查路由结果</strong>：查看 <code>route_query()</code> 返回的 agent_key，是否路由到了用户不可见的 Agent</li>
+            <li><strong>检查 "*" 通配</strong>：admin 角色应该有 "*"，如果没有可能是配置被覆盖</li>
+            <li><strong>检查多角色合并</strong>：用户可能有多个角色，<code>get_visible_agents()</code> 取并集。如果一个角色有权限另一个没有，合并后应该有权限</li>
+        </ol>
+        <p><strong>常见根因</strong>：① 新增 Agent 后忘记在 ROLE_AGENT_MATRIX 中配置；② 用户角色分配错误（该给 qa 角色却给了 operator）；③ <code>route_query()</code> 的 QA 优先策略路由到了用户无权访问的 Agent。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q58: 偏差分Agent 分级建议不准（如 critical 偏差被判为 minor），怎么排查？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>查看分级结果</strong>：DeviationAgent 返回的 <code>severity_suggestion</code> 中的 keywords 和 reasons，看命中了哪些关键词</li>
+            <li><strong>分析偏差描述</strong>：查看输入的 description 文本，是否包含 critical 关键词。可能用户描述用语不在关键词表中（如"可能影响患者安全"而非"患者"）</li>
+            <li><strong>检查关键词表</strong>：<code>CRITICAL_KEYWORDS</code> 和 <code>MAJOR_KEYWORDS</code> 是否需要扩充</li>
+            <li><strong>检查 description 传入</strong>：确认 context 中 description 正确传入，不是 None 或空字符串（会走 minor 默认）</li>
+        </ol>
+        <p><strong>优化方案</strong>：</p>
+        <ul>
+            <li><strong>扩充关键词表</strong>：增加更多 critical/major 特征词</li>
+            <li><strong>引入语义分级</strong>：用 LLM 做语义分级——"根据偏差描述判断严重度，critical/major/minor"</li>
+            <li><strong>混合策略</strong>：先用关键词做初判，如果置信度低（无命中）再调 LLM 做语义分级</li>
+            <li><strong>案例对比</strong>：用 <code>search_similar_cases()</code> 检索同类历史偏差，参考历史分级</li>
+        </ul>
+        <div class="callout callout-warning">
+            <strong>注意</strong>：分级只是建议，最终分级由 QA 人工确认。Agent 分级不准不会直接导致错误分级——但会影响调查计划草案的质量。
+        </div>
+    </div>
+</div>
+
+<!-- ===== 2.5 对比选型题 ===== -->
+<h3 id="sec2-5">2.5 对比选型题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q59: 为什么不用 LangGraph 做 Agent 编排？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>LangGraph 的特点</strong>：基于图状态机，Agent 作为节点，条件边控制流转，支持循环、分支、人在回路。适合复杂多步推理场景。</p>
+        <p><strong>不用 LangGraph 的原因</strong>：</p>
+        <ul>
+            <li><strong>不需要复杂流转</strong>：我们的 Agent 间不需要协作和状态共享，路由逻辑简单（角色→可见 Agent→路由），自研 Supervisor 更轻量</li>
+            <li><strong>确定性优先</strong>：制药场景需要强可控性，LangGraph 的图流转可能有循环和分支，增加不确定性</li>
+            <li><strong>状态机在服务层</strong>：业务状态机（偏差/变更/SAE）在 service 层用 Python dict 实现，不需要 LangGraph 的图状态管理</li>
+            <li><strong>依赖收敛</strong>：虽然 pyproject.toml 引了 langgraph >= 0.2，但实际未在核心代码中使用，减少框架耦合</li>
+        </ul>
+        <p><strong>LangGraph 更适合的场景</strong>：需要多步推理（如"查法规→分析差距→生成方案→人工审核→修改"）、Agent 间需要传递中间结果、需要条件循环（如重试直到满足条件）。</p>
+        <p><strong>如果引入 LangGraph</strong>：可以把偏差处理流程建模为图——偏差上报→Agent分级→人工确认→Agent调查计划→人工审核→Agent CAPA建议→关闭。每个节点是一个 Agent 或人工步骤，条件边控制流转。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q60: 为什么不用 AutoGen 或 CrewAI？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>框架</th><th>模式</th><th>优势</th><th>不选的原因</th></tr>
+            <tr><td><strong>自研 Supervisor（本项目）</strong></td><td>中心化路由</td><td>简单可控、确定性</td><td>—</td></tr>
+            <tr><td>AutoGen</td><td>对话式协作</td><td>灵活、Agent 间可协商</td><td>不可控、LLM 调用多、成本高</td></tr>
+            <tr><td>CrewAI</td><td>角色扮演</td><td>自然、角色分工</td><td>过度依赖 LLM 决策、确定性差</td></tr>
+            <tr><td>LangGraph</td><td>图状态机</td><td>显式状态、可循环</td><td>复杂度高、当前不需要</td></tr>
+        </table>
+        <p><strong>核心原因</strong>：制药合规场景需要<strong>强确定性</strong>和<strong>强可控性</strong>。AutoGen 和 CrewAI 都依赖 LLM 做路由和决策，引入随机性和不可预测性。自研 Supervisor 用规则路由，结果可预测、可审计、可测试。</p>
+        <p><strong>可借鉴的方面</strong>：AutoGen 的"多轮对话"思路可用于未来需要 Agent 间协商的场景；CrewAI 的"角色+任务"建模可用于更复杂的工作流编排。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q61: 自研 Supervisor 和 LangChain Agent Executor 有什么区别？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>自研 Supervisor</th><th>LangChain Agent Executor</th></tr>
+            <tr><td>路由</td><td>角色矩阵 + 规则路由</td><td>LLM ReAct（推理+行动）</td></tr>
+            <tr><td>工具选择</td><td>Agent 内部固定调用</td><td>LLM 动态选择</td></tr>
+            <tr><td>多步推理</td><td>不支持（单步）</td><td>支持（观察→思考→行动循环）</td></tr>
+            <tr><td>确定性</td><td>高（规则驱动）</td><td>低（LLM 驱动）</td></tr>
+            <tr><td>LLM 依赖</td><td>仅 QAAgent 调 LLM</td><td>每步都调 LLM</td></tr>
+            <tr><td>成本</td><td>低</td><td>高（多次 LLM 调用）</td></tr>
+            <tr><td>延迟</td><td>低</td><td>高（多轮 LLM）</td></tr>
+        </table>
+        <p><strong>选择理由</strong>：制药场景不需要复杂多步推理——偏差分级用关键词、合规分析用数据聚合，都是确定性逻辑。只有 QAAgent 需要调 LLM 做答案生成。用 LangChain Agent Executor 会增加不必要的 LLM 调用和延迟。</p>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 第三部分：系统故障问题专题 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec3">三、系统故障问题专题</h2>
+
+<!-- ===== 3.1 RAG 链路故障 ===== -->
+<h3 id="sec3-1">3.1 RAG 链路故障</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q62: 【故障】法规文档入库后检索不到，怎么排查？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查思路</strong>：入库流程 = 解析→分块→Embedding→Milvus 写入，逐段检查。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 Parser 解析</strong>：查 <code>extract_sections_and_clauses()</code> 是否正确提取条款。中文数字正则 <code>第([一二三四五六七八九十百零]+|\d+)条</code> 是否匹配。如果法规文档格式变化（如用"1."而非"第一条"），解析会失败</li>
+            <li><strong>检查 Chunker 分块</strong>：查 <code>chunk_clause()</code> 是否产生非空 chunk。如果 content 为空或全部 &lt; 5 字符，会被 <code>split_sentences</code> 过滤</li>
+            <li><strong>检查 Embedding</strong>：查 <code>embedder.embed()</code> 是否成功返回 1024 维向量。如果模型服务 (:8081) 未启动或模型文件缺失，Embedding 会失败</li>
+            <li><strong>检查 Milvus 写入</strong>：查 <code>insert_vectors()</code> 是否成功。检查 <code>ensure_collection</code> 是否创建了集合、<code>ensure_loaded</code> 是否完成加载</li>
+            <li><strong>检查集合名</strong>：入库时用的集合名（如 <code>doc_gmp_2010</code>）与检索时 <code>KbVersion.doc_collection</code> 是否一致</li>
+            <li><strong>检查 tenant_id</strong>：入库时 tenant_id 与检索时是否一致</li>
+            <li><strong>直接查 Milvus</strong>：用 pymilvus 直接 <code>client.query(collection_name, filter="", limit=10)</code> 查看数据是否存在</li>
+        </ol>
+        <p><strong>常见根因</strong>：① Parser 正则不匹配新法规格式；② Embedding 服务未启动；③ 集合名不一致；④ tenant_id 不匹配。</p>
+        <p><strong>优化规避</strong>：入库后加验证步骤——随机抽样 5 条 chunk 做检索验证，确保入库成功。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q63: 【故障】检索结果全是同一条法规的不同 chunk，缺乏多样性，怎么解决？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>问题分析</strong>：向量检索按相似度排序，同一条法规的不同 chunk 语义相近，容易扎堆出现在 top 结果中。用户问"GMP 对洁净室的要求"，检索结果可能全是第一百三十条的 3 个 chunk，而遗漏了其他相关条款。</p>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>MMR（Maximal Marginal Relevance）</strong>：在检索时不仅考虑与 query 的相似度，还考虑结果间的多样性。<code>score = α×sim(q,d) - (1-α)×max(sim(d,selected))</code>。Milvus 2.4 不原生支持 MMR，可在应用层实现</li>
+            <li><strong>按条款去重</strong>：同一 clause_id 的 chunk 只保留 rerank_score 最高的一个。在 <code>_pre_prune_candidates()</code> 中增加条款维度去重</li>
+            <li><strong>按章节分散</strong>：在预剪枝时按 section_id 分组，每章节最多保留 N 条</li>
+            <li><strong>增加 top_k</strong>：从 40 增加到 60，扩大召回池再靠 Rerank 精排</li>
+        </ul>
+        <pre><code># 按条款去重实现
+def _dedupe_by_clause(candidates):
+    seen_clauses = set()
+    deduped = []
+    for c in sorted(candidates, key=lambda x: x.get("score", 0), reverse=True):
+        clause_key = c.get("entity_id") or c.get("text")[:100]
+        if clause_key not in seen_clauses:
+            deduped.append(c)
+            seen_clauses.add(clause_key)
+    return deduped</code></pre>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q64: 【故障】Rerank 服务超时（>5s），导致整体响应变慢，怎么解决？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>问题分析</strong>：bge-reranker-large CrossEncoder 逐对计算，24 条候选 × ~50ms/对 ≈ 1.2s。如果模型加载到 GPU 失败回退到 CPU，可能 5s+。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 GPU 利用率</strong>：<code>nvidia-smi</code> 查看模型服务进程是否在 GPU 上。如果不在，检查 CUDA 环境</li>
+            <li><strong>检查候选数量</strong>：查 <code>_pre_prune_candidates</code> 输出条数。如果多通道多版本导致候选过多（50+），Rerank 计算量暴增</li>
+            <li><strong>检查模型服务</strong>：<code>curl -X POST :8081/rerank -d '{"query":"test","documents":["a","b"]}'</code> 测试延迟</li>
+            <li><strong>检查并发</strong>：多用户并发查询时 Rerank 请求排队，单次 Rerank 没问题但队列等待导致超时</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>更激进预剪枝</strong>：每通道 top 5 而非 8，减少到 15 条候选</li>
+            <li><strong>Rerank 超时+降级</strong>：给 Rerank 加 2s 超时，超时后降级到向量余弦分排序</li>
+            <li><strong>模型量化</strong>：bge-reranker-large → bge-reranker-base，模型小一半，速度快 2x</li>
+            <li><strong>批处理优化</strong>：models_server.py 中 <code>CrossEncoder.predict</code> 设置 <code>batch_size</code> 更大值利用 GPU 并行</li>
+            <li><strong>多实例</strong>：部署多个 models_server 实例，负载均衡</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q65: 【故障】LLM 生成答案包含编造的条款号（如"第三百七十八条"实际不存在），幻觉校验是否一定能拦截？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>不一定能完全拦截</strong>。分析：</p>
+        <p><strong>条款存在性校验（verify_clause_existence）能拦截的场景</strong>：</p>
+        <ul>
+            <li>答案中写了"第三百七十八条"，正则 <code>第[一二三四五六七八九十百零\d]+条</code> 能提取</li>
+            <li>查 MySQL <code>RegClause</code> 表，clause_no 不匹配 → miss → clause_hit_rate 下降</li>
+        </ul>
+        <p><strong>可能漏检的场景</strong>：</p>
+        <ul>
+            <li><strong>正则不匹配</strong>：如果 LLM 写"第37条"（阿拉伯数字）或"第三七八条"（不规范中文数字），正则可能不匹配 → 不校验 → 直接通过</li>
+            <li><strong>条款号格式不一致</strong>：数据库存 "第三百七十八条"，LLM 写"第378条"，<code>clause_no.contains()</code> 可能不匹配</li>
+            <li><strong>条款号真实但内容编造</strong>：LLM 引用了正确的条款号但编造了原文内容——条款存在性校验通过，需要声明校验捕获</li>
+        </ul>
+        <p><strong>优化方案</strong>：</p>
+        <ul>
+            <li><strong>完善正则</strong>：同时匹配阿拉伯数字和中文数字：<code>第([\d一二三四五六七八九十百零]+)条</code></li>
+            <li><strong>规范化条款号</strong>：校验前用 <code>normalize_clause_no()</code> 统一转换为整数比较</li>
+            <li><strong>原文比对</strong>：不仅校验条款存在，还比对答案中引用的原文与数据库中的原文是否一致（文本相似度）</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q66: 【故障】Embedding 服务崩溃，整个 RAG 系统不可用，怎么设计高可用？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>影响范围</strong>：Embedding 服务 (:8081) 崩溃 → 无法做查询向量化 → 检索阶段失败 → 整个 RAG 不可用。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查服务状态</strong>：<code>curl :8081/health</code> 或 <code>docker ps</code> 查看容器状态</li>
+            <li><strong>检查 GPU</strong>：<code>nvidia-smi</code> 查看 GPU 内存是否被其他进程占用</li>
+            <li><strong>检查模型文件</strong>：<code>models/bge-m3/model.safetensors</code> 是否存在且完整</li>
+            <li><strong>查日志</strong>：<code>docker logs models_server</code> 查看 OOM 或 CUDA error</li>
+        </ol>
+        <p><strong>高可用方案</strong>：</p>
+        <ul>
+            <li><strong>多实例部署</strong>：部署 2+ 个 models_server 实例，Nginx 负载均衡。一个崩溃另一个接管</li>
+            <li><strong>Embedding 缓存</strong>：高频查询的 Embedding 缓存到 Redis，Embedding 服务短暂不可用时可降级</li>
+            <li><strong>健康检查+自动重启</strong>：docker-compose 配置 <code>healthcheck</code> + <code>restart: always</code></li>
+            <li><strong>降级模式</strong>：Embedding 服务不可用时，降级到 BM25 关键词检索（不需要向量）</li>
+            <li><strong>预计算</strong>：用户查询的 Embedding 在前端输入时就异步预计算</li>
+        </ul>
+        <div class="callout callout-danger">
+            <strong>关键设计</strong>：Embedding 服务是 RAG 的单点依赖。生产环境必须多实例 + 健康检查 + 自动重启。
+        </div>
+    </div>
+</div>
+
+<!-- ===== 3.2 Agent 编排故障 ===== -->
+<h3 id="sec3-2">3.2 Agent 编排故障</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q67: 【故障】Agent 路由错误（用户要偏差分级但路由到 QAAgent），怎么排查和解决？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>问题现象</strong>：QA 角色用户问"帮我分析这个偏差的严重度"，<code>route_query()</code> 因为"qa"在 visible 中优先路由到 QAAgent，但用户实际需要 DeviationAgent。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>查看路由日志</strong>：确认 <code>route_query()</code> 返回的 agent_key</li>
+            <li><strong>查看 visible_agents</strong>：确认用户角色对应的可见 Agent 列表</li>
+            <li><strong>分析路由策略</strong>：当前 <code>route_query()</code> 是"QA 优先"，只要有 qa 就路由到 QAAgent</li>
+        </ol>
+        <p><strong>根本原因</strong>：<code>route_query()</code> 的 QA 优先策略不考虑用户意图，任何查询都路由到 QAAgent。</p>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>方案一：关键词路由</strong>——在 <code>route_query()</code> 中加关键词匹配：
+                <pre><code>if "偏差" in query or "偏离" in query:
+    return "deviation"
+if "变更" in query:
+    return "change"
+if "qa" in visible_agents:
+    return "qa"</code></pre>
+            </li>
+            <li><strong>方案二：LLM 路由</strong>——用 LLM 分析 query 意图，返回 Agent key。延迟增加 ~1s</li>
+            <li><strong>方案三：API 层分流</strong>——前端不同入口直接调不同 API，不走 Supervisor 路由</li>
+            <li><strong>方案四：启用 SCENARIO_TO_AGENT</strong>——先做意图分类，再查映射表路由</li>
+        </ul>
+        <p><strong>推荐方案</strong>：方案一（关键词路由）——简单、快速、确定性强，与 RAG 的意图分类风格一致。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q68: 【故障】Agent 返回数据结构不一致（有的返回 output，有的直接返回 error），前端怎么处理？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>问题分析</strong>：</p>
+        <ul>
+            <li>正常返回：<code>{"agent": "偏差处理", "output": {...}}</code></li>
+            <li>Agent 不存在：<code>{"error": "Agent xxx not implemented", "available_agents": [...]}</code></li>
+            <li>Agent 内部异常：可能抛异常（无返回值）</li>
+        </ul>
+        <p><strong>影响</strong>：前端需要判断多种返回格式，容易遗漏边界条件。</p>
+        <p><strong>解决方案</strong>：统一返回格式 + 异常处理</p>
+        <pre><code># Supervisor.execute() 统一异常处理
+try:
+    result = await agent.run(query, context, db, tenant_id)
+    if "output" not in result:
+        return {"agent": agent_key, "output": {"error": "Agent 返回格式异常"}}
+    return result
+except AppError as e:
+    return {"agent": agent_key, "output": {"error": e.message}}
+except Exception as e:
+    logger.error("agent_failed", agent=agent_key, error=str(e))
+    return {"agent": agent_key, "output": {"error": "Agent 执行异常", "detail": str(e)}}</code></pre>
+        <p><strong>前端处理</strong>：统一检查 <code>result.output.error</code> 是否存在，存在则展示错误信息，否则正常渲染 output。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q69: 【故障】Agent 依赖的数据库连接断开，怎么处理？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>问题分析</strong>：多个 Agent 的 <code>run()</code> 方法需要 <code>db: AsyncSession</code> 参数。如果数据库连接池耗尽或 MySQL 不可达，<code>db.execute()</code> 会抛 <code>OperationalError</code>。</p>
+        <p><strong>当前处理</strong>：Agent 内部没有 try-except 包裹 db 操作，异常直接传播到 API 层。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li>检查 MySQL 容器状态：<code>docker ps | findstr mysql</code></li>
+            <li>检查连接池配置：<code>create_async_engine(pool_size=10, max_overflow=20)</code> 是否够用</li>
+            <li>检查是否有连接泄漏：Agent 中 <code>await db.execute()</code> 后 session 未正确关闭</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>连接池监控</strong>：监控连接池使用率，接近上限时告警</li>
+            <li><strong>Agent 降级</strong>：db 不可用时，部分 Agent 可以用 context 传入的数据降级运行（如 ComplianceAgent 的 <code>ctx.get("deviations")</code>）</li>
+            <li><strong>重试机制</strong>：db.execute 加 tenacity 重试（网络抖动场景）</li>
+            <li><strong>健康检查</strong>：API 层加 /health 端点检查 db 连通性</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q70: 【故障】状态机非法转换（如从 closed 状态尝试变更为 investigating），怎么处理？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>当前处理</strong>：<code>ALLOWED_TRANSITIONS</code> 中 <code>closed</code> 的转换集合为空 <code>set()</code>。服务层在执行状态变更前会检查：</p>
+        <pre><code>def validate_transition(current_status, target_status, transitions):
+    allowed = transitions.get(current_status, set())
+    if target_status not in allowed:
+        raise AppError(
+            message=f"非法状态转换: {current_status} → {target_status}",
+            code=400
+        )</code></pre>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li>查看 API 返回的错误信息和状态码（400）</li>
+            <li>检查 <code>ALLOWED_TRANSITIONS</code> 中当前状态是否允许目标转换</li>
+            <li>检查是否有并发请求导致状态竞争（两个请求同时尝试变更同一实体状态）</li>
+        </ol>
+        <p><strong>并发问题解决方案</strong>：</p>
+        <ul>
+            <li><strong>乐观锁</strong>：在 UPDATE 语句中加 <code>WHERE status = {expected_status}</code>，如果行数=0 说明状态已被其他请求变更</li>
+            <li><strong>悲观锁</strong>：<code>SELECT ... FOR UPDATE</code> 锁定行，事务完成才释放</li>
+            <li><strong>审计日志</strong>：非法转换尝试也记录审计日志，用于安全审计</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== 3.3 基础设施故障 ===== -->
+<h3 id="sec3-3">3.3 基础设施故障</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q71: 【故障】Milvus 容器 OOM（内存不足）导致向量检索失败，怎么解决？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>问题分析</strong>：Milvus 需要将集合数据 load 到内存才能搜索。集合多或数据量大时内存不足，容器被 OOM Killer 杀掉。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查容器状态</strong>：<code>docker ps -a | findstr milvus</code>，如果 STATUS 是 Exited(137) 说明被 OOM Kill</li>
+            <li><strong>检查容器内存限制</strong>：<code>docker inspect milvus | findstr Memory</code>，docker-compose.yml 中是否设了 mem_limit</li>
+            <li><strong>检查集合数量</strong>：多版本×3通道可能产生大量集合，每个集合 load 都占内存</li>
+            <li><strong>检查数据量</strong>：10 万条 × 1024 维 × 4 字节 ≈ 400MB/集合。如果 10 个集合就是 4GB</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>增加内存</strong>：docker-compose.yml 中 <code>mem_limit: 8g</code> 或增大宿主机内存</li>
+            <li><strong>按需 load</strong>：不活跃的版本集合 <code>release_collection()</code> 释放内存，只在检索时 load</li>
+            <li><strong>集合合并</strong>：同一法规不同版本合并到一个集合，用 <code>doc_version</code> 字段区分，减少集合数</li>
+            <li><strong>Milvus 分布式</span>：多节点部署，数据分片到多个 Milvus 实例</li>
+            <li><strong>监控</strong>：Prometheus 采集 Milvus 内存指标，接近上限告警</li>
+        </ul>
+        <div class="callout callout-warning">
+            <strong>注意</strong>：Milvus 的 <code>ensure_loaded()</code> 有 30s 超时，如果 load 因内存不足反复失败，会超时但不报错（只打 warning），导致后续 search 返回空。需要监控 load_timeout 日志。
+        </div>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q72: 【故障】etcd 或 MinIO 宕机导致 Milvus 不可用，怎么处理？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>依赖关系</strong>：Milvus 元数据存在 etcd，向量数据存在 MinIO（S3 兼容）。任何一个宕机 Milvus 都不可用。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 etcd</strong>：<code>docker ps | findstr etcd</code> + <code>curl :2379/health</code></li>
+            <li><strong>检查 MinIO</strong>：<code>docker ps | findstr minio</code> + <code>curl :9000/minio/health/live</code></li>
+            <li><strong>检查 Milvus 日志</strong>：<code>docker logs milvus 2>&1 | findstr "error\|etcd\|minio"</code></li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>重启依赖</strong>：<code>docker-compose restart etcd minio milvus</code>（按顺序）</li>
+            <li><strong>数据恢复</strong>：如果 MinIO 数据卷损坏，从备份恢复。etcd 数据损坏需要重建 Milvus 集合（从 MySQL 重新灌入向量）</li>
+            <li><strong>数据卷持久化</strong>：docker-compose.yml 中 etcd 和 minio 配置 <code>volumes</code> 持久化到宿主机，避免容器删除后数据丢失</li>
+            <li><strong>高可用</strong>：生产环境部署 etcd 集群（3 节点）和 MinIO 分布式模式</li>
+            <li><strong>RAG 降级</strong>：Milvus 不可用时降级到 MySQL LIKE 查询（精确关键词匹配），虽然精度差但保证可用</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q73: 【故障】Redis 连接池耗尽导致缓存功能不可用，怎么排查和解决？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>影响范围</strong>：会话缓存失效、限流失效、Embedding 缓存不可用。系统不会完全不可用，但性能下降。</p>
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 Redis 容器</strong>：<code>docker ps | findstr redis</code> + <code>redis-cli ping</code></li>
+            <li><strong>检查连接数</strong>：<code>redis-cli info clients</code>，如果 connected_clients 接近 maxclients 说明连接泄漏</li>
+            <li><strong>检查内存</strong>：<code>redis-cli info memory</code>，如果 used_memory 接近 maxmemory 会触发淘汰</li>
+            <li><strong>检查代码</strong>：查看是否有 Redis 连接未正确释放（<code>async with redis_client</code> 未用 with）</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>连接池配置</strong>：<code>max_connections=50</code>，超过会等待而非报错</li>
+            <li><strong>超时设置</strong>：Redis 操作加 <code>socket_timeout=5</code>，避免连接挂起</li>
+            <li><strong>降级策略</strong>：Redis 不可用时降级到内存缓存（lru_cache）或直接跳过缓存</li>
+            <li><strong>监控</strong>：Prometheus 采集 Redis 连接数、内存、命中率</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q74: 【故障】MySQL 数据库连接池耗尽（Too many connections），怎么解决？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>查看 MySQL 连接数</strong>：<code>SHOW STATUS LIKE 'Threads_connected'</code>，与 <code>max_connections</code> 比较</li>
+            <li><strong>查看活跃连接</strong>：<code>SHOW PROCESSLIST</code>，找长时间运行的查询（可能是慢查询导致连接不释放）</li>
+            <li><strong>检查 SQLAlchemy 连接池</strong>：<code>create_async_engine(pool_size=10, max_overflow=20, pool_timeout=30)</code>。如果 pool_timeout 触发会抛 <code>TimeoutError</code></li>
+            <li><strong>检查异步 session 管理</strong>：<code>async with get_db() as session</code> 是否正确释放。如果有 <code>await db.execute()</code> 但没用 with，session 不会关闭</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>增大连接池</strong>：pool_size=20, max_overflow=40（根据并发量调整）</li>
+            <li><strong>慢查询优化</strong>：加索引、避免 N+1 查询、用 <code>EXPLAIN</code> 分析慢 SQL</li>
+            <li><strong>连接超时</strong>：<code>pool_recycle=3600</code>，每小时回收连接避免 MySQL 端 <code>wait_timeout</code> 导致连接失效</li>
+            <li><strong>读写分离</strong>：读操作走从库，减轻主库连接压力</li>
+            <li><strong>监控告警</strong>：连接池使用率 > 80% 告警</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q75: 【故障】Docker 容器启动顺序错误导致服务依赖失败，怎么解决？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>问题现象</strong>：后端容器启动时 MySQL/Milvus 还未就绪，导致连接失败退出。</p>
+        <p><strong>原因</strong>：docker-compose 的 <code>depends_on</code> 只保证容器启动顺序，不保证服务就绪。MySQL 容器启动后需要几秒初始化。</p>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>健康检查</strong>：docker-compose.yml 中每个服务加 <code>healthcheck</code></li>
+            <li><strong>condition: service_healthy</strong>：<code>depends_on: mysql: condition: service_healthy</code>，等 MySQL 健康检查通过才启动后端</li>
+            <li><strong>重试机制</strong>：后端启动时如果连不上 MySQL，tenacity 重试 5 次（间隔 5s）</li>
+            <li><strong>启动脚本</strong>：entrypoint 脚本中 <code>until mysqladmin ping; do sleep 2; done</code> 等待 MySQL 就绪</li>
+        </ul>
+        <pre><code># docker-compose.yml 示例
+services:
+  mysql:
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    depends_on:
+      mysql:
+        condition: service_healthy
+      milvus:
+        condition: service_healthy</code></pre>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q76: 【故障】本地模型服务（models_server.py）启动失败（CUDA error / 模型加载失败），怎么排查？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 GPU</strong>：<code>nvidia-smi</code> 查看 GPU 状态、驱动版本、CUDA 版本</li>
+            <li><strong>检查 PyTorch CUDA</strong>：<code>python -c "import torch; print(torch.cuda.is_available())"</code>。如果 False 说明 PyTorch 未正确安装 CUDA 版本</li>
+            <li><strong>检查模型文件</strong>：<code>models/bge-m3/config.json</code> 是否存在，<code>model.safetensors</code> 是否完整下载</li>
+            <li><strong>检查内存</strong>：bge-m3 ~2GB + bge-reranker-large ~2GB，总 4GB+。如果内存不足会 OOM</li>
+            <li><strong>查日志</strong>：模型服务启动日志中的错误信息</li>
+        </ol>
+        <p><strong>常见错误及解决</strong>：</p>
+        <ul>
+            <li><strong>CUDA out of memory</strong>：GPU 被其他进程占用。<code>nvidia-smi</code> 查看占用进程，kill 或减少 batch_size</li>
+            <li><strong>Model not found</strong>：模型路径错误。确认 <code>SentenceTransformer("models/bge-m3")</code> 路径正确</li>
+            <li><strong>CUDA driver version mismatch</strong>：升级 GPU 驱动或降级 PyTorch CUDA 版本</li>
+            <li><strong>CPU fallback</strong>：如果无 GPU，模型会在 CPU 上运行（慢 10x），但功能正常。配置 <code>device="cpu"</code></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== 3.4 性能问题 ===== -->
+<h3 id="sec3-4">3.4 性能问题</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q77: 【性能】RAG 端到端响应时间 8s+，用户体验差，怎么优化到 3s 以内？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>延迟拆解</strong>（典型 8s 场景）：Embedding 100ms + Milvus 6次串行 300ms + Rerank 300ms + LLM 生成 4s + 幻觉校验 3s = ~8s。</p>
+        <p><strong>优化方案</strong>（按收益排序）：</p>
+        <ol>
+            <li><strong>LLM 流式输出</strong>（-3.5s 体感延迟）：首 token ~200ms 后用户就开始看到答案，不需要等完整生成。已实现 SSE</li>
+            <li><strong>声明校验并行</strong>（-2s）：当前逐句串行调 LLM 裁判。改为 <code>asyncio.gather</code> 并行 3-5 句，省 60% 时间</li>
+            <li><strong>Milvus 并行检索</strong>（-250ms）：6 次串行改 <code>asyncio.gather</code> 并行</li>
+            <li><strong>FAQ 快速路径</strong>（-7s）：FAQ 命中 rerank>0.85 跳过 LLM + 校验，直接返回标准口径 ~300ms</li>
+            <li><strong>Embedding 缓存</strong>（-100ms）：高频查询 Embedding 缓存到 Redis</li>
+            <li><strong>声明校验异步化</strong>（-3s）：答案先返回给用户，声明校验异步执行，如果校验不通过再推送 flag 事件修正</li>
+        </ol>
+        <p><strong>优化后预期</strong>：FAQ 快速路径 ~300ms，常规路径首 token ~500ms，完整响应 ~4-5s，校验异步后用户体感 ~1s。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q78: 【性能】高并发下 RAG 系统响应时间急剧上升，怎么排查和解决？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>定位瓶颈</strong>：用 APM（如 Prometheus/Grafana）看各阶段延迟分布。是 LLM 排队、Milvus 排队还是 DB 连接池耗尽？</li>
+            <li><strong>检查 LLM 并发</strong>：本地 qwen2.5-14b 单 GPU 同时只能处理 1-2 个请求，并发时排队。查看 GPU 利用率</li>
+            <li><strong>检查 Milvus 并发</strong>：Milvus 单节点支持并发检索，但负载高时检索延迟上升</li>
+            <li><strong>检查 FastAPI worker</strong>：<code>uvicorn --workers 4</code>，如果只有 1 个 worker 并发受限</li>
+            <li><strong>检查 DB 连接池</strong>：连接池耗尽时 <code>pool_timeout</code> 等待</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>LLM 多实例</strong>：部署多个 LLM 服务实例，Nginx 负载均衡</li>
+            <li><strong>请求队列+限流</strong>：RAG 请求加 Redis 限流（如每用户 5 QPM），超出排队</li>
+            <li><strong>FastAPI 多 worker</strong>：<code>uvicorn --workers $(nproc)</code> 按 CPU 核数启动</li>
+            <li><strong>异步非阻塞</strong>：确保所有 I/O 操作用 async/await，不阻塞事件循环</li>
+            <li><strong>缓存高频答案</strong>：相同问题的 RAG 答案缓存 1h，命中跳过整个管线</li>
+            <li><strong>GPU 升级</strong>：更大显存支持更大 batch_size，提升 LLM 吞吐</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q79: 【性能】法规文档入库速度极慢（1万条 chunk 需要 10 分钟+），怎么优化？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>瓶颈分析</strong>：入库流程 = 解析→分块→Embedding→Milvus 写入。1 万条 chunk：</p>
+        <ul>
+            <li>解析+分块：~5s（CPU 计算）</li>
+            <li>Embedding：逐条调 HTTP = 100ms × 10000 = 1000s ← <strong>主要瓶颈</strong></li>
+            <li>Milvus 写入：批量 insert ~10s</li>
+        </ul>
+        <p><strong>优化方案</strong>：</p>
+        <ul>
+            <li><strong>批量 Embedding</strong>：<code>embedder.embed(texts)</code> 支持批量。一次 64 条，1 万条只需 156 次 HTTP 调用 ~16s</li>
+            <li><strong>并行 Embedding</strong>：多批次并行调用，<code>asyncio.gather</code> 每批 64 条</li>
+            <li><strong>Milvus 批量写入</strong>：<code>insert_vectors()</code> 一次写入所有向量，不分批</li>
+            <li><strong>后台任务</strong>：入库用 Celery/BackgroundTasks 异步执行，不阻塞 API 响应</li>
+            <li><strong>增量入库</strong>：只入库新增/修改的条款，不全量重建</li>
+        </ul>
+        <p><strong>优化后预期</strong>：批量 Embedding + 并行 = ~30s，Milvus 写入 ~10s，总计 ~50s（提升 12x）。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q80: 【性能】前端 SSE 流式输出卡顿（token 之间延迟 1s+），怎么排查？ <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>排查步骤</strong>：</p>
+        <ol>
+            <li><strong>检查 LLM 流式</strong>：直接 <code>curl</code> LLM API 的 <code>stream: true</code>，看 token 延迟。如果 LLM 端就慢，是 GPU 性能问题</li>
+            <li><strong>检查后端 SSE 中转</strong>：<code>llm_client.chat_stream()</code> 用 <code>httpx.AsyncClient.stream()</code>。如果 <code>aiter_lines()</code> 有缓冲，会攒一批再 yield</li>
+            <li><strong>检查 FastAPI SSE</strong>：<code>sse-starlette</code> 是否正确配置 <code>ping</code> 心跳</li>
+            <li><strong>检查前端 EventSource</strong>：浏览器 DevTools Network 面板看 EventStream 延迟</li>
+            <li><strong>检查 Nginx/代理</strong>：如果有反向代理，需配置 <code>proxy_buffering off</code> 避免缓冲 SSE</li>
+        </ol>
+        <p><strong>解决方案</strong>：</p>
+        <ul>
+            <li><strong>httpx 流式优化</strong>：确保 <code>client.stream()</code> 用 <code>aiter_bytes()</code> 而非 <code>aiter_lines()</code>，避免等换行符</li>
+            <li><strong>Nginx 配置</strong>：<code>proxy_buffering off; proxy_cache off; chunked_transfer_encoding on;</code></li>
+            <li><strong>LLM batch_size</strong>：增大 LLM 推理 batch_size，提升单位时间 token 产出</li>
+            <li><strong>前端降级</strong>：如果 SSE 卡顿严重，降级为非流式（一次性返回完整答案）</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 第四部分：技术对比专题 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec4">四、技术对比专题</h2>
+
+<h3 id="sec4-1">4.1 向量数据库对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q81: Milvus vs FAISS vs Chroma vs Pinecone vs Weaviate vs Qdrant 全面对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>Milvus（本项目）</th><th>FAISS</th><th>Chroma</th><th>Pinecone</th><th>Weaviate</th><th>Qdrant</th></tr>
+            <tr><td>类型</td><td>分布式向量数据库</td><td>向量检索库</td><td>嵌入式向量库</td><td>SaaS 向量服务</td><td>向量+图数据库</td><td>向量搜索引擎</td></tr>
+            <tr><td>部署</td><td>Docker/分布式</td><td>pip install</td><td>pip install</td><td>云服务</td><td>Docker/K8s</td><td>Docker</td></tr>
+            <tr><td>规模</td><td>十亿级</td><td>十亿级</td><td>百万级</td><td>十亿级</td><td>亿级</td><td>亿级</td></tr>
+            <tr><td>多租户</td><td>✅ filter 表达式</td><td>❌ 需自行实现</td><td>⚠️ 分集合</td><td>✅ namespace</td><td>✅ class</td><td>✅ payload filter</td></tr>
+            <tr><td>CRUD</td><td>✅</td><td>⚠️ 删除需重建</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>持久化</td><td>✅ etcd+MinIO</td><td>❌ 内存</td><td>✅ 文件</td><td>✅ 云端</td><td>✅</td><td>✅</td></tr>
+            <tr><td>水平扩展</td><td>✅ 分片+副本</td><td>❌</td><td>❌</td><td>✅ 云端</td><td>✅</td><td>✅</td></tr>
+            <tr><td>数据安全</td><td>✅ 本地部署</td><td>✅ 本地</td><td>✅ 本地</td><td>❌ 数据上传</td><td>✅ 本地</td><td>✅ 本地</td></tr>
+            <tr><td>运维复杂度</td><td>中（3容器）</td><td>低</td><td>低</td><td>极低</td><td>中</td><td>低</td></tr>
+            <tr><td>生态</td><td>丰富（LangChain等）</td><td>丰富</td><td>一般</td><td>丰富</td><td>丰富</td><td>好</td></tr>
+        </table>
+        <p><strong>本项目选 Milvus 的原因</strong>：① 支持十亿级规模和水平扩展；② 原生 filter 多租户隔离；③ CRUD 完整支持法规库版本更新；④ Docker 容器化部署；⑤ 本地部署满足制药数据安全要求。</p>
+        <p><strong>如果重新选型</strong>：Qdrant 是很好的替代——部署更简单（单容器）、payload filter 强大、性能接近 Milvus。但如果规模需要分布式扩展，Milvus 仍然更成熟。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q82: 如果面试官问"为什么不用 Pinecone（最简单的向量服务）？" <span class="difficulty diff-mid">进阶</span></div>
+    <div class="qa-answer">
+        <p><strong>核心原因：数据安全</strong>。制药行业的法规文本、FAQ、历史案例属于企业核心知识产权，不能上传到 Pinecone 的云服务。GMP/GCP 合规要求"数据不出内网"。</p>
+        <p><strong>其他原因</strong>：</p>
+        <ul>
+            <li><strong>成本</strong>：Pinecone 按存储量和查询量计费，法规库数万条 × 高频查询成本高</li>
+            <li><strong>延迟</strong>：云服务有网络延迟（100-300ms），本地 Milvus 检索 10-50ms</li>
+            <li><strong>控制</strong>：本地部署可自定义索引参数、硬件配置，云服务受限于平台</li>
+        </ul>
+        <p><strong>Pinecone 的优势</strong>：零运维、弹性扩缩、SLA 保障。适合创业公司快速验证或非敏感数据场景。</p>
+    </div>
+</div>
+
+<h3 id="sec4-2">4.2 Embedding 模型对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q83: bge-m3 vs text-embedding-ada-002 vs M3E vs bge-large-zh vs Cohere Embed v3 对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>bge-m3（本项目）</th><th>ada-002</th><th>M3E</th><th>bge-large-zh</th><th>Cohere v3</th></tr>
+            <tr><td>来源</td><td>智源 BAAI</td><td>OpenAI</td><td>Moka AI</td><td>智源 BAAI</td><td>Cohere</td></tr>
+            <tr><td>部署</td><td>本地</td><td>远程 API</td><td>本地</td><td>本地</td><td>远程 API</td></tr>
+            <tr><td>维度</td><td>1024</td><td>1536</td><td>768</td><td>1024</td><td>1024/384</td></tr>
+            <tr><td>中文表现</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td></tr>
+            <tr><td>多语言</td><td>✅ 100+语言</td><td>✅</td><td>⚠️ 中英</td><td>⚠️ 中文为主</td><td>✅ 100+语言</td></tr>
+            <tr><td>多功能</td><td>✅ Dense+Sparse+ColBERT</td><td>❌ Dense only</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            <tr><td>成本</td><td>免费</td><td>按 token 计费</td><td>免费</td><td>免费</td><td>按 token 计费</td></tr>
+            <tr><td>延迟</td><td>~50ms 本地</td><td>~200ms API</td><td>~50ms</td><td>~50ms</td><td>~200ms</td></tr>
+        </table>
+        <p><strong>选 bge-m3 的原因</strong>：① 中文表现最优（MTEB 中文排行榜前列）；② 多语言支持（如果未来扩展英文法规）；③ 多功能（Dense+Sparse+ColBERT 三合一，未来可升级混合检索）；④ 本地部署满足数据安全；⑤ 1024 维平衡精度和存储。</p>
+        <p><strong>其他模型的优势</strong>：ada-002 零运维但数据外传+成本高；M3E 轻量但维度低（768）精度略差；Cohere v3 多语言好但远程 API。</p>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q84: 如果 Embedding 模型需要升级（如 bge-m3 → bge-m3-v2），怎么做？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>核心挑战</strong>：新模型维度可能变化，旧向量与新模型不兼容，需要全量重新 Embedding + 重建索引。</p>
+        <p><strong>迁移步骤</strong>：</p>
+        <ol>
+            <li><strong>新版本知识库入库</strong>：用新模型对全部法规文本重新 Embedding，写入新 Milvus 集合（如 <code>doc_gmp_2010_v2</code>）</li>
+            <li><strong>双版本并行</strong>：新旧集合同时 active，检索时两版本都查。用 A/B 测试对比质量</li>
+            <li><strong>评估对比</strong>：用 200 条评估集分别跑新旧模型，比较命中率/准确率/阻断率</li>
+            <li><strong>切换</strong>：评估通过后，新版本激活，旧版本 inactive。旧集合可保留或删除</li>
+            <li><strong>Embedding 缓存刷新</strong>：清空 Redis 中的 Embedding 缓存（key 不同自然失效）</li>
+        </ol>
+        <p><strong>注意事项</strong>：① 迁移期间需要双倍存储（两个集合）；② 迁移时间取决于数据量（1万条 ~1h）；③ 如果维度变化需要更新 Milvus Schema。</p>
+    </div>
+</div>
+
+<h3 id="sec4-3">4.3 Rerank 方案对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q85: CrossEncoder vs ColBERT vs LLM Rerank vs 混合检索（BM25+向量）全面对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>方案</th><th>原理</th><th>精度</th><th>速度</th><th>成本</th><th>适用场景</th></tr>
+            <tr><td><strong>CrossEncoder（本项目）</strong></td><td>query+doc 拼接送 Transformer</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐ ~300ms</td><td>本地 GPU</td><td>对精度要求高</td></tr>
+            <tr><td>ColBERT</td><td>query 和 doc 分别编码为 token 级向量，延迟交互</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐ ~100ms</td><td>存储大</td><td>大规模+实时</td></tr>
+            <tr><td>LLM Rerank</td><td>让 LLM 对候选打分排序</td><td>⭐⭐⭐⭐</td><td>⭐ ~5s</td><td>LLM API 成本</td><td>需要解释性</td></tr>
+            <tr><td>BM25+向量混合</td><td>关键词检索+语义检索融合</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐ ~50ms</td><td>低</td><td>专业术语多</td></tr>
+            <tr><td>不加 Rerank</td><td>只用向量检索 top_k</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐ ~10ms</td><td>零</td><td>原型/小规模</td></tr>
+        </table>
+        <p><strong>本项目选 CrossEncoder 的原因</strong>：① 精度最高——制药合规对检索精度要求极高；② 本地部署无 API 成本；③ bge-reranker-large 在 MTEB 排行榜表现优异；④ 候选数少（24条）CrossEncoder 延迟可接受（~300ms）。</p>
+        <p><strong>优化方向 — 混合检索</strong>：引入 BM25 做第一阶段检索（精确匹配条款号"第三十五条"），向量检索做语义匹配，两路结果用 RRF（Reciprocal Rank Fusion）融合后再 CrossEncoder 精排。BM25 擅长精确关键词匹配，向量擅长语义匹配，互补效果好。</p>
+    </div>
+</div>
+
+<h3 id="sec4-4">4.4 Agent 框架对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q86: 自研 Supervisor vs LangGraph vs AutoGen vs CrewAI vs LangChain Agent 深度对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>自研 Supervisor</th><th>LangGraph</th><th>AutoGen</th><th>CrewAI</th><th>LangChain Agent</th></tr>
+            <tr><td>模式</td><td>中心化路由</td><td>图状态机</td><td>对话式协作</td><td>角色扮演</td><td>ReAct 循环</td></tr>
+            <tr><td>路由</td><td>规则路由</td><td>条件边</td><td>LLM 协商</td><td>LLM 分工</td><td>LLM 决策</td></tr>
+            <tr><td>状态管理</td><td>服务层状态机</td><td>图状态</td><td>对话历史</td><td>任务状态</td><td>Agent_scratchpad</td></tr>
+            <tr><td>多步推理</td><td>❌</td><td>✅ 可循环</td><td>✅ 多轮对话</td><td>✅</td><td>✅ ReAct</td></tr>
+            <tr><td>确定性</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐</td><td>⭐⭐</td></tr>
+            <tr><td>LLM 依赖</td><td>低（仅QA）</td><td>中</td><td>高（每轮）</td><td>高</td><td>高（每步）</td></tr>
+            <tr><td>延迟</td><td>低</td><td>中</td><td>高</td><td>高</td><td>高</td></tr>
+            <tr><td>成本</td><td>低</td><td>中</td><td>高</td><td>高</td><td>高</td></tr>
+            <tr><td>可控性</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐</td></tr>
+            <tr><td>开发复杂度</td><td>低</td><td>中</td><td>中</td><td>低</td><td>低</td></tr>
+        </table>
+        <p><strong>本项目选自研 Supervisor 的核心原因</strong>：制药合规场景需要<strong>强确定性</strong>（规则路由）和<strong>强可控性</strong>（Agent 不写库）。其他框架都依赖 LLM 做路由/决策，引入随机性和不可预测性。</p>
+        <p><strong>各框架的最佳适用场景</strong>：</p>
+        <ul>
+            <li><strong>自研 Supervisor</strong>：强合规、强可控、确定性优先的场景（金融、医疗、法规）</li>
+            <li><strong>LangGraph</strong>：复杂多步工作流、需要状态循环（如审批流→驳回→修改→再审批）</li>
+            <li><strong>AutoGen</strong>：需要多 Agent 协商讨论（如方案评审、头脑风暴）</li>
+            <li><strong>CrewAI</strong>：角色分工明确的团队协作（如内容生产流水线）</li>
+            <li><strong>LangChain Agent</strong>：需要 LLM 动态选择工具的通用 Agent（如代码助手）</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q87: 如果项目演进到需要 Agent 间协作，你会选 LangGraph 还是 AutoGen？为什么？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>会选 LangGraph</strong>。原因：</p>
+        <ul>
+            <li><strong>确定性更强</strong>：LangGraph 的图状态机是显式的——节点、边、条件都明确定义，行为可预测。AutoGen 的 Agent 间对话依赖 LLM 协商，行为不可控</li>
+            <li><strong>状态管理</strong>：LangGraph 有显式的 State 对象，可以追踪多步流转中的中间状态。制药合规需要完整的状态审计轨迹</li>
+            <li><strong>人在回路</strong>：LangGraph 原生支持 <code>interrupt_before</code> / <code>interrupt_after</code>，可以在关键节点暂停等待人工审核。这正好符合制药行业"AI 建议→人工复核"的工作模式</li>
+            <li><strong>与现有架构兼容</strong>：服务层已经有状态机（偏差/变更/SAE），LangGraph 可以在 Agent 层做类似的状态管理，与 service 层状态机形成两层模型</li>
+            <li><strong>已有依赖</strong>：pyproject.toml 已引入 langgraph >= 0.2</li>
+        </ul>
+        <p><strong>具体场景示例</strong>：偏差处理全流程可以建模为 LangGraph 图：</p>
+        <div class="arch-box">DeviationAgent(分级) 
+    → [人工确认分级]
+    → DeviationAgent(调查计划)
+    → [人工审核调查]
+    → ComplianceAgent(CAPA建议)
+    → [人工审批]
+    → closed</div>
+        <p>每个节点是一个 Agent 或人工步骤，条件边控制流转（如分级为 critical 则通知管理层）。</p>
+    </div>
+</div>
+
+<h3 id="sec4-5">4.5 LLM 选型对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q88: qwen2.5-14b（本地）vs GPT-4（远程）vs Llama3 vs ChatGLM 对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>维度</th><th>qwen2.5-14b（本项目）</th><th>GPT-4</th><th>Llama3-70b</th><th>ChatGLM4-9B</th></tr>
+            <tr><td>部署</td><td>本地 GPU</td><td>远程 API</td><td>本地/远程</td><td>本地</td></tr>
+            <tr><td>中文能力</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td></tr>
+            <tr><td>推理能力</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
+            <tr><td>成本</td><td>GPU 折旧</td><td>按 token 计费（贵）</td><td>GPU 折旧</td><td>GPU 折旧</td></tr>
+            <tr><td>数据安全</td><td>✅ 数据不出内网</td><td>❌ 数据上传 OpenAI</td><td>✅</td><td>✅</td></tr>
+            <tr><td>延迟</td><td>~1-3s 本地</td><td>~2-5s API</td><td>~2-4s</td><td>~1-2s</td></tr>
+            <tr><td>显存需求</td><td>~28GB (14B)</td><td>0（云端）</td><td>~140GB (70B)</td><td>~18GB (9B)</td></tr>
+            <tr><td>许可</td><td>Apache 2.0</td><td>商用 API</td><td>Llama 许可</td><td>商用许可</td></tr>
+        </table>
+        <p><strong>选 qwen2.5-14b 的原因</strong>：① 中文能力优秀（阿里中文模型）；② 14B 参数量在精度和速度间平衡好；③ 本地部署满足数据安全；④ Apache 2.0 许可商用无忧；⑤ 显存 ~28GB 单卡 A100 可跑。</p>
+        <p><strong>GPT-4 的优势</strong>：推理能力最强，但制药数据不能上传外部 API。如果法规文本脱敏后可以接受远程 API，GPT-4 答案质量最高。</p>
+        <p><strong>优化方向</strong>：可以考虑 qwen2.5-72b（精度更高但需要多卡）或部署 vLLM 做 continuous batching 提升吞吐。</p>
+    </div>
+</div>
+
+<h3 id="sec4-6">4.6 分块策略对比</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q89: 固定长度 vs 语义分块 vs 递归分块 vs 文档结构分块（本项目）vs 语义聚合分块对比 <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <table>
+            <tr><th>策略</th><th>原理</th><th>优点</th><th>缺点</th><th>适用</th></tr>
+            <tr><td>固定长度</td><td>每 N 字符切一块</td><td>简单</td><td>破坏语义完整性</td><td>原型</td></tr>
+            <tr><td>按句子/段落</td><td>自然语言边界切分</td><td>语义较完整</td><td>长度不可控</td><td>通用文档</td></tr>
+            <tr><td>递归分块</td><td>先按段落→超长则按句→再超长则固定</td><td>自适应</td><td>不感知文档结构</td><td>混合文档</td></tr>
+            <tr><td><strong>文档结构（本项目）</strong></td><td>按法规"第X条"为粒度</td><td>天然支持引用溯源</td><td>依赖文档格式</td><td>法规/标准</td></tr>
+            <tr><td>语义聚合</td><td>用 Embedding 聚合语义相近的句子</td><td>语义最优</td><td>计算量大、不可控</td><td>非结构化文本</td></tr>
+            <tr><td>父子分块</td><td>小块检索，大块送 LLM</td><td>检索精+上下文全</td><td>实现复杂</td><td>长文档</td></tr>
+        </table>
+        <p><strong>本项目选文档结构分块的原因</strong>：① 法规天然有"第X章→第X条"结构；② 引用溯源需要——每块绑定 clause_id，答案可溯源到具体条款号；③ 512 token 上限内大部分条款一条一个 chunk。</p>
+        <p><strong>优化方向 — 父子分块</strong>：检索时用小块（条款内句子级），但送 LLM 时扩展到父块（完整条款），保证上下文完整。如检索命中"第三十五条第二款"，送 LLM 的是完整"第三十五条"全文。</p>
+    </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 第五部分：同类项目对比专题 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec5">五、同类项目对比专题</h2>
+
+<h3 id="sec5-1">5.1 行业同类 RAG 项目</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q90: 你了解市面上有哪些类似的 RAG 问答项目？和你们有什么区别？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>同类项目</strong>：</p>
+        <table>
+            <tr><th>项目</th><th>定位</th><th>与 PharmaReg 的差异</th></tr>
+            <tr><td>Dify</td><td>通用 AI 应用开发平台</td><td>Dify 是平台型产品，支持任意知识库；PharmaReg 是垂直行业产品，深度绑定制药合规业务</td></tr>
+            <tr><td>FastGPT</td><td>开源知识库问答</td><td>FastGPT 通用知识库问答，无行业特化；PharmaReg 有条款级引用溯源、幻觉防护、审计链</td></tr>
+            <tr><td>MaxKB</td><td>企业知识库问答</td><td>MaxKB 面向通用企业知识；PharmaReg 面向制药 GMP/GCP 合规，有法规解析、状态机、电子签名</td></tr>
+            <tr><td>LangChain-Chatchat</td><td>开源 RAG 工具</td><td>通用 RAG 工具，无行业特化；PharmaReg 有条款级分块、意图分类、幻觉检测、多 Agent</td></tr>
+            <tr><td>QAnything（网易）</td><td>企业知识问答</td><td>通用问答，无合规场景特化；PharmaReg 有制药合规 Agent 矩阵</td></tr>
+        </table>
+        <p><strong>PharmaReg 的差异化优势</strong>：</p>
+        <ul>
+            <li><strong>垂直行业深度</strong>：法规解析（中文数字转整数）、条款级分块、引用溯源、幻觉双重校验、置信度门控——这些通用 RAG 平台没有</li>
+            <li><strong>多 Agent 合规矩阵</strong>：10 个制药专家 Agent + 角色权限矩阵，通用平台通常是单 Agent 或简单路由</li>
+            <li><strong>审计完整性</strong>：哈希链审计日志 + 电子签名（21 CFR Part 11），通用平台通常只有操作日志</li>
+            <li><strong>状态机管理</strong>：偏差/变更/SAE/CAPA 状态机 + Agent 不写库约束，通用平台没有业务状态管理</li>
+            <li><strong>评估门禁</strong>：200 条评估集 + 幻觉注入测试 + CI 质量门禁，通用平台通常没有评估体系</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q91: 和 Dify/FastGPT 相比，你们有什么劣势？可以借鉴什么？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>劣势</strong>：</p>
+        <ul>
+            <li><strong>通用性差</strong>：PharmaReg 深度绑定制药合规，换到其他行业（如法律、金融）需要大量改造。Dify/FastGPT 通用性强</li>
+            <li><strong>知识库管理 UI</strong>：Dify/FastGPT 有完善的文档管理 UI（上传、解析、分块预览、调试）。PharmaReg 的知识库管理主要靠 API</li>
+            <li><strong>调试工具</strong>：Dify 有可视化 Workflow 编排和调试面板。PharmaReg 的 RAG 链路调试靠日志</li>
+            <li><strong>多格式支持</strong>：Dify 支持多种文档格式（PDF/Word/Excel/网页）。PharmaReg 主要处理纯文本法规</li>
+            <li><strong>社区生态</strong>：Dify/FastGPT 有活跃社区和插件生态。PharmaReg 是内部项目</li>
+        </ul>
+        <p><strong>可借鉴的优化点</strong>：</p>
+        <ul>
+            <li><strong>知识库管理 UI</strong>：增加文档上传→解析→分块预览→入库的完整 Web UI，降低运维门槛</li>
+            <li><strong>RAG 调试面板</strong>：增加可视化调试——输入问题后展示每阶段中间结果（意图分类结果、检索候选、Rerank 分数、LLM prompt/输出、校验结果）</li>
+            <li><strong>多格式解析</strong>：支持 PDF（法规原文常为 PDF）和 Word 格式，用 PyMuPDF/python-docx 解析</li>
+            <li><strong>Workflow 可视化</strong>：用 LangGraph Studio 或自研可视化工具展示 Agent 路由图</li>
+            <li><strong>A/B 测试</strong>：支持不同 Prompt / 模型版本的 A/B 测试对比</li>
+        </ul>
+    </div>
+</div>
+
+<h3 id="sec5-2">5.2 同类 Agent 项目</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q92: 你了解市面上有哪些多 Agent 项目？你们的 Agent 架构有什么不同？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>同类项目</strong>：</p>
+        <table>
+            <tr><th>项目</th><th>Agent 架构</th><th>与 PharmaReg 的差异</th></tr>
+            <tr><td>AutoGen (微软)</td><td>对话式多 Agent 协作</td><td>AutoGen 靠 LLM 对话协商，PharmaReg 用规则路由，确定性更强</td></tr>
+            <tr><td>CrewAI</td><td>角色扮演+任务委派</td><td>CrewAI 靠 LLM 分工，PharmaReg 用角色矩阵权限控制</td></tr>
+            <tr><td>MetaGPT</td><td>软件公司模拟（PM/架构/开发）</td><td>MetaGPT 面向软件开发，PharmaReg 面向制药合规</td></tr>
+            <tr><td>ChatDev</td><td>对话式软件开发 Agent</td><td>ChatDev 面向代码，PharmaReg 面向合规</td></tr>
+            <tr><td>OpenAI Swarm</td><td>轻量级 Agent 编排</td><td>Swarm 是实验性框架，PharmaReg 是生产级系统</td></tr>
+        </table>
+        <p><strong>PharmaReg Agent 架构的独特性</strong>：</p>
+        <ul>
+            <li><strong>Agent 不写库约束</strong>：这是其他所有项目都没有的设计。在合规场景中 AI 只做建议，不做决策</li>
+            <li><strong>角色权限矩阵</strong>：基于制药行业角色分工（操作员/QA/研究者/CRA/PV/合规专员）做 Agent 可见性控制。其他项目通常不做角色级权限</li>
+            <li><strong>确定性工具调用</strong>：Agent 内部用关键词规则（如偏差分级）而非 LLM ReAct。其他项目都依赖 LLM 做工具选择</li>
+            <li><strong>服务层状态机分离</strong>：状态管理在 service 层，Agent 只做建议。其他项目通常在 Agent 内管理状态</li>
+        </ul>
+    </div>
+</div>
+
+<h3 id="sec5-3">5.3 差异化分析</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q93: 如果面试官问"你们项目和市面上的 RAG 项目最大的差异化在哪里？" <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>三个核心差异化</strong>：</p>
+        <p><strong>① 幻觉防护体系（最大差异化）</strong></p>
+        <ul>
+            <li>双重校验（条款存在性 + 声明蕴含 LLM 裁判）</li>
+            <li>三维度加权置信度（rerank + clause_hit + claim_pass）</li>
+            <li>置信度门控 + 阻断策略（<0.6 阻断、未验证>30% 阻断）</li>
+            <li>Stub 模式证据门（rerank<0.45 标记人工审核）</li>
+            <li>200 条评估集含 24 条幻觉注入测试，CI 门禁 100% 阻断</li>
+        </ul>
+        <p>→ 通用 RAG 项目通常只有"检索→生成"两步，没有系统化的幻觉防护。</p>
+        <p><strong>② 条款级引用溯源</strong></p>
+        <ul>
+            <li>文档结构化分块（按"第X条"为粒度）</li>
+            <li>每个 chunk 绑定 clause_id，答案引用可回溯到具体条款</li>
+            <li>build_citations 回查 MySQL 构建结构化引用</li>
+            <li>SSE 先推 citation 事件，用户先看到引用再读答案</li>
+        </ul>
+        <p>→ 通用 RAG 项目通常只返回答案，不做引用溯源或只标注文档名。</p>
+        <p><strong>③ 制药合规 Agent 矩阵</strong></p>
+        <ul>
+            <li>10 个制药专家 Agent（偏差/变更/SAE/审计/培训等）</li>
+            <li>角色权限矩阵（操作员/QA/研究者/CRA/PV/合规专员）</li>
+            <li>Agent 不写库约束（AI 只建议，人工决策 + 电子签名）</li>
+            <li>服务层状态机管理业务生命周期</li>
+        </ul>
+        <p>→ 通用 Agent 项目面向通用场景，没有制药行业深度。</p>
+    </div>
+</div>
+
+<h3 id="sec5-4">5.4 可借鉴优化点</h3>
+
+<div class="qa-block">
+    <div class="qa-question">Q94: 从行业同类项目中，你觉得 PharmaReg 还可以借鉴哪些优化？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>从 Dify 借鉴</strong>：</p>
+        <ul>
+            <li><strong>可视化 Workflow 编排</strong>：用拖拽方式编排 RAG 链路和 Agent 流程，降低非开发人员使用门槛</li>
+            <li><strong>Prompt 调试面板</strong>：在线编辑 Prompt → 实时预览 LLM 输出 → 对比效果</li>
+        </ul>
+        <p><strong>从 FastGPT 借鉴</strong>：</p>
+        <ul>
+            <li><strong>分块预览</strong>：文档入库前预览分块效果，手动调整分块边界</li>
+            <li><strong>问答标注</strong>：用户对答案点赞/点踩，标注数据回流优化检索和 Prompt</li>
+        </ul>
+        <p><strong>从 LangChain-Chatchat 借鉴</strong>：</p>
+        <ul>
+            <li><strong>混合检索</strong>：BM25 + 向量检索 + RRF 融合，提升专业术语检索精度</li>
+            <li><strong>父子分块</strong>：小块检索、大块送 LLM，兼顾检索精度和上下文完整</li>
+        </ul>
+        <p><strong>从 LangGraph 借鉴</strong>：</p>
+        <ul>
+            <li><strong>图式工作流</strong>：偏差处理全流程建模为图，支持条件分支和人在回路</li>
+            <li><strong>状态检查点</strong>：Agent 执行中途可暂停/恢复，支持长流程</li>
+        </ul>
+        <p><strong>从 AutoGen 借鉴</strong>：</p>
+        <ul>
+            <li><strong>多 Agent 协商</strong>：复杂合规问题（如"这个偏差是否需要召回"）可以多 Agent 讨论——QAAgent 检索法规 + DeviationAgent 分析偏差 + ComplianceAgent 评估合规风险</li>
+        </ul>
+        <p><strong>从行业最佳实践借鉴</strong>：</p>
+        <ul>
+            <li><strong>Query 意图 LLM 分类</strong>：用轻量 LLM 做意图分类，替代关键词匹配，提升路由精度</li>
+            <li><strong>Self-RAG</strong>：LLM 自主判断是否需要检索、检索结果是否相关、答案是否有依据</li>
+            <li><strong>Corrective RAG (CRAG)</strong>：检索质量评估→低质量检索触发 web 搜索补充</li>
+            <li><strong>多模态</strong>：支持法规文档中的表格和图片（GMP 附录常有表格）</li>
+        </ul>
+    </div>
+</div>
+
+<div class="qa-block">
+    <div class="qa-question">Q95: 如果让你重新设计这个项目，你会做什么不同的技术选型？ <span class="difficulty diff-hard">高级</span></div>
+    <div class="qa-answer">
+        <p><strong>会保持不变的选型</strong>：</p>
+        <ul>
+            <li>Milvus 向量库（多租户 + CRUD + 分布式扩展）</li>
+            <li>bge-m3 Embedding（中文最优 + 本地部署）</li>
+            <li>bge-reranker-large CrossEncoder（精度最高）</li>
+            <li>FastAPI + React 全栈（异步 + 类型安全）</li>
+            <li>Agent 不写库约束（合规核心要求）</li>
+        </ul>
+        <p><strong>会改变/升级的选型</strong>：</p>
+        <table>
+            <tr><th>当前</th><th>升级方案</th><th>理由</th></tr>
+            <tr><td>自研 Supervisor</td><td>LangGraph 图编排</td><td>支持复杂多步流转和人在回路</td></tr>
+            <tr><td>关键词意图分类</td><td>轻量 BERT 分类器</td><td>意图更精准，支持 10+ 意图</td></tr>
+            <tr><td>纯向量检索</td><td>BM25 + 向量混合检索</td><td>条款号精确匹配 + 语义匹配</td></tr>
+            <tr><td>串行 Milvus 检索</td><td>asyncio.gather 并行</td><td>延迟 -250ms</td></tr>
+            <tr><td>逐句串行校验</td><td>并行声明校验</td><td>延迟 -2s</td></tr>
+            <tr><td>无 RAG 调试面板</td><td>可视化调试 UI</td><td>降低运维门槛</td></tr>
+            <tr><td>纯文本解析</td><td>PDF/Word 多格式</td><td>法规原文常为 PDF</td></tr>
+            <tr><td>固定块分块</td><td>父子分块</td><td>检索精 + 上下文全</td></tr>
+        </table>
+        <p><strong>总结</strong>：核心架构（两阶段检索 + 幻觉防护 + Agent 矩阵 + 不写库约束）不会变，但在工程实现上有很多可以优化的空间。</p>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="callout callout-success">
+    <strong>文档说明</strong>：本文档独立于《项目面试介绍纲要》，专注于 RAG 检索链路与多 Agent 编排的面试题库。共 95 道题目，覆盖基础概念、架构设计、技术实现、性能优化、故障排查、技术对比选型、同类项目对比七大维度。所有代码片段和架构设计均基于 PharmaReg 项目实际源码。建议面试前结合实际代码深入理解每道题的原理和设计决策。
+</div>
+
+</div>
+</body>
+</html>

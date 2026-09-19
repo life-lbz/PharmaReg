@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+.next/
+out/
+*.log
+
+# Cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+
+# Pretrained models (large binary files, re-downloadable)
+models/
+*.bin
+*.safetensors
+*.pt
+*.h5
+*.onnx
+*.msgpack
+
+# Trae share packages (tool-generated)
+.trae-html-share-packages/

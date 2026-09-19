@@ -1,0 +1,232 @@
+{
+  "schema": "pharmareg-eval-run",
+  "eval_set": "qa_subset_0_1.json",
+  "prompt_version": "v1",
+  "run_at": "2026-09-03T12:46:55",
+  "llm_provider": "stub",
+  "embed_model": "bge-m3",
+  "rerank_model": "bge-reranker-large",
+  "milvus": "2.4 standalone @19530",
+  "total": 16,
+  "hit_total": 13,
+  "hit_pass": 13,
+  "hit_rate": 1.0,
+  "illusion_total": 3,
+  "illusion_blocked": 3,
+  "illusion_block_rate": 1.0,
+  "elapsed_sec": 55.7,
+  "gates": {
+    "hit_rate_gte_90": true,
+    "illusion_block_pct": true
+  },
+  "cases": [
+    {
+      "id": "gmp-001",
+      "kind": "hit",
+      "question": "纯化水系统日常监测的检测频次应依据什么规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "纯化水",
+        "citations": 7,
+        "answer_len": 566
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  制药用水应当符合相应质量要求，纯化水系统应当按照验证确定的频次进行日常监测，监测项目至少包括电"
+    },
+    {
+      "id": "gmp-002",
+      "kind": "hit",
+      "question": "洁净区A级悬浮粒子在线监测有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "悬浮粒子",
+        "citations": 7,
+        "answer_len": 591
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区各级别空气悬浮粒子的静态和动态监测应当符合规定限度。A级洁净区应当在其高风险操作区域进行"
+    },
+    {
+      "id": "gmp-003",
+      "kind": "hit",
+      "question": "批生产记录保存期限是多久，依据哪一条？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "批生产记录",
+        "citations": 7,
+        "answer_len": 526
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  批生产记录应当内容完整、真实、可追溯，由质量管理部门审核并按规定保存，保存期限应当不少于药品有"
+    },
+    {
+      "id": "gmp-004",
+      "kind": "hit",
+      "question": "发生偏差后质量部门应当履行的职责是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "偏差",
+        "citations": 7,
+        "answer_len": 539
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发生偏差时，应当按照规定的程序进行调查，查明原因，评估影响范围，必要时采取纠正和预防措施。质量"
+    },
+    {
+      "id": "gmp-005",
+      "kind": "hit",
+      "question": "药品生产人员健康检查有什么管理规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "健康",
+        "citations": 8,
+        "answer_len": 491
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  直接接触药品的生产人员应当每年进行健康检查，患有传染病或者其他可能污染药品的疾病的人员不得从事"
+    },
+    {
+      "id": "gcp-001",
+      "kind": "hit",
+      "question": "研究者获知受试者死亡后应在多长时间内向申办方报告？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "死亡",
+        "citations": 7,
+        "answer_len": 588
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当在获知受试者死亡后二十四小时内向申办方报告，并在规定期限内提交详细书面报告。危及生命"
+    },
+    {
+      "id": "gcp-002",
+      "kind": "hit",
+      "question": "知情同意书应当包含哪些基本要素？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "知情同意",
+        "citations": 8,
+        "answer_len": 498
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当获得受试者或者其法定代理人签署的知情同意书。知情同意书应当包含试验目的、试验步骤、预"
+    },
+    {
+      "id": "gcp-003",
+      "kind": "hit",
+      "question": "SAE 上报时限：危及生命事件应当在什么时间窗口内报告？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "SAE",
+        "citations": 7,
+        "answer_len": 560
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当在获知受试者死亡后二十四小时内向申办方报告，并在规定期限内提交详细书面报告。危及生命"
+    },
+    {
+      "id": "gcp-004",
+      "kind": "hit",
+      "question": "临床试验数据修改应当遵循什么原则？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据",
+        "citations": 8,
+        "answer_len": 466
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验数据应当真实、准确、完整和可溯源。电子数据修改应当保留稽查轨迹，纸质记录修改应当划线更"
+    },
+    {
+      "id": "gcp-005",
+      "kind": "hit",
+      "question": "监查员在临床试验中的主要职责包括哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "监查",
+        "citations": 8,
+        "answer_len": 468
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当由申办者指定并具备相应资质，主要职责包括核实病例报告表数据与源数据一致、确认方案依从"
+    },
+    {
+      "id": "sop-001",
+      "kind": "hit",
+      "question": "无菌灌装间出现温湿度超标时应如何启动偏差调查？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "偏差",
+        "citations": 7,
+        "answer_len": 518
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  偏差案例（空调系统故障批次报废）：无菌灌装车间空调系统突发故障，洁净区温湿度及悬浮粒子持续超标"
+    },
+    {
+      "id": "case-001",
+      "kind": "hit",
+      "question": "有没有空调系统故障导致批次报废的历史案例可供参考？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "案例",
+        "citations": 6,
+        "answer_len": 616
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  偏差案例（空调系统故障批次报废）：无菌灌装车间空调系统突发故障，洁净区温湿度及悬浮粒子持续超标"
+    },
+    {
+      "id": "case-002",
+      "kind": "hit",
+      "question": "类似受试者严重过敏反应的历史SAE处理案例有哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "案例",
+        "citations": 6,
+        "answer_len": 669
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  SAE 历史案例（严重过敏反应）：某受试者用药后出现速发型严重过敏反应，表现为血压下降与呼吸困"
+    },
+    {
+      "id": "ill-001",
+      "kind": "illusion",
+      "question": "请说明第三千二百条关于药品追溯码的处罚金额上限。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5053,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  批生产记录应当内容完整、真实、可追溯，由质量管理部门审核并按规定保存，保存期限应当不少于药品有"
+    },
+    {
+      "id": "ill-002",
+      "kind": "illusion",
+      "question": "GCP规定所有试验必须每年出具风险管理认证报告，依据哪一条？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5176,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当提供试验用药品并承担相关责任，应当建立覆盖临床试验全过程的质量管理体系。 研究者应当"
+    },
+    {
+      "id": "ill-003",
+      "kind": "illusion",
+      "question": "请确认新版GMP规定洁净服必须每2小时更换一次。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5011,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区各级别空气悬浮粒子的静态和动态监测应当符合规定限度。A级洁净区应当在其高风险操作区域进行"
+    }
+  ]
+}

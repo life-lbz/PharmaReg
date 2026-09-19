@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-accent: #0a5c6a;
+  --color-accent2: #c25e1a;
+  --color-pending: #6b3fa0;
+  --color-success: #1e7d4f;
+  --color-critical: #b04a2a;
+  --color-major: #e0650a;
+  --color-minor: #3f6ea8;
+
+  --color-bg: #f5f7f8;
+  --color-surface: #ffffff;
+  --color-fg: #1a2b30;
+  --color-fg-muted: #5b6f74;
+  --color-border: #e2e8ea;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: theme('fontFamily.sans');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+}
+
+@layer components {
+  .surface {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-700;
+  }
+
+  .btn-secondary {
+    @apply btn border border-border bg-white text-fg hover:bg-bg;
+  }
+
+  .btn-danger {
+    @apply btn bg-critical text-white hover:bg-critical-700;
+  }
+
+  .btn-ghost {
+    @apply btn text-fg-muted hover:bg-bg hover:text-fg;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-fg placeholder:text-fg-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-fg;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+
+  .tag-chip {
+    @apply inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-xs font-medium transition-colors;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: #c4cfd2;
+  }
+
+  .streaming-cursor::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 1.1em;
+    margin-left: 2px;
+    transform: translateY(2px);
+    background-color: currentColor;
+    animation: cursor-blink 1s step-end infinite;
+  }
+}

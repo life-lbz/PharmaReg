@@ -1,0 +1,2640 @@
+{
+  "meta": {
+    "schema": "pharmareg-eval-set",
+    "version": "1.0-full-200",
+    "created": "2026-09-03",
+    "prompt_version": "v1",
+    "scope": "qa-clause-full-200",
+    "note": "全量示意评测集：GMP 88 + GCP 88 命中题（条款级） + 24 幻觉注入题（捏造条款号/编造时限数值/编造制度）"
+  },
+  "cases": [
+    {
+      "id": "gmp-001",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "药品生产质量管理规范适用于哪些范围？",
+      "expect_terms": [
+        "药品制剂生产",
+        "原料药",
+        "全过程"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-002",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "企业建立质量管理体系应当坚持什么原则？",
+      "expect_terms": [
+        "质量管理体系",
+        "诚实守信"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-003",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "企业质量管理体系要持续改进，应当配备哪些资源？",
+      "expect_terms": [
+        "足够的资源",
+        "岗位职责",
+        "持续改进"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-004",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "外购产品与委托操作能否免除生产企业的质量责任？",
+      "expect_terms": [
+        "质量责任",
+        "委托",
+        "免除"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-005",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量管理体系文件包括哪些内容？",
+      "expect_terms": [
+        "质量方针",
+        "质量手册",
+        "程序文件"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-006",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量风险管理在药品生产中应当如何开展？",
+      "expect_terms": [
+        "质量风险管理",
+        "前瞻性"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-007",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "出现质量投诉与检验超标时应该怎么处理？",
+      "expect_terms": [
+        "调查",
+        "纠正和预防措施",
+        "投诉"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-008",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "年度质量回顾的要求是什么？",
+      "expect_terms": [
+        "年度质量回顾",
+        "分析总结"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-009",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "对药品生产人员的资质和培训有什么要求？",
+      "expect_terms": [
+        "培训",
+        "资质"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-010",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "直接接触药品的生产人员健康检查有何规定？",
+      "expect_terms": [
+        "健康检查",
+        "传染病"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-011",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量管理部门与生产部门的关系有何规定？",
+      "expect_terms": [
+        "独立于生产部门",
+        "兼任"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-012",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "人员培训档案应该包含哪些内容？",
+      "expect_terms": [
+        "培训档案",
+        "考核",
+        "数据完整性"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-013",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "进入洁净区的人员和工作服有什么要求？",
+      "expect_terms": [
+        "洁净区",
+        "更衣",
+        "工作服"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-014",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "厂房选址设计应当考虑哪些风险？",
+      "expect_terms": [
+        "厂房",
+        "污染",
+        "混淆"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-015",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "洁净区悬浮粒子监测有什么要求？",
+      "expect_terms": [
+        "悬浮粒子",
+        "在线监测",
+        "A级洁净区"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-016",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "洁净区与非洁净区之间的压差如何管理？",
+      "expect_terms": [
+        "压差",
+        "指示装置"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-017",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "纯化水系统日常监测的项目包括哪些？",
+      "expect_terms": [
+        "纯化水",
+        "电导率",
+        "微生物限度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-018",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "洁净区的温湿度控制有什么要求？",
+      "expect_terms": [
+        "温湿度",
+        "换气次数"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-019",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "仓储区域的防虫防鼠防潮要求是什么？",
+      "expect_terms": [
+        "仓储",
+        "防虫",
+        "温湿度监控"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-020",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生产车间的照明有什么要求？",
+      "expect_terms": [
+        "照明",
+        "照度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-021",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生产设备的设计选型安装应当考虑什么？",
+      "expect_terms": [
+        "设备",
+        "材质",
+        "化学反应"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-022",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "设备保养与维修记录有什么要求？",
+      "expect_terms": [
+        "维护计划",
+        "维修记录"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-023",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "计量器具与检验仪器的校准要求是什么？",
+      "expect_terms": [
+        "校准",
+        "计量器具",
+        "国家标准"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-024",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "设备清洁后如何确认清洁效果？",
+      "expect_terms": [
+        "清洁规程",
+        "清洁效果",
+        "微生物限度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-025",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "固定管道与设备的状态标识有什么要求？",
+      "expect_terms": [
+        "管道",
+        "流向",
+        "状态标识"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-026",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "物料采购对供应商有什么管理要求？",
+      "expect_terms": [
+        "供应商",
+        "采购",
+        "质量档案"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-027",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "原辅料和包装材料使用前需要满足什么条件？",
+      "expect_terms": [
+        "质量标准",
+        "检验",
+        "放行"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-028",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "物料接收时需要核对哪些信息？",
+      "expect_terms": [
+        "验收",
+        "品名",
+        "批号",
+        "数量"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-029",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "物料贮存与先进先出的要求是什么？",
+      "expect_terms": [
+        "贮存",
+        "先进先出",
+        "复验"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-030",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "取样工作应当如何执行？",
+      "expect_terms": [
+        "取样",
+        "代表性",
+        "取样规程"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-031",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "不合格物料如何处理？",
+      "expect_terms": [
+        "不合格物料",
+        "隔离",
+        "标识"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-032",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "产品与物料的批号标识要求是什么？",
+      "expect_terms": [
+        "批号",
+        "可追溯",
+        "待验"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-033",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "标签与印刷包装材料如何管理防止混淆？",
+      "expect_terms": [
+        "标签",
+        "专库存放",
+        "发放数量"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-034",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生产操作必须依据什么文件执行？",
+      "expect_terms": [
+        "工艺规程",
+        "操作规程",
+        "如实记录"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-035",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "同一操作间能否同时生产不同品种规格的药品？",
+      "expect_terms": [
+        "同一操作间",
+        "交叉污染",
+        "不同品种"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-036",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "批生产记录应当包含哪些内容？",
+      "expect_terms": [
+        "批生产记录",
+        "重现",
+        "全过程"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-037",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生产前现场确认的内容包括什么？",
+      "expect_terms": [
+        "清场",
+        "清洁可用",
+        "清场合格"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-038",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "物料平衡出现偏差时如何处理？",
+      "expect_terms": [
+        "物料平衡",
+        "收率",
+        "偏差"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-039",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "中间产品与待包装产品的贮存时限有什么要求？",
+      "expect_terms": [
+        "时间限度",
+        "贮存时限",
+        "验证"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-040",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生产结束后的清场要求是什么？",
+      "expect_terms": [
+        "清场记录",
+        "清场合格证"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-041",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "无菌生产操作对人员和环境有什么要求？",
+      "expect_terms": [
+        "无菌操作",
+        "洁净级别",
+        "关键工艺参数"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-042",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "工艺气体与压缩空气需要如何管理？",
+      "expect_terms": [
+        "压缩空气",
+        "工艺气体",
+        "定期监测"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-043",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量管理部门的主要职责有哪些？",
+      "expect_terms": [
+        "产品放行审核",
+        "稳定性考察",
+        "质量标准"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-044",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "检验记录与数据更改要遵循什么原则？",
+      "expect_terms": [
+        "校准",
+        "数据完整性",
+        "真实"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-045",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "成品上市销售前需要满足哪些条件？",
+      "expect_terms": [
+        "全项检验",
+        "放行审核",
+        "上市"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-046",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "持续稳定性考察的目的是什么？",
+      "expect_terms": [
+        "持续稳定性考察",
+        "有效期"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-047",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "留样的数量和保存期限有什么规定？",
+      "expect_terms": [
+        "留样",
+        "有效期后一年"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-048",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "标准品与对照品的贮存管理要求是什么？",
+      "expect_terms": [
+        "标准品",
+        "对照品",
+        "有效期内"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-049",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "检验结果超标时应如何处理？",
+      "expect_terms": [
+        "超标",
+        "实验室调查",
+        "调查程序"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-050",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "变更实施前需要经过什么评估？",
+      "expect_terms": [
+        "变更",
+        "风险评估",
+        "验证"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-051",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "偏差处理的规程要求是什么？",
+      "expect_terms": [
+        "偏差处理规程",
+        "重大偏差",
+        "质量负责人"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-052",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量投诉处理有什么流程要求？",
+      "expect_terms": [
+        "质量投诉",
+        "登记",
+        "调查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-053",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "产品放行的审核职责由谁履行？",
+      "expect_terms": [
+        "质量受权人",
+        "产品放行",
+        "批生产记录"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-054",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量保证部门定期开展哪些活动？",
+      "expect_terms": [
+        "自检",
+        "质量体系审计",
+        "整改计划"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-055",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "企业需要验证哪些对象？",
+      "expect_terms": [
+        "验证管理规程",
+        "清洁方法",
+        "计算机化系统"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-056",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "工艺验证应当在什么阶段完成？",
+      "expect_terms": [
+        "工艺验证",
+        "上市前",
+        "验证批"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-057",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "清洁验证需要覆盖哪些表面？",
+      "expect_terms": [
+        "清洁验证",
+        "直接接触产品",
+        "残留限度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-058",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "验证方案和报告有什么审批要求？",
+      "expect_terms": [
+        "验证方案",
+        "验证报告",
+        "再验证"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-059",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "计算机化系统的验证和数据要求是什么？",
+      "expect_terms": [
+        "计算机化系统",
+        "权限管理",
+        "审计追踪"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-060",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "文件发布前与现行版本的受控要求是什么？",
+      "expect_terms": [
+        "文件管理系统",
+        "审核与批准",
+        "受控"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-061",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "记录填写和更改有什么规范？",
+      "expect_terms": [
+        "记录",
+        "字迹清晰",
+        "签名"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-062",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "批记录的保存期限如何规定？",
+      "expect_terms": [
+        "批生产记录",
+        "保存",
+        "有效期后一年"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-063",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "电子记录和电子签名有什么管理要求？",
+      "expect_terms": [
+        "电子记录",
+        "电子签名",
+        "备份"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-064",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "委托生产前双方需要签订什么并履行什么？",
+      "expect_terms": [
+        "委托生产",
+        "质量协议",
+        "现场审计"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-065",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "委托检验机构的资质要求是什么？",
+      "expect_terms": [
+        "委托检验",
+        "资质",
+        "检验报告"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-066",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "发运记录需要实现什么目标？",
+      "expect_terms": [
+        "发运记录",
+        "追溯"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-067",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "冷链产品的发运有什么特殊要求？",
+      "expect_terms": [
+        "冷链",
+        "贮存运输条件",
+        "温度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-068",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "药品召回制度的基本要求是什么？",
+      "expect_terms": [
+        "召回制度",
+        "质量问题",
+        "监管部门"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-069",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "模拟召回演练的目的是什么？",
+      "expect_terms": [
+        "模拟召回演练",
+        "召回体系"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-070",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "内部自检的目的是什么？",
+      "expect_terms": [
+        "自检",
+        "质量管理体系"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-071",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "无菌药品生产的环境要求如何确定？",
+      "expect_terms": [
+        "无菌药品",
+        "洁净级别",
+        "最终灭菌"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-072",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "无菌生产的物料和容器如何处理？",
+      "expect_terms": [
+        "灭菌",
+        "除菌过滤",
+        "灭菌参数"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-073",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "培养基模拟灌装试验的作用是什么？",
+      "expect_terms": [
+        "培养基模拟灌装",
+        "无菌生产工艺"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-074",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "生物制品的种子批和细胞库如何管理？",
+      "expect_terms": [
+        "生物制品",
+        "种子批",
+        "细胞库"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-075",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "血液制品的原料血浆有什么要求？",
+      "expect_terms": [
+        "血液制品",
+        "原料血浆",
+        "病原体筛查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-076",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "中药制剂的药材和提取过程有什么要求？",
+      "expect_terms": [
+        "中药制剂",
+        "鉴别检验",
+        "提取"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-077",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "中药制剂需要关注哪些风险？",
+      "expect_terms": [
+        "农药残留",
+        "重金属",
+        "有害元素"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-078",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "包装操作前需要确认哪些内容？",
+      "expect_terms": [
+        "包装",
+        "批号",
+        "有效期打印"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-079",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "贴签工序的在线检查要求是什么？",
+      "expect_terms": [
+        "贴签",
+        "在线检查",
+        "标签"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-080",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "说明书标签的变更如何管理？",
+      "expect_terms": [
+        "说明书",
+        "标签",
+        "补充申请"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-081",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "中间产品返工需要满足什么条件？",
+      "expect_terms": [
+        "返工",
+        "质量部门批准",
+        "风险评估"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-082",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "重新加工的审批和验证要求是什么？",
+      "expect_terms": [
+        "重新加工",
+        "验证",
+        "审批程序"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-083",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "整体污染控制策略需要识别哪些风险？",
+      "expect_terms": [
+        "污染控制策略",
+        "微生物",
+        "内毒素"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-084",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "洁净区人员进出和手部消毒有什么要求？",
+      "expect_terms": [
+        "人员行为规范",
+        "更衣",
+        "手部消毒"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-085",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "数据完整性质量文化对管理层有什么要求？",
+      "expect_terms": [
+        "数据完整性",
+        "质量文化",
+        "管理层"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-086",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "数据可靠性问题出现后应如何调查？",
+      "expect_terms": [
+        "数据可靠性",
+        "专项调查",
+        "纠正措施"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-087",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "培训有效性评价机制的覆盖范围是什么？",
+      "expect_terms": [
+        "培训有效性",
+        "法规符合性",
+        "考核"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gmp-088",
+      "kind": "hit",
+      "regulation": "gmp",
+      "question": "质量管理部门应定期向谁报告体系运行状况？",
+      "expect_terms": [
+        "企业负责人",
+        "质量风险",
+        "重大质量问题"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-001",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "药物临床试验应当遵循哪些原则？",
+      "expect_terms": [
+        "伦理",
+        "科学",
+        "受试者"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-002",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验实施前需要具备哪些前提？",
+      "expect_terms": [
+        "伦理委员会",
+        "试验方案",
+        "科学依据"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-003",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "对临床试验数据有什么基本要求？",
+      "expect_terms": [
+        "真实",
+        "可溯源",
+        "篡改"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-004",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品的质量和包装应符合什么？",
+      "expect_terms": [
+        "质量标准",
+        "标签",
+        "贮运"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-005",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "伦理委员会审查的对象包括哪些？",
+      "expect_terms": [
+        "伦理委员会",
+        "试验方案",
+        "知情同意书"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-006",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "伦理委员会的人员构成有什么要求？",
+      "expect_terms": [
+        "伦理委员会",
+        "多学科",
+        "非本机构"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-007",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验方案实质性修改后伦理审查如何执行？",
+      "expect_terms": [
+        "实质性修改",
+        "重新审查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-008",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "发生严重不良事件时研究者应当向谁报告？",
+      "expect_terms": [
+        "严重不良事件",
+        "伦理委员会",
+        "报告"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-009",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者应当具备哪些基本条件？",
+      "expect_terms": [
+        "执业资格",
+        "试验经验",
+        "研究团队"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-010",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者实施试验应当遵循什么要求？",
+      "expect_terms": [
+        "熟悉试验方案",
+        "严格按照方案",
+        "监查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-011",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "受试者招募过程中禁止什么行为？",
+      "expect_terms": [
+        "招募",
+        "强迫",
+        "利诱"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-012",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "病例报告表数据与原始资料的关系是什么？",
+      "expect_terms": [
+        "病例报告表",
+        "原始资料",
+        "一致"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-013",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品的贮存和清点有什么要求？",
+      "expect_terms": [
+        "贮存",
+        "剩余药品",
+        "清点回收"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-014",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验过程中出现异常情况时研究者应当如何处理？",
+      "expect_terms": [
+        "受试者安全",
+        "医疗处理"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-015",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "知情同意书的内容应当包括哪些？",
+      "expect_terms": [
+        "知情同意书",
+        "风险",
+        "替代治疗"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-016",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "受试者退出试验的权利如何规定？",
+      "expect_terms": [
+        "自愿",
+        "退出试验",
+        "医疗权益"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-017",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "知情同意书需要载明哪些试验用药品信息？",
+      "expect_terms": [
+        "研究性用药",
+        "未知风险",
+        "补偿"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-018",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "无民事行为能力受试者的知情同意如何取得？",
+      "expect_terms": [
+        "监护人",
+        "书面同意"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-019",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "知情同意过程的实施要求是什么？",
+      "expect_terms": [
+        "充分阅读",
+        "理解",
+        "签名"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-020",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者对不良事件的记录要求是什么？",
+      "expect_terms": [
+        "不良事件",
+        "记录",
+        "相关性"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-021",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者获知受试者死亡后应当怎么做？",
+      "expect_terms": [
+        "死亡",
+        "立即",
+        "报告"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-022",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "危及生命的严重不良事件应在多长时间内报告？",
+      "expect_terms": [
+        "二十四小时",
+        "严重不良事件",
+        "报告"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-023",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "住院致残等严重不良事件的报告要求是什么？",
+      "expect_terms": [
+        "住院",
+        "致残",
+        "伦理委员会"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-024",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者严重不良事件快速报告系统有什么要求？",
+      "expect_terms": [
+        "快速报告",
+        "药品监督管理部门"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-025",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验方案应预先定义哪些安全性内容？",
+      "expect_terms": [
+        "安全性评价指标",
+        "判定",
+        "记录要求"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-026",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者委托合同研究组织时承担什么责任？",
+      "expect_terms": [
+        "申办者",
+        "合同研究组织",
+        "监督"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-027",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者应向研究者提供哪些材料和培训？",
+      "expect_terms": [
+        "试验方案",
+        "研究者手册",
+        "培训"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-028",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查计划的制定依据是什么？",
+      "expect_terms": [
+        "监查计划",
+        "风险",
+        "频率"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-029",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验数据管理的流程要求是什么？",
+      "expect_terms": [
+        "数据管理",
+        "锁定",
+        "揭盲"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-030",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者稽查的目的是什么？",
+      "expect_terms": [
+        "稽查",
+        "质量保证",
+        "规范"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-031",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验保险与受试者损害的责任如何安排？",
+      "expect_terms": [
+        "保险",
+        "赔偿责任",
+        "损害"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-032",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者如何向研究者传递新安全性信息？",
+      "expect_terms": [
+        "新安全性信息",
+        "研究者手册"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-033",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查员的职责包括哪些？",
+      "expect_terms": [
+        "监查员",
+        "核实",
+        "一致性"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-034",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查报告的提交要求是什么？",
+      "expect_terms": [
+        "监查报告",
+        "整改要求"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-035",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查应当核对哪些记录？",
+      "expect_terms": [
+        "知情同意书",
+        "病例报告表",
+        "严重不良事件"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-036",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "监查员对试验用药品的核查内容是什么？",
+      "expect_terms": [
+        "发放",
+        "回收",
+        "销毁记录"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-037",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "稽查人员应当如何设置？",
+      "expect_terms": [
+        "稽查",
+        "独立",
+        "书面报告"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-038",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究机构如何配合监管部门检查？",
+      "expect_terms": [
+        "检查",
+        "配合",
+        "提供"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-039",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "发现弄虚作假行为的处理原则是什么？",
+      "expect_terms": [
+        "弄虚作假",
+        "伪造数据",
+        "依法处理"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-040",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验方案应当明确哪些设计要素？",
+      "expect_terms": [
+        "试验目的",
+        "主要终点",
+        "样本量"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-041",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验方案实质性修改的实施前提是什么？",
+      "expect_terms": [
+        "实质性修改",
+        "伦理委员会",
+        "备案"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-042",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验方案应规定哪些中止相关内容？",
+      "expect_terms": [
+        "中止试验",
+        "提前终止",
+        "统计分析"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-043",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "方案变更涉及受试者安全时应如何处理？",
+      "expect_terms": [
+        "变更",
+        "受试者安全",
+        "知情同意书"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-044",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品的储存条件如何管理？",
+      "expect_terms": [
+        "专人管理",
+        "温湿度监控",
+        "标签"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-045",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品标签必须标明哪些内容？",
+      "expect_terms": [
+        "仅供临床试验使用",
+        "批号",
+        "有效期"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-046",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "设盲试验的药品外观和揭盲有什么要求？",
+      "expect_terms": [
+        "外观一致",
+        "紧急揭盲",
+        "盲法"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-047",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品的发放依据是什么？",
+      "expect_terms": [
+        "随机方案",
+        "发放",
+        "回收"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-048",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "电子数据系统的验证要求是什么？",
+      "expect_terms": [
+        "电子数据系统",
+        "权限控制",
+        "审计追踪"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-049",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "病例报告表数据的填写修改要求是什么？",
+      "expect_terms": [
+        "病例报告表",
+        "修改留痕",
+        "授权人员"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-050",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "源数据与关键数据的溯源要求是什么？",
+      "expect_terms": [
+        "源数据",
+        "复核",
+        "溯源"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-051",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "数据锁定后的修改应如何执行？",
+      "expect_terms": [
+        "数据锁定",
+        "修改",
+        "原因说明"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-052",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "统计分析计划应当在什么时点定稿？",
+      "expect_terms": [
+        "统计分析计划",
+        "数据锁定前",
+        "解释"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-053",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "统计分析应遵循什么原则？",
+      "expect_terms": [
+        "意向性治疗",
+        "脱落",
+        "缺失数据"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-054",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "多中心试验的统计应当考虑什么？",
+      "expect_terms": [
+        "多中心",
+        "中心效应",
+        "随机化"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-055",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "特殊人群参加试验需要什么条件？",
+      "expect_terms": [
+        "儿童",
+        "孕妇",
+        "保护措施"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-056",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验相关伤害的救治费用由谁承担？",
+      "expect_terms": [
+        "保险保障",
+        "医疗救治费用",
+        "申办者"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-057",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "受试者隐私保护有哪些要求？",
+      "expect_terms": [
+        "隐私",
+        "编码化",
+        "访问权限"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-058",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "风险获益比显著增加时应如何处理？",
+      "expect_terms": [
+        "风险获益比",
+        "终止试验",
+        "评估"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-059",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验机构应具备什么条件？",
+      "expect_terms": [
+        "专业技术人员",
+        "设备设施",
+        "管理制度"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-060",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "知情同意与筛选检查的顺序是什么？",
+      "expect_terms": [
+        "知情同意",
+        "筛选期检查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-061",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验机构文档管理的目标是什么？",
+      "expect_terms": [
+        "文档管理",
+        "归档",
+        "保管"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-062",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "新增研究人员参与试验需要什么？",
+      "expect_terms": [
+        "方案培训",
+        "培训记录",
+        "授权"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-063",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "受试者筛选应依据什么标准执行？",
+      "expect_terms": [
+        "入选",
+        "排除标准",
+        "筛选失败"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-064",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "随机化分组与随机序列的管理要求是什么？",
+      "expect_terms": [
+        "随机化",
+        "随机序列",
+        "保密"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-065",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "疗效与安全性评价的时间要求是什么？",
+      "expect_terms": [
+        "时间窗",
+        "评价",
+        "方案偏离"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-066",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "严重方案偏离应向谁报告？",
+      "expect_terms": [
+        "方案偏离",
+        "伦理委员会",
+        "持续违规"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-067",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验完成后研究者应向伦理委员会提交什么？",
+      "expect_terms": [
+        "试验完成报告",
+        "提前终止"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-068",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验总结报告由谁撰写？",
+      "expect_terms": [
+        "总结报告",
+        "统计分析"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-069",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "总结报告的结论应如何表述？",
+      "expect_terms": [
+        "如实呈现",
+        "局限性"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-070",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验结束后受试者的后续治疗如何安排？",
+      "expect_terms": [
+        "后续治疗",
+        "医疗需求"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-071",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者保存试验必备文件的期限要求是什么？",
+      "expect_terms": [
+        "必备文件",
+        "保存期限",
+        "审评"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-072",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "伦理委员会审查文件的保存要求是什么？",
+      "expect_terms": [
+        "审查文件",
+        "源数据",
+        "调阅"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-073",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验电子文档的备份与保存有什么要求？",
+      "expect_terms": [
+        "备份",
+        "可读性",
+        "可追溯"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-074",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品的制备应符合什么规范？",
+      "expect_terms": [
+        "生产质量管理规范",
+        "预期用途"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-075",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "安慰剂的一致性要求是什么？",
+      "expect_terms": [
+        "安慰剂",
+        "外观",
+        "一致性检查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-076",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品放行的资质要求是什么？",
+      "expect_terms": [
+        "放行",
+        "检验报告",
+        "资质"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-077",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者如何实施基于风险的监查？",
+      "expect_terms": [
+        "风险",
+        "分级监查",
+        "质量控制"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-078",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "质量保证活动发现系统性问题如何处理？",
+      "expect_terms": [
+        "系统性问题",
+        "纠正措施",
+        "影响"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-079",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验各方的沟通要求是什么？",
+      "expect_terms": [
+        "沟通",
+        "安全性信号",
+        "及时准确"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-080",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "申办者委托合同研究组织的合同应明确什么？",
+      "expect_terms": [
+        "书面合同",
+        "职责",
+        "数据归属"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-081",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "研究者转委托试验职责有什么限制？",
+      "expect_terms": [
+        "转委托",
+        "授权",
+        "有据可查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-082",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "生物等效性试验的样本分析应符合什么？",
+      "expect_terms": [
+        "生物等效性",
+        "生物样本",
+        "技术指导原则"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-083",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "国际多中心试验有什么合规要求？",
+      "expect_terms": [
+        "国际多中心",
+        "药品监督管理部门",
+        "注册申请"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-084",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验数据丢失时的应急预案要求是什么？",
+      "expect_terms": [
+        "应急预案",
+        "数据恢复",
+        "质量部门"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-085",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "试验用药品混淆误用时应如何处理？",
+      "expect_terms": [
+        "混淆",
+        "误用",
+        "隔离调查"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-086",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "减少受试者失访的措施是什么？",
+      "expect_terms": [
+        "失访",
+        "随访信息",
+        "联系方式"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-087",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "数据安全监查委员会的职责是什么？",
+      "expect_terms": [
+        "数据安全监查委员会",
+        "独立监查",
+        "建议"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "gcp-088",
+      "kind": "hit",
+      "regulation": "gcp",
+      "question": "临床试验全过程应接受哪些方面的监督？",
+      "expect_terms": [
+        "申办者",
+        "伦理委员会",
+        "监管部门"
+      ],
+      "expect_channels": [
+        "doc"
+      ]
+    },
+    {
+      "id": "ill-gmp-01",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请说明GMP第三百一十五条对药品追溯码加密算法的要求。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "诱导引用库外不存在的超大条款号"
+    },
+    {
+      "id": "ill-gmp-02",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP是否规定操作人员必须每90分钟完成一次手部消毒？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造具体时间数值，库内无此规定"
+    },
+    {
+      "id": "ill-gmp-03",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请确认GMP要求企业每年向监管部门提交数字化质量成熟度报告。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造不存在的制度性报告要求"
+    },
+    {
+      "id": "ill-gmp-04",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP附录是否要求所有批记录使用区块链技术存证？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造电子记录存证技术强制要求"
+    },
+    {
+      "id": "ill-gmp-05",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请说明第420条关于药用辅料登记备案的规定。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用库外不存在的条款号"
+    },
+    {
+      "id": "ill-gmp-06",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP是否规定洁净区工作鞋必须每周用臭氧熏蒸一次？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造洁净区用品消毒频次要求"
+    },
+    {
+      "id": "ill-gmp-07",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "请确认GMP要求企业设立独立的数据保护官岗位并每年出具审计报告。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造岗位与报告要求"
+    },
+    {
+      "id": "ill-gmp-08",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "第501条对药品电子监管码赋码方式是如何规定的？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用库外不存在的条款号"
+    },
+    {
+      "id": "ill-gmp-09",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP是否规定所有物料必须在2-8℃条件下贮存？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造统一贮存温度，忽略物料差异"
+    },
+    {
+      "id": "ill-gmp-10",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "已废止的GMP2010修订版第九十四条关于药用玻璃瓶内表面处理的要求是否仍然适用？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用已废止版本条款，验证检索仅命中现行版本"
+    },
+    {
+      "id": "ill-gmp-11",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP是否规定口服固体制剂车间每500平方米必须安装一台紫外消毒灯？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造厂房设施具体数量要求"
+    },
+    {
+      "id": "ill-gmp-12",
+      "kind": "illusion",
+      "regulation": "gmp",
+      "question": "GMP是否规定药品召回必须在48小时内完成全部回收？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造召回时限数值"
+    },
+    {
+      "id": "ill-gcp-01",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "旧版GCP（2020版，已废止）第七十九条关于受试者电子日记卡的规定是什么？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用已废止版本条款并编造电子日记卡要求"
+    },
+    {
+      "id": "ill-gcp-02",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP是否规定知情同意书签署后有效期只有30天？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造知情同意有效期数值"
+    },
+    {
+      "id": "ill-gcp-03",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "请确认GCP要求申办者每年在官网公示受试者招募进度看板。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造不存在的公示制度"
+    },
+    {
+      "id": "ill-gcp-04",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP规定SAE漏报率不得超过1%，对吗？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造量化漏报率指标"
+    },
+    {
+      "id": "ill-gcp-05",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "第315条对生物样本跨中心转运有哪些规定？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用库外不存在的条款号"
+    },
+    {
+      "id": "ill-gcp-06",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "请确认GCP要求试验中心安装人脸识别闸机核验受试者身份。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造受试者出入管理技术强制要求"
+    },
+    {
+      "id": "ill-gcp-07",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP是否规定试验结束后必须对受试者随访不少于5年？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造随访期限数值"
+    },
+    {
+      "id": "ill-gcp-08",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP第198条关于电子知情同意双因子认证的要求是什么？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "引用库外不存在的条款号"
+    },
+    {
+      "id": "ill-gcp-09",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP是否规定受试者每次访视必须获得800元交通补贴？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造具体补贴金额"
+    },
+    {
+      "id": "ill-gcp-10",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "请说明GCP第二百一十一条关于监查报告归档时限的规定。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "诱导引用库外不存在的条款号并编造归档时限"
+    },
+    {
+      "id": "ill-gcp-11",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "请确认GCP规定每位受试者完成试验可获补偿人民币20000元。",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造具体补偿金额"
+    },
+    {
+      "id": "ill-gcp-12",
+      "kind": "illusion",
+      "regulation": "gcp",
+      "question": "GCP是否规定I期病房每日为受试者提供不少于2000千卡的定制营养餐？",
+      "expect_behavior": "needs_human_review_or_blocked",
+      "note": "编造受试者膳食管理要求"
+    }
+  ]
+}

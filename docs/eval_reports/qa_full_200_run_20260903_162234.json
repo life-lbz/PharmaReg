@@ -1,0 +1,2624 @@
+{
+  "schema": "pharmareg-eval-run",
+  "eval_set": "qa_full_200.json",
+  "prompt_version": "v1",
+  "run_at": "2026-09-03T16:22:34",
+  "llm_provider": "stub",
+  "embed_model": "bge-m3",
+  "rerank_model": "bge-reranker-large",
+  "milvus": "2.4 standalone @19530",
+  "total": 200,
+  "hit_total": 176,
+  "hit_pass": 176,
+  "hit_rate": 1.0,
+  "illusion_total": 24,
+  "illusion_blocked": 24,
+  "illusion_block_rate": 1.0,
+  "elapsed_sec": 314.6,
+  "gates": {
+    "hit_rate_gte_90": true,
+    "illusion_block_pct": true
+  },
+  "cases": [
+    {
+      "id": "gmp-001",
+      "kind": "hit",
+      "question": "药品生产质量管理规范适用于哪些范围？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "药品制剂生产",
+        "citations": 8,
+        "answer_len": 447
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  为规范药品生产质量管理，保证药品安全有效，制定本规范。本规范是药品生产质量管理的基本要求，适用"
+    },
+    {
+      "id": "gmp-002",
+      "kind": "hit",
+      "question": "企业建立质量管理体系应当坚持什么原则？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量管理体系",
+        "citations": 8,
+        "answer_len": 428
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当坚持诚实守信，禁止任何虚假、欺骗行为。企业应当建立与药品生产相适应的质量管理体系，并确"
+    },
+    {
+      "id": "gmp-003",
+      "kind": "hit",
+      "question": "企业质量管理体系要持续改进，应当配备哪些资源？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "足够的资源",
+        "citations": 8,
+        "answer_len": 422
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当配备足够的资源，明确各岗位职责与权限，确保质量管理体系覆盖影响产品质量的全部环节并持续"
+    },
+    {
+      "id": "gmp-004",
+      "kind": "hit",
+      "question": "外购产品与委托操作能否免除生产企业的质量责任？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量责任",
+        "citations": 8,
+        "answer_len": 392
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  药品生产企业应当对产品质量负最终责任，任何外购产品与委托操作均不得免除企业的质量责任。 委托生"
+    },
+    {
+      "id": "gmp-005",
+      "kind": "hit",
+      "question": "质量管理体系文件包括哪些内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量方针",
+        "citations": 8,
+        "answer_len": 419
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立文件化的质量管理体系，包括质量方针、质量目标、质量手册与必要的程序文件，并定期评审"
+    },
+    {
+      "id": "gmp-006",
+      "kind": "hit",
+      "question": "质量风险管理在药品生产中应当如何开展？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量风险管理",
+        "citations": 8,
+        "answer_len": 451
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当对药品生产全过程实施质量风险管理，质量风险管理应当科学、主动、系统并具有前瞻性。 企业"
+    },
+    {
+      "id": "gmp-007",
+      "kind": "hit",
+      "question": "出现质量投诉与检验超标时应该怎么处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "调查",
+        "citations": 8,
+        "answer_len": 404
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发生质量投诉、偏差与检验超标时，企业应当按照程序启动调查并采取纠正和预防措施，防止问题重复发生"
+    },
+    {
+      "id": "gmp-008",
+      "kind": "hit",
+      "question": "年度质量回顾的要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "年度质量回顾",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立年度质量回顾制度，定期对生产工艺、产品质量与质量体系运行情况进行分析总结并形成报告"
+    },
+    {
+      "id": "gmp-009",
+      "kind": "hit",
+      "question": "对药品生产人员的资质和培训有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "培训",
+        "citations": 8,
+        "answer_len": 438
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  直接接触药品的生产人员应当每年进行健康检查，患有传染病或者其他可能污染药品的疾病的人员不得从事"
+    },
+    {
+      "id": "gmp-010",
+      "kind": "hit",
+      "question": "直接接触药品的生产人员健康检查有何规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "健康检查",
+        "citations": 8,
+        "answer_len": 456
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  直接接触药品的生产人员应当每年进行健康检查，患有传染病或者其他可能污染药品的疾病的人员不得从事"
+    },
+    {
+      "id": "gmp-011",
+      "kind": "hit",
+      "question": "质量管理部门与生产部门的关系有何规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "独立于生产部门",
+        "citations": 8,
+        "answer_len": 392
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量管理部门应当独立于生产部门设置，质量负责人与生产负责人不得互相兼任。 质量管理部门应当独立"
+    },
+    {
+      "id": "gmp-012",
+      "kind": "hit",
+      "question": "人员培训档案应该包含哪些内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "培训档案",
+        "citations": 8,
+        "answer_len": 417
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立人员培训档案，培训内容包括岗位操作技能、GMP 知识与数据完整性要求，培训效果应当"
+    },
+    {
+      "id": "gmp-013",
+      "kind": "hit",
+      "question": "进入洁净区的人员和工作服有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "洁净区",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  进入洁净区的人员应当经过更衣培训与考核，工作服的选择与更换频次应当与洁净级别相适应。 洁净区人"
+    },
+    {
+      "id": "gmp-014",
+      "kind": "hit",
+      "question": "厂房选址设计应当考虑哪些风险？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "厂房",
+        "citations": 8,
+        "answer_len": 436
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  厂房的选址、设计、建造与维护应当避免污染、交叉污染与混淆，生产区域与仓储区域应当布局合理、流程"
+    },
+    {
+      "id": "gmp-015",
+      "kind": "hit",
+      "question": "洁净区悬浮粒子监测有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "悬浮粒子",
+        "citations": 8,
+        "answer_len": 444
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区各级别空气悬浮粒子的静态和动态监测应当符合规定限度。A级洁净区应当在其高风险操作区域进行"
+    },
+    {
+      "id": "gmp-016",
+      "kind": "hit",
+      "question": "洁净区与非洁净区之间的压差如何管理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "压差",
+        "citations": 8,
+        "answer_len": 444
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区与非洁净区之间、不同洁净级别之间应当设置相应的压差，并安装压差指示装置进行连续监测与记录"
+    },
+    {
+      "id": "gmp-017",
+      "kind": "hit",
+      "question": "纯化水系统日常监测的项目包括哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "纯化水",
+        "citations": 8,
+        "answer_len": 453
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  制药用水应当符合相应质量要求，纯化水系统应当按照验证确定的频次进行日常监测，监测项目至少包括电"
+    },
+    {
+      "id": "gmp-018",
+      "kind": "hit",
+      "question": "洁净区的温湿度控制有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "温湿度",
+        "citations": 8,
+        "answer_len": 442
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区应当控制温湿度与换气次数，生产操作期间的温湿度范围应当经过验证并予以记录。 进入洁净区的"
+    },
+    {
+      "id": "gmp-019",
+      "kind": "hit",
+      "question": "仓储区域的防虫防鼠防潮要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "仓储",
+        "citations": 8,
+        "answer_len": 425
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  仓储区域应当具备防虫、防鼠、防潮、防霉与温湿度监控措施，特殊物料应当专区存放并按规定条件储存。"
+    },
+    {
+      "id": "gmp-020",
+      "kind": "hit",
+      "question": "生产车间的照明有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "照明",
+        "citations": 8,
+        "answer_len": 428
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产车间应当配备充足的照明，照度应当满足操作与文件阅读需要，关键操作区域的照明损坏应当及时修复"
+    },
+    {
+      "id": "gmp-021",
+      "kind": "hit",
+      "question": "生产设备的设计选型安装应当考虑什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "设备",
+        "citations": 8,
+        "answer_len": 421
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产与检验设备的设计、选型、安装应当与生产工艺和清洁要求相适应，设备材质不得与药品发生化学反应"
+    },
+    {
+      "id": "gmp-022",
+      "kind": "hit",
+      "question": "设备保养与维修记录有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "维护计划",
+        "citations": 8,
+        "answer_len": 404
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  设备应当按照预定用途与维护计划定期保养，关键设备应当建立使用、维护与维修记录。 记录应当及时填"
+    },
+    {
+      "id": "gmp-023",
+      "kind": "hit",
+      "question": "计量器具与检验仪器的校准要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "校准",
+        "citations": 8,
+        "answer_len": 391
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  计量器具、天平与检验仪器应当按照规定周期校准并贴有校准状态标识，校准结果应当可追溯到国家标准。"
+    },
+    {
+      "id": "gmp-024",
+      "kind": "hit",
+      "question": "设备清洁后如何确认清洁效果？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "清洁规程",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  设备使用后应当按照经过验证的清洁规程及时清洁，清洁效果应当通过目视检查与必要的微生物限度检验确"
+    },
+    {
+      "id": "gmp-025",
+      "kind": "hit",
+      "question": "固定管道与设备的状态标识有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "管道",
+        "citations": 8,
+        "answer_len": 407
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  主要固定管道应当标明内容物名称与流向，设备状态标识应当清晰区分已清洁、待清洁、运行与维修状态。"
+    },
+    {
+      "id": "gmp-026",
+      "kind": "hit",
+      "question": "物料采购对供应商有什么管理要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "供应商",
+        "citations": 8,
+        "answer_len": 424
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  物料采购应当从经质量部门批准的合格供应商处进行，供应商应当定期评估并建立质量档案。 物料接收时"
+    },
+    {
+      "id": "gmp-027",
+      "kind": "hit",
+      "question": "原辅料和包装材料使用前需要满足什么条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量标准",
+        "citations": 8,
+        "answer_len": 421
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  原辅料、包装材料应当按照规定的质量标准检验，合格后方可使用，未经检验或检验不合格的物料不得放行"
+    },
+    {
+      "id": "gmp-028",
+      "kind": "hit",
+      "question": "物料接收时需要核对哪些信息？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "验收",
+        "citations": 8,
+        "answer_len": 405
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  物料接收时应当核对供应商、品名、批号与数量，并按验收规程检查外观、包装完整性与运输条件记录。 "
+    },
+    {
+      "id": "gmp-029",
+      "kind": "hit",
+      "question": "物料贮存与先进先出的要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "贮存",
+        "citations": 8,
+        "answer_len": 409
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  物料应当按照规定的条件贮存，先进先出，逾期的物料应当复验或报废处理，复验结果不合格的不得使用。"
+    },
+    {
+      "id": "gmp-030",
+      "kind": "hit",
+      "question": "取样工作应当如何执行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "取样",
+        "citations": 8,
+        "answer_len": 380
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  取样应当由质量部门按照批准的取样规程进行，取样件数与取样量应当具有代表性。 参与临床试验的各方"
+    },
+    {
+      "id": "gmp-031",
+      "kind": "hit",
+      "question": "不合格物料如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "不合格物料",
+        "citations": 8,
+        "answer_len": 407
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  不合格物料应当专区隔离并明确标识，及时按照程序调查与处理，任何不合格物料不得用于生产。 物料应"
+    },
+    {
+      "id": "gmp-032",
+      "kind": "hit",
+      "question": "产品与物料的批号标识要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "批号",
+        "citations": 8,
+        "answer_len": 409
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  产品与物料应当按批号建立可追溯标识，待验、合格与不合格状态应当以明确标识区分。 包装操作前应当"
+    },
+    {
+      "id": "gmp-033",
+      "kind": "hit",
+      "question": "标签与印刷包装材料如何管理防止混淆？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "标签",
+        "citations": 8,
+        "answer_len": 398
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  标签与印刷包装材料应当专库存放、专人管理，发放数量应当平衡核算，防止混淆与误用。 包装操作前应"
+    },
+    {
+      "id": "gmp-034",
+      "kind": "hit",
+      "question": "生产操作必须依据什么文件执行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "工艺规程",
+        "citations": 8,
+        "answer_len": 404
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产操作应当严格按照经批准的工艺规程和操作规程进行，操作人员应当如实记录实际操作过程。 各工序"
+    },
+    {
+      "id": "gmp-035",
+      "kind": "hit",
+      "question": "同一操作间能否同时生产不同品种规格的药品？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "同一操作间",
+        "citations": 8,
+        "answer_len": 420
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  同一操作间不得同时生产不同品种、规格的药品，生产过程中应当采取措施防止污染和交叉污染。 每批药"
+    },
+    {
+      "id": "gmp-036",
+      "kind": "hit",
+      "question": "批生产记录应当包含哪些内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "批生产记录",
+        "citations": 8,
+        "answer_len": 397
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  每批药品生产应当建立批生产记录，批记录应当包含完整的过程数据，能够重现该批药品生产的全过程。 "
+    },
+    {
+      "id": "gmp-037",
+      "kind": "hit",
+      "question": "生产前现场确认的内容包括什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "清场",
+        "citations": 8,
+        "answer_len": 398
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产前应当确认生产现场已清场、设备处于清洁可用状态，并取得上一品种的清场合格证明。 企业应当建"
+    },
+    {
+      "id": "gmp-038",
+      "kind": "hit",
+      "question": "物料平衡出现偏差时如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "物料平衡",
+        "citations": 8,
+        "answer_len": 416
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产过程中的物料平衡与收率应当在规定限度内，出现偏差时应当按照偏差管理程序调查处理。 企业应当"
+    },
+    {
+      "id": "gmp-039",
+      "kind": "hit",
+      "question": "中间产品与待包装产品的贮存时限有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "时间限度",
+        "citations": 8,
+        "answer_len": 407
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  各工序生产操作应当在规定的时间限度内完成，中间产品与待包装产品的贮存时限应当经过验证。 物料应"
+    },
+    {
+      "id": "gmp-040",
+      "kind": "hit",
+      "question": "生产结束后的清场要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "清场记录",
+        "citations": 8,
+        "answer_len": 400
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产结束应当及时清场并填写清场记录，清场合格后由质量部门检查确认并发放清场合格证。 生产前应当"
+    },
+    {
+      "id": "gmp-041",
+      "kind": "hit",
+      "question": "无菌生产操作对人员和环境有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "无菌操作",
+        "citations": 8,
+        "answer_len": 405
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  关键工艺参数与无菌操作应当在受控条件下执行，无菌生产操作应当符合相应洁净级别下的人员与更衣要求"
+    },
+    {
+      "id": "gmp-042",
+      "kind": "hit",
+      "question": "工艺气体与压缩空气需要如何管理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "压缩空气",
+        "citations": 8,
+        "answer_len": 412
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生产用水、压缩空气与工艺气体应当经过验证并定期监测，气体质量应当符合生产工艺要求。 洁净区应当"
+    },
+    {
+      "id": "gmp-043",
+      "kind": "hit",
+      "question": "质量管理部门的主要职责有哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "产品放行审核",
+        "citations": 8,
+        "answer_len": 406
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量管理部门应当定期向企业负责人报告质量体系运行状况与主要质量风险，重大质量问题应当及时上报。"
+    },
+    {
+      "id": "gmp-044",
+      "kind": "hit",
+      "question": "检验记录与数据更改要遵循什么原则？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "校准",
+        "citations": 8,
+        "answer_len": 385
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  检验用仪器设备应当定期校准，检验数据应当真实、完整，记录更改应当符合数据完整性要求。 记录应当"
+    },
+    {
+      "id": "gmp-045",
+      "kind": "hit",
+      "question": "成品上市销售前需要满足哪些条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "全项检验",
+        "citations": 8,
+        "answer_len": 402
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  成品应当按照注册批准的质量标准进行全项检验，检验合格并履行放行审核后方可上市销售。 工艺验证应"
+    },
+    {
+      "id": "gmp-046",
+      "kind": "hit",
+      "question": "持续稳定性考察的目的是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "持续稳定性考察",
+        "citations": 8,
+        "answer_len": 375
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当按照规定进行持续稳定性考察，考察方案与数据应当支持药品有效期的确定与变更。 出现数据可"
+    },
+    {
+      "id": "gmp-047",
+      "kind": "hit",
+      "question": "留样的数量和保存期限有什么规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "留样",
+        "citations": 8,
+        "answer_len": 398
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  留样应当按规定数量与条件保存，留样保存期限不得短于药品有效期后一年，供质量追溯与调查使用。 批"
+    },
+    {
+      "id": "gmp-048",
+      "kind": "hit",
+      "question": "标准品与对照品的贮存管理要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "标准品",
+        "citations": 8,
+        "answer_len": 397
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  检验用试剂、试液、标准品与对照品应当按规定条件贮存，标准品应当来源明确并在有效期内使用。 物料"
+    },
+    {
+      "id": "gmp-049",
+      "kind": "hit",
+      "question": "检验结果超标时应如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "超标",
+        "citations": 8,
+        "answer_len": 397
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  出现检验结果超标时，应当按照超标调查程序进行实验室调查与全面调查，查明原因后作出处理决定。 发"
+    },
+    {
+      "id": "gmp-050",
+      "kind": "hit",
+      "question": "变更实施前需要经过什么评估？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "变更",
+        "citations": 8,
+        "answer_len": 390
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量部门应当对变更实施风险评估与审核批准，影响产品质量的变更应当经过验证后方可实施。 试验方案"
+    },
+    {
+      "id": "gmp-051",
+      "kind": "hit",
+      "question": "偏差处理的规程要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "偏差处理规程",
+        "citations": 8,
+        "answer_len": 403
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立偏差处理规程，所有偏差应当记录、调查、评估并明确处理措施，重大偏差应当报告质量负责"
+    },
+    {
+      "id": "gmp-052",
+      "kind": "hit",
+      "question": "质量投诉处理有什么流程要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量投诉",
+        "citations": 8,
+        "answer_len": 393
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量投诉应当指定部门登记与调查，投诉处理结果应当反馈并纳入年度质量回顾。 发生质量投诉、偏差与"
+    },
+    {
+      "id": "gmp-053",
+      "kind": "hit",
+      "question": "产品放行的审核职责由谁履行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量受权人",
+        "citations": 8,
+        "answer_len": 390
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量管理部门应当独立于生产部门履行职责，负责产品放行审核、稳定性考察和质量标准管理。 产品放行"
+    },
+    {
+      "id": "gmp-054",
+      "kind": "hit",
+      "question": "质量保证部门定期开展哪些活动？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "自检",
+        "citations": 8,
+        "answer_len": 410
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量保证部门应当定期开展自检与质量体系审计，发现缺陷应当制定整改计划并跟踪关闭。 申办者应当建"
+    },
+    {
+      "id": "gmp-055",
+      "kind": "hit",
+      "question": "企业需要验证哪些对象？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "验证管理规程",
+        "citations": 8,
+        "answer_len": 396
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立验证管理规程，对生产工艺、清洁方法、检验方法与计算机化系统进行验证或确认。 工艺验"
+    },
+    {
+      "id": "gmp-056",
+      "kind": "hit",
+      "question": "工艺验证应当在什么阶段完成？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "工艺验证",
+        "citations": 8,
+        "answer_len": 395
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  工艺验证应当在产品上市前完成，验证批数据应当证明工艺持续稳定地生产出符合质量标准的产品。 各工"
+    },
+    {
+      "id": "gmp-057",
+      "kind": "hit",
+      "question": "清洁验证需要覆盖哪些表面？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "清洁验证",
+        "citations": 8,
+        "answer_len": 405
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  清洁验证应当覆盖设备直接接触产品的表面，验证残留限度应当结合毒理学数据合理设定。 设备使用后应"
+    },
+    {
+      "id": "gmp-058",
+      "kind": "hit",
+      "question": "验证方案和报告有什么审批要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "验证方案",
+        "citations": 8,
+        "answer_len": 392
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  验证方案应当事先批准，验证报告应当由质量部门审核批准，验证状态发生重大变化时应当再验证。 企业"
+    },
+    {
+      "id": "gmp-059",
+      "kind": "hit",
+      "question": "计算机化系统的验证和数据要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "计算机化系统",
+        "citations": 8,
+        "answer_len": 394
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  计算机化系统应当经过验证并实施权限管理，系统数据应当具备审计追踪功能，防止未授权更改。 企业应"
+    },
+    {
+      "id": "gmp-060",
+      "kind": "hit",
+      "question": "文件发布前与现行版本的受控要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "文件管理系统",
+        "citations": 8,
+        "answer_len": 386
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立文件管理系统，文件在发布前应当经过审核与批准，现行版本应当在受控场所可获得。 产品"
+    },
+    {
+      "id": "gmp-061",
+      "kind": "hit",
+      "question": "记录填写和更改有什么规范？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "记录",
+        "citations": 8,
+        "answer_len": 381
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  记录应当及时填写、内容真实、字迹清晰，记录更改不得覆盖原数据，应当签名并注明日期。 检验用仪器"
+    },
+    {
+      "id": "gmp-062",
+      "kind": "hit",
+      "question": "批记录的保存期限如何规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "批生产记录",
+        "citations": 8,
+        "answer_len": 389
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  批记录与相关质量记录应当按规定期限保存，批生产记录保存期限不得少于药品有效期后一年。 每批药品"
+    },
+    {
+      "id": "gmp-063",
+      "kind": "hit",
+      "question": "电子记录和电子签名有什么管理要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "电子记录",
+        "citations": 8,
+        "answer_len": 393
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  电子记录与电子签名应当经过验证并等效于纸质记录，电子数据应当定期备份并验证备份的可恢复性。 记"
+    },
+    {
+      "id": "gmp-064",
+      "kind": "hit",
+      "question": "委托生产前双方需要签订什么并履行什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "委托生产",
+        "citations": 8,
+        "answer_len": 391
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  委托生产应当签订质量协议，委托方应当对受托方生产条件与质量管理体系进行现场审计。 申办者委托合"
+    },
+    {
+      "id": "gmp-065",
+      "kind": "hit",
+      "question": "委托检验机构的资质要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "委托检验",
+        "citations": 8,
+        "answer_len": 369
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  委托检验应当选择具备相应资质的检验机构，受托方应当出具检验报告并由委托方审核确认。 临床试验机"
+    },
+    {
+      "id": "gmp-066",
+      "kind": "hit",
+      "question": "发运记录需要实现什么目标？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "发运记录",
+        "citations": 8,
+        "answer_len": 363
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  每批产品发运应当建立发运记录，发运记录应当能够实现产品从生产到销售去向的完整追溯。 发运过程应"
+    },
+    {
+      "id": "gmp-067",
+      "kind": "hit",
+      "question": "冷链产品的发运有什么特殊要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "冷链",
+        "citations": 8,
+        "answer_len": 412
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发运过程应当符合产品贮存运输条件要求，冷链产品应当使用经过验证的冷链设施并记录全程温度。 每批"
+    },
+    {
+      "id": "gmp-068",
+      "kind": "hit",
+      "question": "药品召回制度的基本要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "召回制度",
+        "citations": 8,
+        "answer_len": 433
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立药品召回制度，能够及时召回已上市存在质量问题的药品并按规定向监管部门报告。 企业应"
+    },
+    {
+      "id": "gmp-069",
+      "kind": "hit",
+      "question": "模拟召回演练的目的是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "模拟召回演练",
+        "citations": 8,
+        "answer_len": 377
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当定期开展模拟召回演练，演练记录应当证明召回体系能够在规定时间内有效运行。 企业应当建立"
+    },
+    {
+      "id": "gmp-070",
+      "kind": "hit",
+      "question": "内部自检的目的是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "自检",
+        "citations": 8,
+        "answer_len": 375
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当定期开展内部自检，检查质量管理体系与生产活动是否符合本规范要求并持续改进。 发生质量投"
+    },
+    {
+      "id": "gmp-071",
+      "kind": "hit",
+      "question": "无菌药品生产的环境要求如何确定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "无菌药品",
+        "citations": 8,
+        "answer_len": 419
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  无菌药品生产应当根据工艺确定相应的洁净级别，最终灭菌产品与非最终灭菌产品的环境要求应当区分管理"
+    },
+    {
+      "id": "gmp-072",
+      "kind": "hit",
+      "question": "无菌生产的物料和容器如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "灭菌",
+        "citations": 8,
+        "answer_len": 419
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  无菌生产的物料、容器与设备应当经过灭菌或除菌过滤处理，灭菌过程应当经过验证并监测灭菌参数。 物"
+    },
+    {
+      "id": "gmp-073",
+      "kind": "hit",
+      "question": "培养基模拟灌装试验的作用是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "培养基模拟灌装",
+        "citations": 8,
+        "answer_len": 363
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  培养基模拟灌装试验应当按照规定周期实施，用于确认无菌生产工艺的保障能力。 申办者应当建立质量保"
+    },
+    {
+      "id": "gmp-074",
+      "kind": "hit",
+      "question": "生物制品的种子批和细胞库如何管理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "生物制品",
+        "citations": 8,
+        "answer_len": 406
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生物制品的生产应当控制原料来源与动物源性材料风险，种子批与细胞库的建立、检定与保存应当符合规定"
+    },
+    {
+      "id": "gmp-075",
+      "kind": "hit",
+      "question": "血液制品的原料血浆有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "血液制品",
+        "citations": 8,
+        "answer_len": 408
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  血液制品的原料血浆应当来自合格采供血机构，每批血浆应当经过规定的病原体筛查检测。 原辅料、包装"
+    },
+    {
+      "id": "gmp-076",
+      "kind": "hit",
+      "question": "中药制剂的药材和提取过程有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "中药制剂",
+        "citations": 8,
+        "answer_len": 432
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  中药制剂生产应当对药材进行鉴别检验，中药提取过程应当控制工艺参数并防止提取液变质。 中药制剂应"
+    },
+    {
+      "id": "gmp-077",
+      "kind": "hit",
+      "question": "中药制剂需要关注哪些风险？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "农药残留",
+        "citations": 8,
+        "answer_len": 421
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  中药制剂应当关注农药残留、重金属与有害元素的风险评估与控制。 中药制剂生产应当对药材进行鉴别检"
+    },
+    {
+      "id": "gmp-078",
+      "kind": "hit",
+      "question": "包装操作前需要确认哪些内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "包装",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  包装操作前应当确认包装材料正确、批号与有效期打印清晰，包装过程应当防止标签混用与混淆。 物料接"
+    },
+    {
+      "id": "gmp-079",
+      "kind": "hit",
+      "question": "贴签工序的在线检查要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "贴签",
+        "citations": 8,
+        "answer_len": 399
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  贴签与包装工序应当进行在线检查，确保标签内容、数量与产品一致，偏差应当立即报告处理。 电子记录"
+    },
+    {
+      "id": "gmp-080",
+      "kind": "hit",
+      "question": "说明书标签的变更如何管理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "说明书",
+        "citations": 8,
+        "answer_len": 384
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  说明书与标签的变更应当经过审核，涉及注册内容的变更应当依法办理补充申请。 标签与印刷包装材料应"
+    },
+    {
+      "id": "gmp-081",
+      "kind": "hit",
+      "question": "中间产品返工需要满足什么条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "返工",
+        "citations": 8,
+        "answer_len": 392
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  不符合质量标准的中间产品可以返工的应当经质量部门批准并评估风险，返工应当有完整记录。 各工序生"
+    },
+    {
+      "id": "gmp-082",
+      "kind": "hit",
+      "question": "重新加工的审批和验证要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "重新加工",
+        "citations": 8,
+        "answer_len": 392
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  重新加工应当经过验证并评估对产品质量的影响，成品重新加工应当从严控制并履行审批程序。 质量部门"
+    },
+    {
+      "id": "gmp-083",
+      "kind": "hit",
+      "question": "整体污染控制策略需要识别哪些风险？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "污染控制策略",
+        "citations": 8,
+        "answer_len": 431
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立整体污染控制策略，系统识别微生物、内毒素与颗粒物的污染风险并采取综合控制措施。 洁"
+    },
+    {
+      "id": "gmp-084",
+      "kind": "hit",
+      "question": "洁净区人员进出和手部消毒有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "人员行为规范",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区人员行为规范应当经过培训并监督检查，进出洁净区应当按规定进行更衣与手部消毒。 进入洁净区"
+    },
+    {
+      "id": "gmp-085",
+      "kind": "hit",
+      "question": "数据完整性质量文化对管理层有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据完整性",
+        "citations": 8,
+        "answer_len": 403
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当培育数据完整性质量文化，管理层应当为员工提供如实记录数据的环境与制度保障。 出现数据可"
+    },
+    {
+      "id": "gmp-086",
+      "kind": "hit",
+      "question": "数据可靠性问题出现后应如何调查？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据可靠性",
+        "citations": 8,
+        "answer_len": 391
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  出现数据可靠性问题时应当开展专项调查，评估对已上市产品与批准状态的影响并及时采取纠正措施。 发"
+    },
+    {
+      "id": "gmp-087",
+      "kind": "hit",
+      "question": "培训有效性评价机制的覆盖范围是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "培训有效性",
+        "citations": 8,
+        "answer_len": 411
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立培训有效性评价机制，将法规符合性、操作规程与岗位技能纳入培训与考核体系。 企业应当"
+    },
+    {
+      "id": "gmp-088",
+      "kind": "hit",
+      "question": "质量管理部门应定期向谁报告体系运行状况？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "企业负责人",
+        "citations": 8,
+        "answer_len": 418
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量管理部门应当定期向企业负责人报告质量体系运行状况与主要质量风险，重大质量问题应当及时上报。"
+    },
+    {
+      "id": "gcp-001",
+      "kind": "hit",
+      "question": "药物临床试验应当遵循哪些原则？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "伦理",
+        "citations": 8,
+        "answer_len": 406
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  药物临床试验应当遵循伦理、科学、规范的原则，保护受试者的权益、安全与健康高于对科学与社会利益的"
+    },
+    {
+      "id": "gcp-002",
+      "kind": "hit",
+      "question": "临床试验实施前需要具备哪些前提？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "伦理委员会",
+        "citations": 8,
+        "answer_len": 377
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验机构应当具备与试验相适应的专业技术人员、设备设施与管理制度。 临床试验应当具有充分的科"
+    },
+    {
+      "id": "gcp-003",
+      "kind": "hit",
+      "question": "对临床试验数据有什么基本要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "真实",
+        "citations": 8,
+        "answer_len": 376
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  参与临床试验的各方应当履行各自职责，试验数据应当真实、准确、完整、可溯源，禁止编造与篡改数据。"
+    },
+    {
+      "id": "gcp-004",
+      "kind": "hit",
+      "question": "试验用药品的质量和包装应符合什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "质量标准",
+        "citations": 8,
+        "answer_len": 379
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验用药品应当符合质量标准，其制备、包装、标签与贮运条件应当符合试验方案的要求。 试验用药"
+    },
+    {
+      "id": "gcp-005",
+      "kind": "hit",
+      "question": "伦理委员会审查的对象包括哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "伦理委员会",
+        "citations": 8,
+        "answer_len": 393
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  伦理委员会审查文件、知情同意书与源数据应当按机构规定期限保存并可随时调阅。 临床试验机构应当设"
+    },
+    {
+      "id": "gcp-006",
+      "kind": "hit",
+      "question": "伦理委员会的人员构成有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "伦理委员会",
+        "citations": 8,
+        "answer_len": 393
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  伦理委员会应当由具备相应资质与经验的多学科人员组成，审查会议应当有非本机构人员参与。 伦理委员"
+    },
+    {
+      "id": "gcp-007",
+      "kind": "hit",
+      "question": "试验方案实质性修改后伦理审查如何执行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "实质性修改",
+        "citations": 8,
+        "answer_len": 396
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案的实质性修改应当经过伦理委员会审查同意后方可实施，非实质性修改应当记录备案。 伦理委员"
+    },
+    {
+      "id": "gcp-008",
+      "kind": "hit",
+      "question": "发生严重不良事件时研究者应当向谁报告？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "严重不良事件",
+        "citations": 8,
+        "answer_len": 383
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发生严重不良事件或试验方案重大偏离时，研究者应当及时向伦理委员会报告并接受审查。 研究者获知受"
+    },
+    {
+      "id": "gcp-009",
+      "kind": "hit",
+      "question": "研究者应当具备哪些基本条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "执业资格",
+        "citations": 8,
+        "answer_len": 390
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当具备相应的执业资格与试验经验，能够投入足够时间并组织研究团队完成临床试验。 研究者应"
+    },
+    {
+      "id": "gcp-010",
+      "kind": "hit",
+      "question": "研究者实施试验应当遵循什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "熟悉试验方案",
+        "citations": 8,
+        "answer_len": 384
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当保障受试者的知情同意过程规范实施，不得使用强迫、利诱等不当方式招募受试者。 研究者应"
+    },
+    {
+      "id": "gcp-011",
+      "kind": "hit",
+      "question": "受试者招募过程中禁止什么行为？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "招募",
+        "citations": 8,
+        "answer_len": 376
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当保障受试者的知情同意过程规范实施，不得使用强迫、利诱等不当方式招募受试者。 受试者隐"
+    },
+    {
+      "id": "gcp-012",
+      "kind": "hit",
+      "question": "病例报告表数据与原始资料的关系是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "病例报告表",
+        "citations": 8,
+        "answer_len": 372
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当及时、完整、准确地记录试验数据，病例报告表数据应当与原始资料一致并可溯源。 源数据应"
+    },
+    {
+      "id": "gcp-013",
+      "kind": "hit",
+      "question": "试验用药品的贮存和清点有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "贮存",
+        "citations": 8,
+        "answer_len": 381
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品应当由专人管理，储存条件应当符合标签要求并配备温湿度监控记录。 研究者应当将试验用药"
+    },
+    {
+      "id": "gcp-014",
+      "kind": "hit",
+      "question": "试验过程中出现异常情况时研究者应当如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "受试者安全",
+        "citations": 8,
+        "answer_len": 378
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验过程中研究者应当关注受试者安全，出现异常情况时应当按照方案给予适当的医疗处理。 发生严重不"
+    },
+    {
+      "id": "gcp-015",
+      "kind": "hit",
+      "question": "知情同意书的内容应当包括哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "知情同意书",
+        "citations": 8,
+        "answer_len": 400
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意书应当使用受试者能够理解的语言文字，内容应当包括试验目的、程序、风险、获益与替代治疗。"
+    },
+    {
+      "id": "gcp-016",
+      "kind": "hit",
+      "question": "受试者退出试验的权利如何规定？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "自愿",
+        "citations": 8,
+        "answer_len": 385
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意书应当说明受试者参加试验是自愿的，受试者有权随时退出试验且不影响其后续医疗权益。 试验"
+    },
+    {
+      "id": "gcp-017",
+      "kind": "hit",
+      "question": "知情同意书需要载明哪些试验用药品信息？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "研究性用药",
+        "citations": 8,
+        "answer_len": 398
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意书应当载明试验用药品为研究性用药、可能存在的未知风险以及发生损害时的补偿与救治安排。 "
+    },
+    {
+      "id": "gcp-018",
+      "kind": "hit",
+      "question": "无民事行为能力受试者的知情同意如何取得？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "监护人",
+        "citations": 8,
+        "answer_len": 403
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  无民事行为能力或限制民事行为能力的受试者参加试验时，应当取得其监护人的书面同意。 知情同意过程"
+    },
+    {
+      "id": "gcp-019",
+      "kind": "hit",
+      "question": "知情同意过程的实施要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "充分阅读",
+        "citations": 8,
+        "answer_len": 407
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意过程应当在受试者充分阅读并理解后进行，研究者应当在知情同意书上签名并注明日期。 研究者"
+    },
+    {
+      "id": "gcp-020",
+      "kind": "hit",
+      "question": "研究者对不良事件的记录要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "不良事件",
+        "citations": 8,
+        "answer_len": 386
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当及时记录试验过程中发生的所有不良事件，并评估其与试验用药品的相关性。 研究者获知受试"
+    },
+    {
+      "id": "gcp-021",
+      "kind": "hit",
+      "question": "研究者获知受试者死亡后应当怎么做？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "死亡",
+        "citations": 8,
+        "answer_len": 389
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者获知受试者死亡后应当立即向申办者报告，死亡事件属于严重不良事件的应当按规定时限快速报告。"
+    },
+    {
+      "id": "gcp-022",
+      "kind": "hit",
+      "question": "危及生命的严重不良事件应在多长时间内报告？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "二十四小时",
+        "citations": 8,
+        "answer_len": 387
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  危及生命或导致死亡的严重不良事件应当在获知后二十四小时内向申办者报告。 研究者获知受试者死亡后"
+    },
+    {
+      "id": "gcp-023",
+      "kind": "hit",
+      "question": "住院致残等严重不良事件的报告要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "住院",
+        "citations": 8,
+        "answer_len": 383
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  其他严重不良事件（住院、致残、先天异常等）应当在规定时限内报告申办者并按规定提交伦理委员会。 "
+    },
+    {
+      "id": "gcp-024",
+      "kind": "hit",
+      "question": "申办者严重不良事件快速报告系统有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "快速报告",
+        "citations": 8,
+        "answer_len": 374
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立严重不良事件快速报告系统，并及时向药品监督管理部门与相关机构报告。 危及生命或导"
+    },
+    {
+      "id": "gcp-025",
+      "kind": "hit",
+      "question": "试验方案应预先定义哪些安全性内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "安全性评价指标",
+        "citations": 8,
+        "answer_len": 383
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案应当预先定义安全性评价指标与不良事件收集、判定的标准和记录要求。 试验方案应当明确试验"
+    },
+    {
+      "id": "gcp-026",
+      "kind": "hit",
+      "question": "申办者委托合同研究组织时承担什么责任？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "申办者",
+        "citations": 8,
+        "answer_len": 378
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当对试验质量与受试者安全负总体责任，可以委托合同研究组织承担部分职责并对其监督。 申办"
+    },
+    {
+      "id": "gcp-027",
+      "kind": "hit",
+      "question": "申办者应向研究者提供哪些材料和培训？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "试验方案",
+        "citations": 8,
+        "answer_len": 369
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当向研究者提供试验方案、研究者手册与试验用药品，并在试验前完成相关培训。 申办者应当及"
+    },
+    {
+      "id": "gcp-028",
+      "kind": "hit",
+      "question": "监查计划的制定依据是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "监查计划",
+        "citations": 8,
+        "answer_len": 362
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当制定监查计划并按计划实施监查，监查频率应当与试验风险相适应。 申办者应当基于风险对临"
+    },
+    {
+      "id": "gcp-029",
+      "kind": "hit",
+      "question": "试验数据管理的流程要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据管理",
+        "citations": 8,
+        "answer_len": 364
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立数据管理流程，试验数据的录入、核查、锁定与揭盲过程应当规范并可追溯。 试验相关电"
+    },
+    {
+      "id": "gcp-030",
+      "kind": "hit",
+      "question": "申办者稽查的目的是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "稽查",
+        "citations": 8,
+        "answer_len": 354
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立质量保证体系，必要时开展稽查以评估试验是否按照方案与规范执行。 监查员应当由申办"
+    },
+    {
+      "id": "gcp-031",
+      "kind": "hit",
+      "question": "临床试验保险与受试者损害的责任如何安排？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "保险",
+        "citations": 8,
+        "answer_len": 406
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  受试者参加试验应当获得相应的保险保障，试验相关伤害的医疗救治费用由申办者承担。 申办者应当对试"
+    },
+    {
+      "id": "gcp-032",
+      "kind": "hit",
+      "question": "申办者如何向研究者传递新安全性信息？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "新安全性信息",
+        "citations": 8,
+        "answer_len": 375
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当及时向研究者通报试验用药品的新安全性信息并更新研究者手册。 申办者应当向研究者提供试"
+    },
+    {
+      "id": "gcp-033",
+      "kind": "hit",
+      "question": "监查员的职责包括哪些？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "监查员",
+        "citations": 8,
+        "answer_len": 355
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当确认试验用药品的接收、发放、回收与销毁记录完整并与实际库存一致。 监查员应当在每次监"
+    },
+    {
+      "id": "gcp-034",
+      "kind": "hit",
+      "question": "监查报告的提交要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "监查报告",
+        "citations": 8,
+        "answer_len": 361
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当在每次监查后提交书面监查报告，报告中应当记录发现的问题与整改要求。 监查应当核对知情"
+    },
+    {
+      "id": "gcp-035",
+      "kind": "hit",
+      "question": "监查应当核对哪些记录？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "知情同意书",
+        "citations": 8,
+        "answer_len": 356
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查应当核对知情同意书签署情况、病例报告表填写质量与严重不良事件的报告情况。 监查员应当确认试"
+    },
+    {
+      "id": "gcp-036",
+      "kind": "hit",
+      "question": "监查员对试验用药品的核查内容是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "发放",
+        "citations": 8,
+        "answer_len": 354
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当确认试验用药品的接收、发放、回收与销毁记录完整并与实际库存一致。 监查应当核对知情同"
+    },
+    {
+      "id": "gcp-037",
+      "kind": "hit",
+      "question": "稽查人员应当如何设置？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "稽查",
+        "citations": 8,
+        "answer_len": 363
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当由申办者指派并经过培训，负责核实试验数据与原始资料的一致性。 稽查应当由独立于临床试"
+    },
+    {
+      "id": "gcp-038",
+      "kind": "hit",
+      "question": "研究机构如何配合监管部门检查？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "检查",
+        "citations": 8,
+        "answer_len": 369
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究机构应当配合药品监督管理部门的检查，并提供试验方案、记录与报告等相关文件。 研究者应当熟悉"
+    },
+    {
+      "id": "gcp-039",
+      "kind": "hit",
+      "question": "发现弄虚作假行为的处理原则是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "弄虚作假",
+        "citations": 8,
+        "answer_len": 418
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发现弄虚作假、伪造数据等严重违规行为时，监管部门应当依法处理并追究相关责任。 企业应当坚持诚实"
+    },
+    {
+      "id": "gcp-040",
+      "kind": "hit",
+      "question": "试验方案应当明确哪些设计要素？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "试验目的",
+        "citations": 8,
+        "answer_len": 369
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案应当明确试验目的、设计类型、主要终点与次要终点、样本量及其计算依据。 试验方案应当规定"
+    },
+    {
+      "id": "gcp-041",
+      "kind": "hit",
+      "question": "试验方案实质性修改的实施前提是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "实质性修改",
+        "citations": 8,
+        "answer_len": 382
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案的实质性修改应当经过伦理委员会审查同意后方可实施，非实质性修改应当记录备案。 伦理委员"
+    },
+    {
+      "id": "gcp-042",
+      "kind": "hit",
+      "question": "试验方案应规定哪些中止相关内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "中止试验",
+        "citations": 8,
+        "answer_len": 376
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案应当规定中止试验的标准与提前终止试验的条件，并明确数据截止与统计分析原则。 试验方案应"
+    },
+    {
+      "id": "gcp-043",
+      "kind": "hit",
+      "question": "方案变更涉及受试者安全时应如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "变更",
+        "citations": 8,
+        "answer_len": 379
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验方案变更涉及受试者安全或试验主要终点时，申办者应当及时更新知情同意书相关内容。 试验过程中"
+    },
+    {
+      "id": "gcp-044",
+      "kind": "hit",
+      "question": "试验用药品的储存条件如何管理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "专人管理",
+        "citations": 8,
+        "answer_len": 379
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品应当由专人管理，储存条件应当符合标签要求并配备温湿度监控记录。 研究者应当将试验用药"
+    },
+    {
+      "id": "gcp-045",
+      "kind": "hit",
+      "question": "试验用药品标签必须标明哪些内容？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "仅供临床试验使用",
+        "citations": 8,
+        "answer_len": 372
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品的标签应当标明\"仅供临床试验使用\"、批号、有效期与受试者编号等必要信息。 试验用药品"
+    },
+    {
+      "id": "gcp-046",
+      "kind": "hit",
+      "question": "设盲试验的药品外观和揭盲有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "外观一致",
+        "citations": 8,
+        "answer_len": 367
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  设盲试验的试验用药品应当外观一致，紧急揭盲程序应当在方案中预先规定并保持完整记录。 安慰剂应当"
+    },
+    {
+      "id": "gcp-047",
+      "kind": "hit",
+      "question": "试验用药品的发放依据是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "随机方案",
+        "citations": 8,
+        "answer_len": 374
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品的放行应当由具备资质的人员审核并出具检验报告与放行记录。 试验用药品应当按照随机方案"
+    },
+    {
+      "id": "gcp-048",
+      "kind": "hit",
+      "question": "电子数据系统的验证要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "电子数据系统",
+        "citations": 8,
+        "answer_len": 398
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  电子数据系统应当经过验证并具备权限控制与审计追踪功能，系统变更应当记录并经批准。 电子记录与电"
+    },
+    {
+      "id": "gcp-049",
+      "kind": "hit",
+      "question": "病例报告表数据的填写修改要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "病例报告表",
+        "citations": 8,
+        "answer_len": 373
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  病例报告表数据应当由授权人员及时填写，数据修改应当留痕并注明修改者与修改日期。 记录应当及时填"
+    },
+    {
+      "id": "gcp-050",
+      "kind": "hit",
+      "question": "源数据与关键数据的溯源要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "源数据",
+        "citations": 8,
+        "answer_len": 381
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  源数据应当支持病例报告表数据的复核，关键数据的溯源应当清晰完整。 研究者应当及时、完整、准确地"
+    },
+    {
+      "id": "gcp-051",
+      "kind": "hit",
+      "question": "数据锁定后的修改应如何执行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据锁定",
+        "citations": 8,
+        "answer_len": 385
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验数据锁定后需要修改时，应当按照预定程序执行并保存修改记录与原因说明。 记录应当及时填写、内"
+    },
+    {
+      "id": "gcp-052",
+      "kind": "hit",
+      "question": "统计分析计划应当在什么时点定稿？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "统计分析计划",
+        "citations": 8,
+        "answer_len": 365
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  统计分析计划应当在数据锁定前定稿，统计分析结果的解释应当客观并避免选择偏差。 申办者应当在规定"
+    },
+    {
+      "id": "gcp-053",
+      "kind": "hit",
+      "question": "统计分析应遵循什么原则？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "意向性治疗",
+        "citations": 8,
+        "answer_len": 366
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  统计分析应当遵循意向性治疗原则，脱落与缺失数据的处理方法应当在统计分析计划中预先规定。 统计分"
+    },
+    {
+      "id": "gcp-054",
+      "kind": "hit",
+      "question": "多中心试验的统计应当考虑什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "多中心",
+        "citations": 8,
+        "answer_len": 366
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  多中心试验的统计分析应当考虑中心效应，主要分析应当以全部随机化受试者为基础进行。 国际多中心试"
+    },
+    {
+      "id": "gcp-055",
+      "kind": "hit",
+      "question": "特殊人群参加试验需要什么条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "儿童",
+        "citations": 8,
+        "answer_len": 388
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  涉及儿童、孕妇、老年人、精神障碍等特殊人群的试验应当有充分的保护措施与科学必要性论证。 无民事"
+    },
+    {
+      "id": "gcp-056",
+      "kind": "hit",
+      "question": "试验相关伤害的救治费用由谁承担？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "保险保障",
+        "citations": 8,
+        "answer_len": 390
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  受试者参加试验应当获得相应的保险保障，试验相关伤害的医疗救治费用由申办者承担。 申办者应当购买"
+    },
+    {
+      "id": "gcp-057",
+      "kind": "hit",
+      "question": "受试者隐私保护有哪些要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "隐私",
+        "citations": 8,
+        "answer_len": 390
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  受试者隐私应当受到保护，涉及受试者身份的数据应当编码化处理并限制访问权限。 研究者应当保障受试"
+    },
+    {
+      "id": "gcp-058",
+      "kind": "hit",
+      "question": "风险获益比显著增加时应如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "风险获益比",
+        "citations": 8,
+        "answer_len": 396
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验期间应当定期评估受试者的风险获益比，风险显著增加时应当及时调整或终止试验。 申办者应当基于"
+    },
+    {
+      "id": "gcp-059",
+      "kind": "hit",
+      "question": "临床试验机构应具备什么条件？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "专业技术人员",
+        "citations": 8,
+        "answer_len": 386
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验机构应当具备与试验相适应的专业技术人员、设备设施与管理制度。 参与临床试验的各方应当履"
+    },
+    {
+      "id": "gcp-060",
+      "kind": "hit",
+      "question": "知情同意与筛选检查的顺序是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "知情同意",
+        "citations": 8,
+        "answer_len": 387
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当获得受试者知情同意后方可开始试验相关操作，筛选期检查应当在知情同意后实施。 知情同意"
+    },
+    {
+      "id": "gcp-061",
+      "kind": "hit",
+      "question": "临床试验机构文档管理的目标是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "文档管理",
+        "citations": 8,
+        "answer_len": 373
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验机构应当建立试验文档管理体系，试验相关文件应当及时归档并妥善保管。 试验相关电子文档应"
+    },
+    {
+      "id": "gcp-062",
+      "kind": "hit",
+      "question": "新增研究人员参与试验需要什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "方案培训",
+        "citations": 8,
+        "answer_len": 382
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当参加方案培训并保存培训记录，新增研究人员应当经研究者授权并完成相应培训。 申办者应当"
+    },
+    {
+      "id": "gcp-063",
+      "kind": "hit",
+      "question": "受试者筛选应依据什么标准执行？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "入选",
+        "citations": 8,
+        "answer_len": 367
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  筛选受试者应当按照方案规定的入选与排除标准执行，筛选失败的原因应当记录。 研究者应当获得受试者"
+    },
+    {
+      "id": "gcp-064",
+      "kind": "hit",
+      "question": "随机化分组与随机序列的管理要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "随机化",
+        "citations": 8,
+        "answer_len": 383
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  受试者入组后应当按方案进行随机化分组，随机序列应当保密并由专人管理。 申办者应当建立数据管理流"
+    },
+    {
+      "id": "gcp-065",
+      "kind": "hit",
+      "question": "疗效与安全性评价的时间要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "时间窗",
+        "citations": 8,
+        "answer_len": 367
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验过程中应当按方案规定时间窗进行疗效与安全性评价，方案偏离应当记录并评估。 申办者应当在规定"
+    },
+    {
+      "id": "gcp-066",
+      "kind": "hit",
+      "question": "严重方案偏离应向谁报告？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "方案偏离",
+        "citations": 8,
+        "answer_len": 397
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当定期评估试验进展，严重方案偏离与持续违规应当向伦理委员会与申办者报告。 发生严重不良"
+    },
+    {
+      "id": "gcp-067",
+      "kind": "hit",
+      "question": "试验完成后研究者应向伦理委员会提交什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "试验完成报告",
+        "citations": 8,
+        "answer_len": 396
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验完成后研究者应当向伦理委员会提交试验完成报告，试验提前终止的应当说明原因。 研究者应当定期"
+    },
+    {
+      "id": "gcp-068",
+      "kind": "hit",
+      "question": "临床试验总结报告由谁撰写？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "总结报告",
+        "citations": 8,
+        "answer_len": 371
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当在规定时间内完成统计分析并撰写临床试验总结报告。 临床试验总结报告应当如实呈现结果，"
+    },
+    {
+      "id": "gcp-069",
+      "kind": "hit",
+      "question": "总结报告的结论应如何表述？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "如实呈现",
+        "citations": 8,
+        "answer_len": 359
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验总结报告应当如实呈现结果，结论应当基于数据并讨论试验的局限性。 申办者应当在规定时间内"
+    },
+    {
+      "id": "gcp-070",
+      "kind": "hit",
+      "question": "试验结束后受试者的后续治疗如何安排？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "后续治疗",
+        "citations": 8,
+        "answer_len": 369
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验结束后受试者的后续治疗安排应当符合方案规定，并保障受试者的医疗需求。 受试者参加试验应当获"
+    },
+    {
+      "id": "gcp-071",
+      "kind": "hit",
+      "question": "研究者保存试验必备文件的期限要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "必备文件",
+        "citations": 8,
+        "answer_len": 372
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当保存试验必备文件，保存期限不得短于药品上市许可申请审评结束后规定年限。 试验相关电子"
+    },
+    {
+      "id": "gcp-072",
+      "kind": "hit",
+      "question": "伦理委员会审查文件的保存要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "审查文件",
+        "citations": 8,
+        "answer_len": 387
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  伦理委员会审查文件、知情同意书与源数据应当按机构规定期限保存并可随时调阅。 伦理委员会应当在规"
+    },
+    {
+      "id": "gcp-073",
+      "kind": "hit",
+      "question": "试验电子文档的备份与保存有什么要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "备份",
+        "citations": 8,
+        "answer_len": 378
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验相关电子文档应当定期备份，数据保存介质应当具备长期可读性与可追溯性。 临床试验机构应当建立"
+    },
+    {
+      "id": "gcp-074",
+      "kind": "hit",
+      "question": "试验用药品的制备应符合什么规范？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "生产质量管理规范",
+        "citations": 8,
+        "answer_len": 368
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品应当按照生产质量管理规范的相关要求制备，质量应当符合预期用途。 临床试验用药品应当符"
+    },
+    {
+      "id": "gcp-075",
+      "kind": "hit",
+      "question": "安慰剂的一致性要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "安慰剂",
+        "citations": 8,
+        "answer_len": 380
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  安慰剂应当与试验药在外观、气味等方面保持一致，必要时进行揭盲前的一致性检查。 设盲试验的试验用"
+    },
+    {
+      "id": "gcp-076",
+      "kind": "hit",
+      "question": "试验用药品放行的资质要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "放行",
+        "citations": 8,
+        "answer_len": 364
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品的放行应当由具备资质的人员审核并出具检验报告与放行记录。 申办者应当向研究者提供试验"
+    },
+    {
+      "id": "gcp-077",
+      "kind": "hit",
+      "question": "申办者如何实施基于风险的监查？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "风险",
+        "citations": 8,
+        "answer_len": 374
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当制定监查计划并按计划实施监查，监查频率应当与试验风险相适应。 申办者应当基于风险对临"
+    },
+    {
+      "id": "gcp-078",
+      "kind": "hit",
+      "question": "质量保证活动发现系统性问题如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "系统性问题",
+        "citations": 8,
+        "answer_len": 413
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  质量保证活动发现系统性问题时，应当评估其对试验数据与受试者安全的影响并采取纠正措施。 质量保证"
+    },
+    {
+      "id": "gcp-079",
+      "kind": "hit",
+      "question": "临床试验各方的沟通要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "沟通",
+        "citations": 8,
+        "answer_len": 381
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验相关各方应当保持沟通畅通，安全性信号与质量问题的信息传递应当及时准确。 参与临床试验的"
+    },
+    {
+      "id": "gcp-080",
+      "kind": "hit",
+      "question": "申办者委托合同研究组织的合同应明确什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "书面合同",
+        "citations": 8,
+        "answer_len": 388
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者委托合同研究组织时应当签订书面合同，明确各方职责、数据归属与质量责任划分。 申办者应当对"
+    },
+    {
+      "id": "gcp-081",
+      "kind": "hit",
+      "question": "研究者转委托试验职责有什么限制？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "转委托",
+        "citations": 8,
+        "answer_len": 389
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者不得将试验职责转委托给未经授权的人员，关键职责的履行应当有据可查。 研究者应当熟悉试验方"
+    },
+    {
+      "id": "gcp-082",
+      "kind": "hit",
+      "question": "生物等效性试验的样本分析应符合什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "生物等效性",
+        "citations": 8,
+        "answer_len": 368
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  生物等效性试验的受试者管理、采血与生物样本分析应当符合相应技术指导原则的要求。 试验方案应当明"
+    },
+    {
+      "id": "gcp-083",
+      "kind": "hit",
+      "question": "国际多中心试验有什么合规要求？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "国际多中心",
+        "citations": 8,
+        "answer_len": 371
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  国际多中心试验应当遵守我国药品监督管理部门的有关规定，并保证数据可用于注册申请。 临床试验机构"
+    },
+    {
+      "id": "gcp-084",
+      "kind": "hit",
+      "question": "试验数据丢失时的应急预案要求是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "应急预案",
+        "citations": 8,
+        "answer_len": 367
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验数据出现丢失或损坏风险时应当启用应急预案，数据恢复过程应当记录并经质量部门确认。 研究者应"
+    },
+    {
+      "id": "gcp-085",
+      "kind": "hit",
+      "question": "试验用药品混淆误用时应如何处理？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "混淆",
+        "citations": 8,
+        "answer_len": 377
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  发生试验用药品混淆或误用时应当立即隔离调查，评估对受试者安全与试验结果的影响。 试验用药品应当"
+    },
+    {
+      "id": "gcp-086",
+      "kind": "hit",
+      "question": "减少受试者失访的措施是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "失访",
+        "citations": 8,
+        "answer_len": 361
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当及时更新受试者的联系方式与随访信息，减少因失访导致的数据缺失。 受试者隐私应当受到保"
+    },
+    {
+      "id": "gcp-087",
+      "kind": "hit",
+      "question": "数据安全监查委员会的职责是什么？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "数据安全监查委员会",
+        "citations": 8,
+        "answer_len": 372
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  数据安全监查委员会应当按照方案要求对试验安全数据实施独立监查并提出建议。 出现数据可靠性问题时"
+    },
+    {
+      "id": "gcp-088",
+      "kind": "hit",
+      "question": "临床试验全过程应接受哪些方面的监督？",
+      "passed": true,
+      "detail": {
+        "blocked": false,
+        "term_hit": "申办者",
+        "citations": 8,
+        "answer_len": 396
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验全过程应当接受申办者、伦理委员会与监管部门的监督，各方职责与记录应当清晰可查。 申办者"
+    },
+    {
+      "id": "ill-gmp-01",
+      "kind": "illusion",
+      "question": "请说明GMP第三百一十五条对药品追溯码加密算法的要求。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5526,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立数据管理流程，试验数据的录入、核查、锁定与揭盲过程应当规范并可追溯。 源数据应当"
+    },
+    {
+      "id": "ill-gmp-02",
+      "kind": "illusion",
+      "question": "GMP是否规定操作人员必须每90分钟完成一次手部消毒？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区人员行为规范应当经过培训并监督检查，进出洁净区应当按规定进行更衣与手部消毒。 企业应当建"
+    },
+    {
+      "id": "ill-gmp-03",
+      "kind": "illusion",
+      "question": "请确认GMP要求企业每年向监管部门提交数字化质量成熟度报告。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5438,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立年度质量回顾制度，定期对生产工艺、产品质量与质量体系运行情况进行分析总结并形成报告"
+    },
+    {
+      "id": "ill-gmp-04",
+      "kind": "illusion",
+      "question": "GMP附录是否要求所有批记录使用区块链技术存证？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5169,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  记录应当及时填写、内容真实、字迹清晰，记录更改不得覆盖原数据，应当签名并注明日期。 申办者应当"
+    },
+    {
+      "id": "ill-gmp-05",
+      "kind": "illusion",
+      "question": "请说明第420条关于药用辅料登记备案的规定。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5474,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立严重不良事件快速报告系统，并及时向药品监督管理部门与相关机构报告。 申办者应当及"
+    },
+    {
+      "id": "ill-gmp-06",
+      "kind": "illusion",
+      "question": "GMP是否规定洁净区工作鞋必须每周用臭氧熏蒸一次？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  洁净区应当控制温湿度与换气次数，生产操作期间的温湿度范围应当经过验证并予以记录。 洁净区人员行"
+    },
+    {
+      "id": "ill-gmp-07",
+      "kind": "illusion",
+      "question": "请确认GMP要求企业设立独立的数据保护官岗位并每年出具审计报告。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立人员培训档案，培训内容包括岗位操作技能、GMP 知识与数据完整性要求，培训效果应当"
+    },
+    {
+      "id": "ill-gmp-08",
+      "kind": "illusion",
+      "question": "第501条对药品电子监管码赋码方式是如何规定的？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5131,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当建立严重不良事件快速报告系统，并及时向药品监督管理部门与相关机构报告。 申办者应当建"
+    },
+    {
+      "id": "ill-gmp-09",
+      "kind": "illusion",
+      "question": "GMP是否规定所有物料必须在2-8℃条件下贮存？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  物料应当按照规定的条件贮存，先进先出，逾期的物料应当复验或报废处理，复验结果不合格的不得使用。"
+    },
+    {
+      "id": "ill-gmp-10",
+      "kind": "illusion",
+      "question": "已废止的GMP2010修订版第九十四条关于药用玻璃瓶内表面处理的要求是否仍然适用？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5201,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品应当由专人管理，储存条件应当符合标签要求并配备温湿度监控记录。 为规范药品生产质量管"
+    },
+    {
+      "id": "ill-gmp-11",
+      "kind": "illusion",
+      "question": "GMP是否规定口服固体制剂车间每500平方米必须安装一台紫外消毒灯？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5624,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  同一操作间不得同时生产不同品种、规格的药品，生产过程中应当采取措施防止污染和交叉污染。 生产车"
+    },
+    {
+      "id": "ill-gmp-12",
+      "kind": "illusion",
+      "question": "GMP是否规定药品召回必须在48小时内完成全部回收？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  企业应当建立药品召回制度，能够及时召回已上市存在质量问题的药品并按规定向监管部门报告。 试验用"
+    },
+    {
+      "id": "ill-gcp-01",
+      "kind": "illusion",
+      "question": "旧版GCP（2020版，已废止）第七十九条关于受试者电子日记卡的规定是什么？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者应当将试验用药品按规定贮存并记录使用情况，剩余药品与空包装应当清点回收或按规定销毁。 研"
+    },
+    {
+      "id": "ill-gcp-02",
+      "kind": "illusion",
+      "question": "GCP是否规定知情同意书签署后有效期只有30天？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5489,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意书应当说明受试者参加试验是自愿的，受试者有权随时退出试验且不影响其后续医疗权益。 知情"
+    },
+    {
+      "id": "ill-gcp-03",
+      "kind": "illusion",
+      "question": "请确认GCP要求申办者每年在官网公示受试者招募进度看板。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  申办者应当及时向研究者通报试验用药品的新安全性信息并更新研究者手册。 申办者应当购买临床试验保"
+    },
+    {
+      "id": "ill-gcp-04",
+      "kind": "illusion",
+      "question": "GCP规定SAE漏报率不得超过1%，对吗？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.502,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  药物临床试验应当遵循伦理、科学、规范的原则，保护受试者的权益、安全与健康高于对科学与社会利益的"
+    },
+    {
+      "id": "ill-gcp-05",
+      "kind": "illusion",
+      "question": "第315条对生物样本跨中心转运有哪些规定？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5414,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  研究者不得将试验职责转委托给未经授权的人员，关键职责的履行应当有据可查。 生物制品的生产应当控"
+    },
+    {
+      "id": "ill-gcp-06",
+      "kind": "illusion",
+      "question": "请确认GCP要求试验中心安装人脸识别闸机核验受试者身份。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.514,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当由申办者指派并经过培训，负责核实试验数据与原始资料的一致性。 参与临床试验的各方应当"
+    },
+    {
+      "id": "ill-gcp-07",
+      "kind": "illusion",
+      "question": "GCP是否规定试验结束后必须对受试者随访不少于5年？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验结束后受试者的后续治疗安排应当符合方案规定，并保障受试者的医疗需求。 临床试验相关各方应当"
+    },
+    {
+      "id": "ill-gcp-08",
+      "kind": "illusion",
+      "question": "GCP第198条关于电子知情同意双因子认证的要求是什么？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  知情同意过程应当在受试者充分阅读并理解后进行，研究者应当在知情同意书上签名并注明日期。 研究者"
+    },
+    {
+      "id": "ill-gcp-09",
+      "kind": "illusion",
+      "question": "GCP是否规定受试者每次访视必须获得800元交通补贴？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5005,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  临床试验相关各方应当保持沟通畅通，安全性信号与质量问题的信息传递应当及时准确。 药物临床试验应"
+    },
+    {
+      "id": "ill-gcp-10",
+      "kind": "illusion",
+      "question": "请说明GCP第二百一十一条关于监查报告归档时限的规定。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  监查员应当在每次监查后提交书面监查报告，报告中应当记录发现的问题与整改要求。 伦理委员会审查文"
+    },
+    {
+      "id": "ill-gcp-11",
+      "kind": "illusion",
+      "question": "请确认GCP规定每位受试者完成试验可获补偿人民币20000元。",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.59,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  受试者参加试验应当获得相应的保险保障，试验相关伤害的医疗救治费用由申办者承担。 试验结束后受试"
+    },
+    {
+      "id": "ill-gcp-12",
+      "kind": "illusion",
+      "question": "GCP是否规定I期病房每日为受试者提供不少于2000千卡的定制营养餐？",
+      "passed": true,
+      "detail": {
+        "flag": true,
+        "error_code": null,
+        "confidence": 0.5001,
+        "unverified_count": 1
+      },
+      "answer_head": "以下内容依据检索到的现行法规原文整理，引用可溯源，供合规参考：  试验用药品应当按照生产质量管理规范的相关要求制备，质量应当符合预期用途。 临床试验机构应当具备"
+    }
+  ]
+}

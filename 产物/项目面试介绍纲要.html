@@ -1,0 +1,1786 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaReg 制药合规知识平台 — 项目面试介绍纲要</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #dbeafe;
+            --secondary: #059669;
+            --secondary-light: #d1fae5;
+            --accent: #7c3aed;
+            --accent-light: #ede9fe;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #d97706;
+            --warning-light: #fef3c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --code-text: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.8; font-size: 15px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+
+        /* 目录导航 */
+        .toc {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px 32px; margin-bottom: 40px;
+            position: sticky; top: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .toc-title {
+            font-size: 18px; font-weight: 700; color: var(--primary);
+            margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light);
+        }
+        .toc-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+        .toc-list li a {
+            text-decoration: none; color: var(--text); font-size: 13px;
+            padding: 4px 12px; border-radius: 6px; background: var(--bg); transition: all 0.2s; display: inline-block;
+        }
+        .toc-list li a:hover { background: var(--primary-light); color: var(--primary); }
+
+        /* 标题样式 */
+        h1 { font-size: 30px; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+        h2 {
+            font-size: 24px; font-weight: 700; color: var(--primary);
+            margin-top: 48px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--primary-light);
+        }
+        h3 { font-size: 19px; font-weight: 700; color: var(--text); margin-top: 36px; margin-bottom: 14px; padding-left: 12px; border-left: 4px solid var(--accent); }
+        h4 { font-size: 16px; font-weight: 700; color: var(--secondary); margin-top: 24px; margin-bottom: 10px; }
+        h5 { font-size: 15px; font-weight: 600; color: var(--text-light); margin-top: 16px; margin-bottom: 8px; }
+        p { margin-bottom: 12px; }
+
+        /* 文档头部 */
+        .doc-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1a56db 100%);
+            color: white; padding: 40px 32px; border-radius: 16px; margin-bottom: 40px;
+        }
+        .doc-header h1 { color: white; margin-bottom: 8px; }
+        .doc-header .subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 16px; }
+        .doc-header .meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .doc-header .meta span { background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+
+        /* 卡片 */
+        .card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        .card-primary { border-left: 4px solid var(--primary); }
+        .card-secondary { border-left: 4px solid var(--secondary); }
+        .card-accent { border-left: 4px solid var(--accent); }
+        .card-danger { border-left: 4px solid var(--danger); }
+        .card-warning { border-left: 4px solid var(--warning); }
+
+        /* 代码块 */
+        pre {
+            background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px 20px; overflow-x: auto; margin: 12px 0; font-size: 13px; line-height: 1.6;
+        }
+        code { font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, monospace; }
+        pre code { color: var(--code-text); }
+        :not(pre) > code { background: var(--code-bg); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+
+        /* 表格 */
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+        th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+        td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        tr:nth-child(even) td { background: #f8fafc; }
+        tr:hover td { background: var(--primary-light); }
+
+        /* 流程图基础 */
+        .flow-diagram {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px; margin: 20px 0;
+        }
+        .flow-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+        .flow-step-number {
+            flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--primary);
+            color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+        }
+        .flow-step-content { flex: 1; padding-bottom: 16px; border-left: 2px dashed var(--border); margin-left: -16px; padding-left: 16px; margin-top: 6px; }
+        .flow-step:last-child .flow-step-content { border-left: none; }
+        .flow-step-title { font-weight: 600; color: var(--text); font-size: 14px; }
+        .flow-step-desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+
+        /* 标签 */
+        .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .tag-primary { background: var(--primary-light); color: var(--primary); }
+        .tag-secondary { background: var(--secondary-light); color: var(--secondary); }
+        .tag-accent { background: var(--accent-light); color: var(--accent); }
+        .tag-danger { background: var(--danger-light); color: var(--danger); }
+        .tag-warning { background: var(--warning-light); color: var(--warning); }
+
+        /* 高亮提示 */
+        .highlight {
+            background: linear-gradient(120deg, var(--warning-light) 0%, var(--warning-light) 100%);
+            background-repeat: no-repeat; background-size: 100% 40%; background-position: 0 85%; padding: 0 2px;
+        }
+        .callout { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 14px; }
+        .callout-info { background: var(--primary-light); border-left: 4px solid var(--primary); }
+        .callout-warning { background: var(--warning-light); border-left: 4px solid var(--warning); }
+        .callout-danger { background: var(--danger-light); border-left: 4px solid var(--danger); }
+        .callout-success { background: var(--secondary-light); border-left: 4px solid var(--secondary); }
+
+        /* ASCII 架构图 */
+        .arch-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid var(--primary-light); border-radius: 12px; padding: 24px; margin: 20px 0;
+            font-family: "Cascadia Code", monospace; font-size: 13px; line-height: 1.5; overflow-x: auto; white-space: pre; color: var(--text);
+        }
+
+        /* 知识点卡片 */
+        .knowledge-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin: 16px 0; overflow: hidden; }
+        .knowledge-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%);
+            color: white; padding: 12px 20px; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+        }
+        .knowledge-body { padding: 16px 20px; }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container { padding: 20px 12px; }
+            .toc { position: static; }
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; }
+        }
+
+        .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 40px 0; }
+        .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .section-anchor { scroll-margin-top: 20px; }
+
+        /* ===== 流程图通用样式 ===== */
+        .arch-fig {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
+            padding: 26px 24px 20px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-x: auto;
+        }
+        .arch-fig-title { text-align: center; font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+        .arch-fig-sub { text-align: center; font-size: 12px; color: var(--text-light); margin-bottom: 18px; }
+        .arch-caption { text-align:center; font-size:12px; color:var(--text-light); margin-top:8px; }
+
+        /* 竖直流转 */
+        .fc-flow { display: flex; flex-direction: column; align-items: center; min-width: 640px; }
+        .fc-layer { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .fc-layer-tag {
+            font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #fff; background: var(--primary);
+            padding: 2px 12px; border-radius: 10px; margin-bottom: 8px;
+        }
+        .fc-nodes { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 100%; }
+        .fc-node {
+            background: #fff; border: 1.5px solid var(--border); border-radius: 9px;
+            padding: 7px 13px; min-width: 108px; text-align: center; font-size: 13px; font-weight: 600;
+            color: var(--text); line-height: 1.4; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .fc-node small { display:block; font-size: 11px; font-weight: 400; color: var(--text-light); }
+        .fc-node fe { background:#eff6ff; border-color:#bfdbfe; }
+        .fc-node.api { background:#f5f3ff; border-color:#ddd6fe; }
+        .fc-node.agent { background:#ecfdf5; border-color:#a7f3d0; }
+        .fc-node.rag { background:#fff7ed; border-color:#fed7aa; }
+        .fc-node.svc { background:#fdf2f8; border-color:#fbcfe8; }
+        .fc-node.infra { background:#f8fafc; border-color:#cbd5e1; font-weight:500; }
+        .fc-node.super { background: linear-gradient(135deg,#1e3a8a,#1a56db); border-color:#1e3a8a; color:#fff; }
+        .fc-node.super small { color:#dbeafe; }
+        .fc-node.sec { background:#fef2f2; border-color:#fecaca; }
+        .fc-node.mon { background:#f0fdf4; border-color:#bbf7d0; }
+        .fc-node.danger { border-color:#dc2626; color:#dc2626; }
+        .fc-arrow { text-align: center; color: var(--primary); font-size: 15px; line-height: 1; padding: 5px 0 5px; }
+
+        /* 核心并列卡片 */
+        .fc-core { width:100%; display:flex; gap:10px; justify-content:center; align-items:stretch; }
+        .fc-core-card { flex:1; border:1.5px solid var(--border); border-radius:10px; padding:10px; background:#fbfdff; min-width:0; }
+        .fc-core-card .fc-card-title { text-align:center; font-size:13px; font-weight:700; color:var(--primary); margin-bottom:8px; padding-bottom:6px; border-bottom:1px dashed var(--border); }
+        .fc-mini { display:flex; flex-direction:column; gap:6px; }
+        .fc-mini-item { font-size:12px; background:#fff; border:1px solid var(--border); border-radius:6px; padding:5px 8px; color:var(--text); }
+        .fc-mini-item b { color: var(--primary); font-weight:600; }
+        .fc-chip { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; }
+        .fc-chip span { font-size:11px; background:var(--primary-light); color:var(--primary); border-radius:20px; padding:2px 9px; font-weight:600; }
+
+        /* 水平流转 */
+        .fc-flow-h { display:flex; align-items:flex-start; gap:0; overflow-x:auto; padding: 8px 0; }
+        .fc-step-h { display:flex; flex-direction:column; align-items:center; min-width:110px; flex-shrink:0; }
+        .fc-step-h-body {
+            background:#fff; border:1.5px solid var(--border); border-radius:9px; padding:8px 12px;
+            text-align:center; font-size:12px; font-weight:600; color:var(--text); line-height:1.4;
+        }
+        .fc-step-h-body small { display:block; font-size:11px; font-weight:400; color:var(--text-light); margin-top:2px; }
+        .fc-step-h.rag .fc-step-h-body { background:#fff7ed; border-color:#fed7aa; }
+        .fc-step-h.gen .fc-step-h-body { background:#eff6ff; border-color:#bfdbfe; }
+        .fc-step-h.chk .fc-step-h-body { background:#fdf2f8; border-color:#fbcfe8; }
+        .fc-step-h.out .fc-step-h-body { background:#ecfdf5; border-color:#a7f3d0; }
+        .fc-arrow-h { display:flex; align-items:center; color:var(--primary); font-size:18px; padding:0 4px; align-self:center; }
+
+        /* 分支 */
+        .fc-branch { display:flex; gap:20px; justify-content:center; align-items:flex-start; margin: 8px 0; }
+        .fc-branch-path { display:flex; flex-direction:column; align-items:center; gap:6px; }
+        .fc-branch-label { font-size:11px; color:var(--text-light); font-style:italic; background:var(--bg); padding:2px 8px; border-radius:4px; border:1px dashed var(--border); }
+
+        /* 门控/决策菱形 */
+        .fc-gate {
+            background:#fef3c7; border:2px solid #d97706; border-radius:50%;
+            width:66px; height:66px; display:flex; align-items:center; justify-content:center;
+            font-size:11px; font-weight:700; color:#d97706; text-align:center; line-height:1.2; flex-shrink:0;
+        }
+
+        /* 状态机 */
+        .fc-sm-flow { display:flex; flex-wrap:wrap; align-items:center; gap:0; justify-content:center; }
+        .fc-state {
+            background:#fff; border:2px solid var(--primary); border-radius:8px; padding:8px 14px;
+            font-size:13px; font-weight:600; color:var(--primary); text-align:center; min-width:96px; line-height:1.3;
+        }
+        .fc-state small { display:block; font-size:11px; font-weight:400; color:var(--text-light); }
+        .fc-state-final { background:#ecfdf5; border-color:var(--secondary); color:var(--secondary); }
+        .fc-state-initial { background:var(--primary-light); }
+        .fc-sm-arrow { display:flex; flex-direction:column; align-items:center; padding: 0 2px; }
+        .fc-sm-arrow span { color:var(--primary); font-size:16px; }
+        .fc-sm-label {
+            font-size:10px; color:var(--text-light); background:var(--bg); padding:1px 6px;
+            border-radius:4px; border:1px dashed var(--border); white-space:nowrap;
+        }
+
+        /* 泳道 */
+        .fc-lane-row { display:flex; gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:4px 0; }
+        .fc-lane-label {
+            flex-shrink:0; width:80px; display:flex; align-items:center; justify-content:center;
+            font-size:12px; font-weight:700; color:#fff; background:var(--primary); writing-mode:vertical-lr; text-orientation:upright; letter-spacing:2px;
+        }
+        .fc-lane-body { flex:1; padding:10px 12px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; background:#fbfdff; }
+
+        /* 详情标注 */
+        .fc-detail {
+            font-size:11px; color:var(--text-light); background:#f8fafc;
+            border:1px dashed var(--border); border-radius:6px; padding:4px 8px; margin-top:4px; line-height:1.5;
+        }
+        .fc-detail code { font-size:11px; }
+
+        /* 函数标注 */
+        .fc-fn {
+            font-family:"Cascadia Code",monospace; font-size:10px; color:var(--accent);
+            background:var(--accent-light); padding:1px 5px; border-radius:3px; display:inline-block; margin-top:2px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ============ 文档头部 ============ -->
+<div class="doc-header">
+    <h1>PharmaReg 制药合规知识平台</h1>
+    <div class="subtitle">项目面试介绍纲要 — RAG 检索链路 + 多 Agent 编排</div>
+    <div class="meta">
+        <span>Python 3.12 / FastAPI</span>
+        <span>React 19 / TypeScript</span>
+        <span>Milvus 2.4 / bge-m3</span>
+        <span>自研 Supervisor + 10 Agent</span>
+    </div>
+</div>
+
+<!-- ============ 目录 ============ -->
+<div class="toc">
+    <div class="toc-title">目录导航</div>
+    <ul class="toc-list">
+        <li><a href="#sec1">一、项目概述</a></li>
+        <li><a href="#sec2">二、整体架构</a></li>
+        <li><a href="#sec3">三、RAG 检索链路</a></li>
+        <li><a href="#sec4">四、多 Agent 编排</a></li>
+        <li><a href="#sec5">五、知识点详解</a></li>
+
+    </ul>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 一、项目概述 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec1" class="section-anchor">一、项目概述</h2>
+
+<h3>1.1 项目定位</h3>
+<div class="card card-primary">
+    <p><strong>PharmaReg</strong> 是一个面向制药行业（GMP 药品生产质量管理规范 + GCP 药物临床试验质量管理规范）的 <span class="highlight">AI 合规知识问答平台</span>。系统通过 RAG（检索增强生成）技术，将法规条款转化为向量索引，结合大语言模型实现条款级精准问答，同时提供偏差管理、变更控制、CAPA、SAE 上报、审计检查、培训考核等全套制药合规业务能力。</p>
+    <p><strong>核心价值：</strong>法规条款精准检索与引用溯源 + 多角色 Agent 智能辅助 + 哈希链审计完整性 + 全链路幻觉防护。</p>
+</div>
+
+<h3>1.2 技术栈总览</h3>
+<table>
+    <tr><th>层级</th><th>技术</th><th>版本</th><th>用途</th></tr>
+    <tr><td>后端框架</td><td>FastAPI + Uvicorn</td><td>&gt;=0.115</td><td>异步 Web API + SSE 流式</td></tr>
+    <tr><td>前端框架</td><td>React 19 + React Router 7 + Vite 6</td><td>19 / 7.1</td><td>SPA 单页应用</td></tr>
+    <tr><td>状态/数据</td><td>Zustand 5 + TanStack Query</td><td>5 / 5.51</td><td>前端状态管理 + 数据获取</td></tr>
+    <tr><td>关系数据库</td><td>MySQL 8.0 + SQLAlchemy 2.0 + Alembic</td><td>8.0 / 2.0</td><td>业务数据存储 + ORM + 迁移</td></tr>
+    <tr><td>向量数据库</td><td>Milvus (pymilvus)</td><td>2.4.0</td><td>法规条款向量索引与检索</td></tr>
+    <tr><td>Embedding 模型</td><td>bge-m3 (SentenceTransformer)</td><td>1024 维</td><td>文本向量化（多语言支持）</td></tr>
+    <tr><td>Rerank 模型</td><td>bge-reranker-large (CrossEncoder)</td><td>—</td><td>检索结果精排</td></tr>
+    <tr><td>LLM</td><td>qwen2.5-14b (OpenAI 兼容 API)</td><td>—</td><td>答案生成 + 声明校验</td></tr>
+    <tr><td>缓存</td><td>Redis 7</td><td>7-alpine</td><td>会话缓存 + 限流</td></tr>
+    <tr><td>Agent 编排</td><td>自研 Supervisor 路由</td><td>—</td><td>多 Agent 路由与编排</td></tr>
+    <tr><td>认证</td><td>JWT (python-jose) + bcrypt</td><td>—</td><td>用户认证 + 角色权限</td></tr>
+    <tr><td>容器化</td><td>Docker + docker-compose</td><td>—</td><td>基础设施编排</td></tr>
+    <tr><td>监控</td><td>Prometheus + Grafana</td><td>2.53 / 11.1</td><td>指标采集 + 可视化</td></tr>
+</table>
+
+<!-- ================================================================ -->
+<!-- ============ 二、整体架构 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec2" class="section-anchor">二、整体架构</h2>
+
+<h3>2.1 分层架构</h3>
+<div class="arch-box">┌─────────────────────────────────────────────────────────────────┐
+│                     前端 (React 19 + Vite 6)                      │
+│   登录 / 问答(SSE流式) / 法规库 / 偏差 / 变更 / SAE / 培训 / 审计  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │  HTTP / SSE
+┌────────────────────────────▼────────────────────────────────────┐
+│              安全网关 (JWT 验证 + RBAC + 限流)                     │
+│  python-jose HS256 · bcrypt 密码 · Redis 令牌缓存 · 滑窗限流       │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────┐
+│                  API 层 (FastAPI)                                │
+│  /qa/ask-stream  /kb  /quality  /sae  /training  /audit  /sys   │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+         ┌───────────────────┼───────────────────┐
+         ▼                   ▼                   ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│  Agent 层       │ │  RAG 引擎       │ │  服务层         │
+│  Supervisor     │ │  pipeline.py   │ │  状态机管理      │
+│  10 个专家Agent │ │  retriever.py  │ │  哈希链审计      │
+│  角色路由矩阵   │ │  hallucination  │ │  电子签名        │
+│  (建议层·不写库) │ │  (检索→生成→校验)│ │  (执行层·写库)  │
+└────────┬────────┘ └────────┬────────┘ └────────┬────────┘
+         │                   │                   │
+         └───────────────────┼───────────────────┘
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     基础设施层                                   │
+│  MySQL 8.0    Redis 7    Milvus 2.4    模型服务(:8081)          │
+│  (业务数据)   (缓存)     (向量库)     bge-m3 / bge-reranker     │
+│                                           LLM (qwen2.5-14b)    │
+└─────────────────────────────────────────────────────────────────┘</div>
+
+<h3>2.2 端到端项目流程架构图</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">PharmaReg 端到端项目流程架构图（详细版）</div>
+    <div class="arch-fig-sub">用户角色 → 安全网关 → 前端 → API / Supervisor 编排 → 专家 Agent / RAG 管线 / 服务层状态机 → 基础设施 → 监控</div>
+    <div class="fc-flow">
+
+        <!-- 用户层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">用户层 · 角色（10 种角色）</div>
+            <div class="fc-nodes">
+                <div class="fc-node">操作员 / QC<small>日常合规查询 · 条款理解</small></div>
+                <div class="fc-node">QA 工程师<small>偏差 · 变更 · CAPA · 合规分析</small></div>
+                <div class="fc-node">研究者 / CRC<small>SAE 上报 · 方案查询</small></div>
+                <div class="fc-node">CRA / PV<small>审计检查 · 药物警戒复核</small></div>
+                <div class="fc-node">合规专员<small>法规库运维 · 版本管理</small></div>
+                <div class="fc-node">培训师<small>组卷 · 批改 · 认证</small></div>
+                <div class="fc-node">管理员<small>用户管理 · 审计日志 · 全权限</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> HTTPS + JWT Bearer Token</div>
+
+        <!-- 安全网关层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">安全网关层（JWT + RBAC + 限流）</div>
+            <div class="fc-nodes">
+                <div class="fc-node sec">JWT 验证<small>python-jose HS256 · 过期校验</small></div>
+                <div class="fc-node sec">RBAC 权限<small>角色提取 → Agent 可见性</small></div>
+                <div class="fc-node sec">Redis 限流<small>滑窗算法 · API 级别</small></div>
+                <div class="fc-node sec">请求日志<small>操作行为 → 审计链</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> 鉴权通过 · 注入 user / tenant_id</div>
+
+        <!-- 前端层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">前端接入层（React 19 + Vite 6 + Zustand 5 + TanStack Query）</div>
+            <div class="fc-nodes">
+                <div class="fc-node fe">规范问答页<small>SSE 流式 · EventSource · 断线续传</small></div>
+                <div class="fc-node fe">法规库管理<small>版本激活/回滚 · FAQ 编辑</small></div>
+                <div class="fc-node fe">偏差 · 变更 · CAPA<small>状态机驱动 · 电子签名</small></div>
+                <div class="fc-node fe">SAE 上报<small>PV 复核 → 签名 → 提交</small></div>
+                <div class="fc-node fe">审计 / 培训<small>哈希链验证 · 组卷考核</small></div>
+                <div class="fc-node fe">系统管理<small>用户 · 角色 · 审计日志</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> HTTP / SSE</div>
+
+        <!-- API 与编排层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">API 与编排层（FastAPI + Supervisor）</div>
+            <div class="fc-nodes">
+                <div class="fc-node api">FastAPI 路由<small>/qa /kb /quality /sae /training /audit /sys</small></div>
+                <div class="fc-node super">Supervisor 编排<small>ROLE_AGENT_MATRIX 角色矩阵(10×10) · AGENT_REGISTRY 注册表 · route_query 路由 · 权限校验</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> 分发到核心能力</div>
+
+        <!-- 核心能力层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">核心能力层</div>
+            <div class="fc-core">
+                <!-- Agent层 -->
+                <div class="fc-core-card">
+                    <div class="fc-card-title">10 个专家 Agent（建议层 · 不写库）</div>
+                    <div class="fc-chip">
+                        <span>QA 答疑</span><span>条款讲解</span><span>路径指引</span><span>偏差处理</span>
+                        <span>变更评估</span><span>审计准备</span><span>SAE 上报</span><span>法规库运维</span>
+                        <span>培训考核</span><span>合规分析</span>
+                    </div>
+                    <div class="fc-mini" style="margin-top:8px;">
+                        <div class="fc-mini-item"><b>QAAgent</b> → rag_answer() 完整 RAG 管线 · 唯一调 LLM</div>
+                        <div class="fc-mini-item"><b>DeviationAgent</b> → classify_severity + 案例检索 + 调查计划草案</div>
+                        <div class="fc-mini-item"><b>SaeAgent</b> → 严重性评估 + 时限计算(7天/15天) + 草稿</div>
+                        <div class="fc-mini-item"><b>ComplianceAgent</b> → 培训+质量+PV+审计 聚合报告</div>
+                        <div class="fc-mini-item"><b>ChangeAgent</b> → 类型匹配 + 影响评估 + 法规检索</div>
+                        <div class="fc-mini-item" style="color:var(--danger);"><b>约束</b> → 所有 Agent run() 返回 writes_disabled=True</div>
+                    </div>
+                </div>
+                <!-- RAG引擎 -->
+                <div class="fc-core-card" style="border-color:#fed7aa;background:#fffaf5;">
+                    <div class="fc-card-title" style="color:#d97706;">RAG 引擎（检索 → 生成 → 校验 → 门控）</div>
+                    <div class="fc-mini">
+                        <div class="fc-mini-item"><b>① 检索</b> classify_intent → rewrite_query → get_active_versions</div>
+                        <div class="fc-mini-item"><b>② 多通道</b> doc(40) / faq(10) / case(40) → tenant_id 过滤</div>
+                        <div class="fc-mini-item"><b>③ 预剪枝</b> 每通道 top 8 → 去重(text[:100])</div>
+                        <div class="fc-mini-item"><b>④ 精排</b> CrossEncoder rerank(top_n=全量) → top 8</div>
+                        <div class="fc-mini-item"><b>⑤ 生成</b> FAQ 命中(>0.85)短路 / LLM(role_qa Prompt)</div>
+                        <div class="fc-mini-item"><b>⑥ 校验</b> 条款存在性验证 + 声明蕴含校验(temp=0)</div>
+                        <div class="fc-mini-item"><b>⑦ 门控</b> 置信度 0.5·rerank+0.3·条款+0.2·声明</div>
+                        <div class="fc-mini-item"><b>⑧ 溯源</b> build_citations → clause_id/excerpt/version</div>
+                    </div>
+                </div>
+                <!-- 服务层 -->
+                <div class="fc-core-card">
+                    <div class="fc-card-title">服务层与审计（执行层 · 写库）</div>
+                    <div class="fc-mini">
+                        <div class="fc-mini-item"><b>偏差状态机</b> reported→classified→investigating→qa_review→capa_linked→closed</div>
+                        <div class="fc-mini-item" style="color:var(--danger);"><b>critical</b> → 自动创建 BatchHold(批次挂起)</div>
+                        <div class="fc-mini-item"><b>变更状态机</b> submitted→assessed→approved→implemented→verified→closed</div>
+                        <div class="fc-mini-item" style="color:var(--danger);"><b>四眼原则</b> initiator_id≠approver_id</div>
+                        <div class="fc-mini-item"><b>SAE 状态机</b> recorded→pv_reviewed→draft→signed→submitted→archived</div>
+                        <div class="fc-mini-item"><b>哈希链审计</b> SHA256(prev_hash+ts+actor+action+payload)</div>
+                        <div class="fc-mini-item"><b>电子签名</b> PIN 验证 + 幂等键 + 7 种签名场景</div>
+                        <div class="fc-mini-item"><b>编号格式</b> DEV/CHG/CAPA-{year}-{seq:04d}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> 读写基础设施</div>
+
+        <!-- 基础设施层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">基础设施层</div>
+            <div class="fc-nodes">
+                <div class="fc-node infra">MySQL 8.0<small>业务数据 · 条款/FAQ/案例/审计</small></div>
+                <div class="fc-node infra">Redis 7<small>JWT 令牌 · 限流 · 会话缓存</small></div>
+                <div class="fc-node infra">Milvus 2.4<small>AUTOINDEX · COSINE · tenant_id 过滤</small></div>
+                <div class="fc-node infra">模型服务 :8081<small>bge-m3(1024维) · bge-reranker-large</small></div>
+                <div class="fc-node infra">LLM :8080/v1<small>qwen2.5-14b · OpenAI 兼容 · 可切 stub</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span> 指标采集</div>
+
+        <!-- 监控层 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag">监控与可观测层</div>
+            <div class="fc-nodes">
+                <div class="fc-node mon">Prometheus<small>fastapi_requests · milvus_search_latency</small></div>
+                <div class="fc-node mon">Grafana<small>面板 · 告警 · RAG 延迟/命中率</small></div>
+                <div class="fc-node mon">哈希链校验<small>verify_hash_chain() 定时巡检</small></div>
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：PharmaReg 端到端请求流转（红=安全层，蓝=前端，紫=API，绿=Agent建议层，橙=RAG引擎，粉=服务层写库，灰=基础设施，浅绿=监控）</div>
+</div>
+
+<h3>2.3 核心目录结构</h3>
+<pre><code>PharmaReg/
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI 入口
+│   │   ├── api/v1/              # REST API 路由
+│   │   ├── agents/              # Agent 架构（10 个专家 Agent + Supervisor）
+│   │   ├── rag/                 # RAG 核心引擎
+│   │   │   ├── pipeline.py      #   RAG 主链路（rag_answer + 流式版）
+│   │   │   ├── retriever.py     #   检索器（意图分类+查询重写+多通道+Rerank）
+│   │   │   ├── hallucination.py #   幻觉检测（条款存在性+声明校验+置信度）
+│   │   │   ├── llm_client.py    #   LLM 客户端（OpenAI 兼容，重试3次）
+│   │   │   ├── milvus_client.py #   Milvus 向量库客户端
+│   │   │   ├── prompts.py       #   Prompt 版本化加载器
+│   │   │   └── stub_llm.py     #   Stub LLM（无 GPU 环境，确定性答案）
+│   │   ├── ingestion/           # 文档解析管道（parser + chunker）
+│   │   ├── models/              # SQLAlchemy 数据模型
+│   │   ├── services/            # 业务服务层（状态机管理）
+│   │   ├── core/                # 配置/安全/日志/异常
+│   │   └── audit/               # 哈希链审计 + 电子签名
+│   └── tests/                   # 单元+集成+评估测试
+├── frontend/src/                 # React 前端
+├── deploy/                       # Docker 部署 + 本地模型服务
+├── docs/prompts/                 # Prompt 模板（版本化管理）
+└── models/                       # 本地模型文件（bge-m3 + bge-reranker）</code></pre>
+
+<h3>2.4 请求生命周期时序图</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">用户问答请求完整生命周期</div>
+    <div class="arch-fig-sub">从前端发起 SSE 请求到最终流式返回答案 + 引用 + 置信度</div>
+    <div class="arch-box" style="margin:0;">用户(QA工程师)
+  │ ① POST /qa/ask-stream  {query, history}
+  │    Authorization: Bearer <JWT>
+  ▼
+┌──────────────────────────────────────────────────────────┐
+│  安全网关                                                 │
+│  ② verify_jwt(token) → user_id, roles, tenant_id        │
+│  ③ rate_limit_check(redis) → pass/block                 │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────┐
+│  FastAPI 路由 /qa/ask-stream                              │
+│  ④ supervisor.execute(query, roles, db, context, tid)   │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────┐
+│  Supervisor                                               │
+│  ⑤ get_visible_agents(roles) → {"qa","deviation",...}   │
+│  ⑥ route_query(query, visible) → "qa"                   │
+│  ⑦ 权限校验: "qa" in visible → pass                      │
+│  ⑧ agent = AGENT_REGISTRY["qa"]  → QAAgent               │
+│  ⑨ agent.run(query, context)                             │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────┐
+│  QAAgent → rag_answer_stream()                            │
+│  ⑩ classify_intent → rewrite_query → retrieve            │
+│  ⑪ rerank → top 8                                         │
+│  ⑫ FAQ 命中(rerank>0.85)? → 直接返回标准口径              │
+│     否 → LLM 流式生成                                     │
+│  ⑬ verify_clause_existence → verify_claims               │
+│  ⑭ compute_confidence → should_block                     │
+│  ⑮ build_citations                                        │
+└──────────────────────┬───────────────────────────────────┘
+                       ▼
+  ⑯ SSE 事件流推送到前端:
+     event:citation  → {citations:[...]}
+     event:delta     → {content:"逐token..."}  (流式)
+     event:done      → {confidence:0.82, mode:"retrieval"}
+     -- 或阻断时 --
+     event:flag      → {flag:"needs_human_review"}
+     event:done      → {confidence:0.45, mode:"needs_human_review"}</div>
+    <div class="arch-caption">图：一次问答请求从 JWT 鉴权到 SSE 流式返回的完整时序（16 步）</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 三、RAG 检索链路 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec3" class="section-anchor">三、RAG 检索链路详解</h2>
+
+<div class="callout callout-info">
+    <strong>核心文件：</strong>
+    <code>backend/app/rag/pipeline.py</code>（主链路）、
+    <code>retriever.py</code>（检索器）、
+    <code>hallucination.py</code>（幻觉防护）、
+    <code>milvus_client.py</code>（向量库）、
+    <code>llm_client.py</code>（LLM 客户端）
+</div>
+
+<h3>3.1 完整 RAG 链路流程图（详细版）</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">RAG 检索链路流程图（检索 → 生成 → 校验 → 门控）</div>
+    <div class="arch-fig-sub">蓝色 = 检索阶段 · 橙色 = 生成阶段 · 粉色 = 校验阶段 · 绿色 = 输出 · 红色 = 阻断分支</div>
+    <div class="fc-flow">
+
+        <!-- ① 检索阶段 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#2563eb;">① 检索阶段（retriever.py）</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">意图分类<small>classify_intent()</small></div>
+                    <div class="fc-detail">关键词匹配<br>qa / faq_match / deviation<br>→ 通道权重矩阵</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">查询重写<small>rewrite_query()</small></div>
+                    <div class="fc-detail">历史上下文拼接<br>GMP→药品生产...<br>最多 2 个变体</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">多版本获取<small>get_active_versions()</small></div>
+                    <div class="fc-detail">status="active"<br>按激活时间倒序<br>支持多法规并行</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">多通道检索<small>search_doc/faq/case</small></div>
+                    <div class="fc-detail">doc top40 · faq top10<br>case top40<br>filter: tenant_id</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">去重预剪枝<small>_pre_prune()</small></div>
+                    <div class="fc-detail">text[:100] 去重<br>每通道 top 8<br>控制 rerank 输入</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">CrossEncoder 精排<small>reranker.rerank()</small></div>
+                    <div class="fc-detail">bge-reranker-large<br>top_n=全量(非8)<br>→ 取 top 8</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分支：FAQ 快速路径 vs 正常生成 -->
+        <div class="fc-arrow"><span>▼</span> rerank 结果</div>
+        <div class="fc-layer">
+            <div class="fc-branch">
+                <!-- FAQ 快速路径 -->
+                <div class="fc-branch-path">
+                    <div class="fc-branch-label">FAQ rerank &gt; 0.85</div>
+                    <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;">FAQ 快速路径<small>置信度固定 0.95 · 跳过生成</small></div>
+                    <div class="fc-detail">直接返回标准口径<br>mode = "faq"</div>
+                </div>
+                <!-- 正常 LLM 生成 -->
+                <div class="fc-branch-path">
+                    <div class="fc-branch-label">否则（正常路径）</div>
+                    <div class="fc-node rag">LLM 生成<small>llm_client.chat() · role_qa Prompt</small></div>
+                    <div class="fc-detail">上下文: [channel] text<br>Prompt 约束: 只用检索内容<br>必须标注条款号 · 严禁编造</div>
+                </div>
+                <!-- Stub 模式 -->
+                <div class="fc-branch-path">
+                    <div class="fc-branch-label">无 GPU · stub_llm</div>
+                    <div class="fc-node" style="background:#f1f5f9;border-color:#cbd5e1;">Stub 拼接<small>不调 LLM · 条款原文拼接</small></div>
+                    <div class="fc-detail">100% 可溯源<br>40 字符假流式<br>rerank&lt;0.45 → 人工复核</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ③ 校验阶段 -->
+        <div class="fc-arrow"><span>▼</span> 草稿答案</div>
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#db2777;">③ 校验阶段（hallucination.py）— 双重幻觉防护</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">条款存在性验证<small>verify_clause_existence()</small></div>
+                    <div class="fc-detail">正则提取"第X条"<br>查 MySQL RegClause<br>→ clause_hit_rate</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">声明蕴含校验<small>verify_claims()</small></div>
+                    <div class="fc-detail">按句切分 · 模态词过滤<br>必须/应当/不得/禁止<br>LLM(temp=0) 逐句 yes/no</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">置信度计算<small>compute_confidence()</small></div>
+                    <div class="fc-detail">0.5×rerank +<br>0.3×clause_hit +<br>0.2×claim_pass</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body" style="border-color:#dc2626;color:#dc2626;">阻断门控<small>should_block()</small></div>
+                    <div class="fc-detail">conf&lt;0.6 → 阻断<br>未验证&gt;30% → 阻断<br>stub rerank&lt;0.45 → 阻断</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分支：阻断 vs 正常输出 -->
+        <div class="fc-arrow"><span>▼</span></div>
+        <div class="fc-layer">
+            <div class="fc-branch">
+                <!-- 阻断 -->
+                <div class="fc-branch-path">
+                    <div class="fc-branch-label" style="color:var(--danger);">阻断</div>
+                    <div class="fc-node danger">needs_human_review<small>mode = "needs_human_review"</small></div>
+                    <div class="fc-detail">返回阻断原因<br>+"不知道"比"给错"更安全</div>
+                </div>
+                <!-- 正常输出 -->
+                <div class="fc-branch-path">
+                    <div class="fc-branch-label" style="color:var(--secondary);">通过</div>
+                    <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;">引用溯源<small>build_citations()</small></div>
+                    <div class="fc-detail">entity_id → RegClause/Faq<br>clause_id / excerpt / version</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ④ 输出 -->
+        <div class="fc-arrow"><span>▼</span></div>
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#059669;">④ 输出（pipeline.py 返回）</div>
+            <div class="fc-nodes">
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:200px;">answer<small>答案文本</small></div>
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:200px;">mode<small>retrieval / faq / needs_human_review</small></div>
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:200px;">citations<small>clause_id · excerpt · version</small></div>
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:200px;">confidence<small>0.0 ~ 1.0</small></div>
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：RAG 链路完整流程（含 FAQ 快速路径、LLM 生成路径、Stub 模式三条分支，以及幻觉阻断/正常输出两条出口）</div>
+</div>
+
+<h3>3.2 RAG 11 步详解</h3>
+
+<div class="flow-diagram">
+    <div class="flow-step">
+        <div class="flow-step-number">1</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">意图分类 <code>classify_intent(query)</code></div>
+            <div class="flow-step-desc">
+                <span class="tag tag-primary">关键词匹配</span> 非LLM分类，基于硬编码关键词匹配区分三种场景：
+                <code>qa</code>（常规问答，权重 doc:0.7/faq:0.2/case:0.1）、
+                <code>faq_match</code>（标准口径，权重 faq:0.6，触发词：口径/怎么办/如何处理/标准）、
+                <code>deviation</code>（案例查询，权重 case:0.6，触发词：案例/历史/发生过/之前）。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">2</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">查询重写 <code>rewrite_query(query, history)</code></div>
+            <div class="flow-step-desc">
+                ① 历史上下文补充：多轮对话中将上一轮用户问题与当前问题拼接；② 缩写展开：GMP→药品生产质量管理规范、GCP→药物临床试验质量管理规范、ICH→人用药品注册技术国际协调会议。最多保留 2 条查询变体，控制检索次数。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">3</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">多版本知识库获取 <code>get_active_versions(db, tenant_id)</code></div>
+            <div class="flow-step-desc">
+                查询所有 <code>status="active"</code> 的 <code>KbVersion</code> 记录，按 <code>activated_at</code> 倒序。每个版本绑定独立的 doc/faq/case 三个 Milvus 集合，支持 GMP 2010 版与 GCP 2023 版等不同法规同时激活。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">4</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">多通道向量检索 <code>search_doc / search_faq / search_case</code></div>
+            <div class="flow-step-desc">
+                对每个查询变体 × 每个版本 × 每个通道分别做 Milvus 向量检索。
+                <strong>doc</strong>: top_k=40（法规条款），<strong>faq</strong>: top_k=10（标准口径），<strong>case</strong>: top_k=40（历史案例）。
+                检索时通过 <code>filter=f"tenant_id == {tenant_id}"</code> 做多租户隔离。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">5</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">去重与预剪枝 <code>_pre_prune_candidates()</code></div>
+            <div class="flow-step-desc">
+                跨 query/版本候选可达 50+ 条。先按 <code>text[:100]</code> 前缀去重，再按通道分组取向量分 top 8（每通道最多 8 条），控制 Rerank 输入规模避免超时。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">6</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">CrossEncoder 重排序 <code>reranker.rerank()</code></div>
+            <div class="flow-step-desc">
+                调用本地 bge-reranker-large 模型对所有候选逐对精排。
+                <span class="highlight">关键设计</span>：<code>top_n=len(doc_texts)</code> 覆盖全部候选（而非 top_n=8），确保所有候选都有 rerank 分。
+                <br><strong>失败回退</strong>：rerank 调用失败时回退到向量余弦分排序，保证管线可用性。按 <code>rerank_score</code> 降序取 top 8。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">7</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">FAQ 快速路径</div>
+            <div class="flow-step-desc">
+                如果 FAQ 候选的 <code>rerank_score &gt; 0.85</code>，直接走 FAQ 标准口径路径，置信度固定 0.95，不再经过 LLM 生成和幻觉检测。<code>mode="faq"</code>。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">8</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">上下文构建 + LLM 生成 <code>build_context() → llm_client.chat()</code></div>
+            <div class="flow-step-desc">
+                将候选文本拼装为 <code>[channel] text</code> 格式上下文，配合 <code>load_prompt("role_qa")</code> 系统提示词送入 LLM。
+                <strong>Prompt 约束</strong>（role_qa.md）：只依据检索上下文作答、每个关键事实必须标注条款号、严禁编造、证据不足回答"未检索到依据"。
+                <br><strong>LLM 参数</strong>：temperature=0.3，同步重试 3 次（指数退避 2-10s），超时 60s。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">9</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">幻觉防护 — 双重校验 <code>hallucination.py</code></div>
+            <div class="flow-step-desc">
+                <strong>① 条款存在性验证</strong> <code>verify_clause_existence()</code>：正则提取答案中的"第X条"，查 MySQL <code>RegClause</code> 表验证条款是否存在，计算 <code>clause_hit_rate</code>。
+                <br><strong>② 声明蕴含校验</strong> <code>verify_claims()</code>：按句切分答案，仅对包含条款号或模态词（必须/应当/不得/禁止/要求/规定）的句子，用 LLM（<code>temperature=0.0</code> 保证确定性）逐句判定"是否有上下文依据"（yes/no）。
+                <br><strong>Stub 模式</strong>：<code>verify_claims_stub()</code> 用逐字匹配替代 LLM 裁判，关键词集多含"建议"。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">10</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">置信度计算与阻断 <code>compute_confidence() / should_block()</code></div>
+            <div class="flow-step-desc">
+                <strong>置信度公式</strong>：<code>score = 0.5 × min(rerank_score, 1.0) + 0.3 × clause_hit_rate + 0.2 × claim_pass_rate</code>
+                <br><strong>阻断规则</strong>：置信度 &lt; 0.6 → 阻断；未验证声明占比 &gt; 30% → 阻断；Stub 模式下 <code>top_rerank &lt; 0.45</code> → 阻断。
+                阻断后返回 <code>mode="needs_human_review"</code>。
+            </div>
+        </div>
+    </div>
+    <div class="flow-step">
+        <div class="flow-step-number">11</div>
+        <div class="flow-step-content">
+            <div class="flow-step-title">引用溯源构建 <code>build_citations()</code></div>
+            <div class="flow-step-desc">
+                根据 <code>entity_id</code> 回查 MySQL，构建 <code>clause_id / clause_no / excerpt / collection</code> 引用信息。doc 通道引用 RegClause 表，faq 通道引用 Faq 表。答案中每个关键事实可溯源到具体法规条款号与版本。
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>3.3 SSE 流式输出</h3>
+<div class="card card-accent">
+    <p><code>rag_answer_stream()</code> 通过 <code>sse-starlette</code> 实现 SSE 流式输出：</p>
+    <pre><code># 事件推送顺序
+yield {"type": "citation", "citations": citations}     # ① 先推送引用信息
+async for delta in llm_client.chat_stream(messages):  # ② 逐 token 流式
+    yield {"type": "delta", "content": delta}
+yield {"type": "done", "confidence": confidence}      # ③ 推送最终置信度
+# 或阻断时
+yield {"type": "flag", "flag": "needs_human_review"}  # ④ 推送阻断标记
+yield {"type": "done", "confidence": conf, "mode": "needs_human_review"}
+# 或异常
+yield {"type": "error", "code": "INTERNAL"}            # ⑤ 推送错误码</code></pre>
+    <p>Stub 模式下模拟流式：将拼接好的答案按 40 字符分块逐段 yield，前端体验与真实流式一致。</p>
+</div>
+
+<h3>3.4 Stub 模式（无 GPU 环境）</h3>
+<div class="callout callout-warning">
+    <strong>设计目的：</strong>在无 GPU / 无本地大模型的环境中，保证 RAG 管线可联调、CI/CD 可执行、评估有基线。
+    <br><strong>实现方式</strong>：<code>stub_llm.py</code> 不调用任何 LLM，直接将检索到的条款原文按固定结构拼接为答案，保证 100% 可溯源。幻觉防护的校验路径（条款存在性、声明判定、置信度、阻断）真实执行。
+    <br><strong>证据门控</strong>：<code>RERANK_MIN_EVIDENCE=0.45</code>，当 <code>top_rerank &lt; 0.45</code> 时标记 <code>needs_human_review</code>。
+    <br><strong>假流式</strong>：按 40 字符分块 yield，前端体验同真实流式。
+</div>
+
+<h3>3.5 文档摄入流程</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">法规文档摄入与向量化流程</div>
+    <div class="arch-fig-sub">上传 → 结构解析 → 语义分块 → 向量化 → 双写 Milvus + MySQL</div>
+    <div class="fc-flow">
+        <div class="fc-layer">
+            <div class="fc-flow-h">
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body">法规文档上传<small>PDF / DOCX / TXT</small></div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">结构解析<small>parser.py</small></div>
+                    <div class="fc-detail">正则: 第X章 / 第X条<br>中文数字→整数<br>提取 clause_no</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">语义分块<small>chunker.py</small></div>
+                    <div class="fc-detail">MAX_CHUNK_TOKENS=512<br>≈768 中文字符<br>按 。；！？\n 切句</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h rag">
+                    <div class="fc-step-h-body">向量化<small>embedder / :8081</small></div>
+                    <div class="fc-detail">bge-m3 · 1024 维<br>SentenceTransformer<br>POST /embed</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="background:#f8fafc;border-color:#cbd5e1;">双写存储</div>
+                    <div class="fc-detail">MySQL: RegClause<br>Milvus: doc_collection<br>含 entity_id + tenant_id</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：法规文档从上传到可检索的完整摄入管线（Parser → Chunker → Embedder → Milvus + MySQL 双写）</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 四、多 Agent 编排 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec4" class="section-anchor">四、多 Agent 编排详解</h2>
+
+<div class="callout callout-info">
+    <strong>核心文件：</strong>
+    <code>backend/app/agents/supervisor.py</code>（Supervisor + 角色矩阵 + 注册表）、
+    <code>base.py</code>（抽象基类）、
+    <code>qa_agent.py / deviation_agent.py / compliance_agent.py</code> 等 10 个 Agent 实现
+</div>
+
+<h3>4.1 Agent 编排流程图</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">Agent 编排完整流程图（从请求到执行到返回）</div>
+    <div class="arch-fig-sub">JWT 鉴权 → 角色提取 → 可见 Agent 计算 → 路由决策 → 权限校验 → Agent 执行 → 建议返回</div>
+    <div class="fc-flow">
+
+        <!-- 请求入口 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#dc2626;">入口：HTTP 请求</div>
+            <div class="fc-nodes">
+                <div class="fc-node sec">POST /qa/ask-stream<small>query + history + JWT</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- JWT 鉴权 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#dc2626;">Step 1: JWT 鉴权</div>
+            <div class="fc-nodes">
+                <div class="fc-node sec">verify_jwt(token)<small>python-jose HS256 · 提取 user_id</small></div>
+                <div class="fc-node sec">获取用户角色<small>roles = user.roles → ["qa","admin"]</small></div>
+                <div class="fc-node sec">获取 tenant_id<small>多租户隔离标识</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- Supervisor 编排 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#1e3a8a;">Step 2: Supervisor 编排</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="background:#eff6ff;border-color:#bfdbfe;">get_visible_agents(roles)</div>
+                    <div class="fc-detail">查 ROLE_AGENT_MATRIX<br>角色 → 可见 Agent 集合<br>admin → "*" (全部)</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="background:#eff6ff;border-color:#bfdbfe;">route_query(query, visible)</div>
+                    <div class="fc-detail">优先返回 "qa"<br>否则取 visible 第一个<br>SCENARIO_TO_AGENT 预留扩展</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="background:#eff6ff;border-color:#bfdbfe;">权限校验</div>
+                    <div class="fc-detail">agent_key in visible<br>or "*" in visible<br>否则 ForbiddenError</div>
+                </div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- Agent 执行 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#059669;">Step 3: Agent 执行（AGENT_REGISTRY 路由）</div>
+            <div class="fc-nodes">
+                <div class="fc-node agent">QAAgent<small>→ rag_answer() 完整 RAG 管线</small></div>
+                <div class="fc-node agent">DeviationAgent<small>→ classify + case + 调查草案</small></div>
+                <div class="fc-node agent">ChangeAgent<small>→ 类型匹配 + 影响评估</small></div>
+                <div class="fc-node agent">SaeAgent<small>→ 严重性 + 时限 + 草稿</small></div>
+                <div class="fc-node agent">ComplianceAgent<small>→ 跨域聚合报告</small></div>
+                <div class="fc-node agent">ExplainAgent<small>→ LLM 逐条讲解</small></div>
+                <div class="fc-node agent">PathAgent<small>→ 合规路径模板</small></div>
+                <div class="fc-node agent">AuditAgent<small>→ 检查表 + 缺口</small></div>
+                <div class="fc-node agent">KbOpsAgent<small>→ 版本差异 + FAQ候选</small></div>
+                <div class="fc-node agent">TrainingAgent<small>→ 组卷 + 批改 + 认证</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- 返回 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#059669;">Step 4: 返回建议（不写库）</div>
+            <div class="fc-nodes">
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:180px;">agent + output<small>mode: advise / retrieval / draft</small></div>
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:180px;">writes_disabled: True<small>提示人工走 API 写库</small></div>
+                <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;min-width:180px;">persist_hint<small>"分级确认请调用 classify 接口"</small></div>
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：Agent 编排全链路（鉴权 → 角色矩阵 → 路由 → 执行 → 建议返回；Agent 层始终不写库，写操作交给服务层 + 人工）</div>
+</div>
+
+<h3>4.2 角色-Agent 映射矩阵</h3>
+<table>
+    <tr><th>角色</th><th>可见 Agent</th><th>业务场景</th></tr>
+    <tr><td>operator (操作员)</td><td>qa, explain</td><td>日常合规查询与条款理解</td></tr>
+    <tr><td>qc (质检员)</td><td>qa, explain</td><td>质量标准查询</td></tr>
+    <tr><td>engineer (工程师)</td><td>qa, explain</td><td>技术规范查询</td></tr>
+    <tr><td>qa (质量保证)</td><td>qa, deviation, change, path, compliance_analysis</td><td>偏差/变更/合规全流程</td></tr>
+    <tr><td>investigator (研究者)</td><td>qa, sae, explain</td><td>临床试验 SAE 上报</td></tr>
+    <tr><td>crc (临床协调员)</td><td>qa, sae, explain</td><td>SAE 辅助上报</td></tr>
+    <tr><td>cra (临床监查员)</td><td>qa, audit, sae</td><td>审计检查 + SAE</td></tr>
+    <tr><td>pv (药物警戒)</td><td>qa, sae</td><td>SAE 复核与上报</td></tr>
+    <tr><td>trainer (培训师)</td><td>training, compliance_analysis</td><td>培训考核管理</td></tr>
+    <tr><td>compliance (合规专员)</td><td>qa, audit, kb_ops, compliance_analysis</td><td>法规库运维 + 审计</td></tr>
+    <tr><td>admin (管理员)</td><td><code>*</code> (全部 10 个)</td><td>全权限</td></tr>
+</table>
+
+<h3>4.3 路由逻辑</h3>
+<pre><code>async def route_query(query: str, visible_agents: set[str]) -> str:
+    # 优先路由到 QAAgent（RAG 管线能力最强）
+    if "qa" in visible_agents:
+        return "qa"
+    # 否则返回第一个可用 Agent
+    if visible_agents:
+        return next(iter(visible_agents))
+    raise ForbiddenError(message="无可装配Agent")</code></pre>
+<div class="callout callout-info">
+    <strong>路由策略说明：</strong>当前采用"QA 优先"策略——如果用户角色可见 Agent 列表中有 <code>qa</code>，优先路由到 QAAgent（完整 RAG 管线，能力最强）。<code>SCENARIO_TO_AGENT</code> 映射表为未来基于意图的精细路由预留了扩展点。路由是规则驱动，非 LLM 路由。
+</div>
+
+<h3>4.4 十个专家 Agent 详解</h3>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">1. QAAgent（规范答疑）</div>
+    <div class="knowledge-body">
+        <p><span class="badge tag-primary">RAG 管线</span> <span class="badge tag-secondary">引用溯源</span> <span class="badge tag-accent">唯一调 LLM</span></p>
+        <p><strong>职责</strong>：调用 <code>rag_answer()</code> / <code>rag_answer_stream()</code> 执行完整 RAG 链路，返回答案 + 置信度 + 引用 + 未验证声明。</p>
+        <p><strong>工具</strong>：<code>["rag_answer"]</code> — 封装了意图分类→检索→重排→LLM 生成→幻觉检测的完整管线。</p>
+        <p><strong>特点</strong>：唯一调用 LLM 生成答案的 Agent；支持流式 SSE 输出；支持 Stub 模式。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">2. DeviationAgent（偏差处理）</div>
+    <div class="knowledge-body">
+        <p><span class="badge tag-warning">规则引擎</span> <span class="badge tag-danger">不写库</span></p>
+        <p><strong>职责</strong>：① 分级建议（critical/major/minor）；② 案例检索（历史同类偏差）；③ 调查计划草案（人机料法环 + 5-Why/鱼骨图）。</p>
+        <p><strong>分级逻辑</strong>：关键词匹配——"产品放行/召回/无菌/污染/数据完整性"→critical；"关键工艺/OOS/违反SOP"→major；其他→minor。</p>
+        <p><strong>设计约束</strong>：<span class="highlight">Agent 层严禁写库</span>。分级确认、调查计划落库由偏差 API 与人工完成。<code>writes_disabled=True</code>。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">3. ChangeAgent（变更评估）</div>
+    <div class="knowledge-body">
+        <p><span class="badge tag-warning">规则引擎</span> <span class="badge tag-danger">不写库</span></p>
+        <p><strong>职责</strong>：变更类型匹配 → 影响等级评估 → 法规依据检索。输出"影响评估初稿"。</p>
+        <p><strong>设计约束</strong>：只输出评估初稿，正式评估与四眼审批（<code>initiator_id ≠ approver_id</code>）由变更 API 与人工完成。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">4. SaeAgent（SAE 上报）</div>
+    <div class="knowledge-body">
+        <p><span class="badge tag-danger">药物警戒</span> <span class="badge tag-danger">不写库</span></p>
+        <p><strong>职责</strong>：SAE 严重性评估 → 上报时限计算（紧急 7 天 / 非紧急 15 天） → 报告草稿生成。</p>
+        <p><strong>设计约束</strong>：只做初判与草稿。PV 复核、电子签名、提交必须由人工走 SAE API 完成。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">5. ComplianceAgent（合规分析）</div>
+    <div class="knowledge-body">
+        <p><span class="badge tag-accent">只读聚合</span> <span class="badge tag-danger">不写库</span></p>
+        <p><strong>职责</strong>：跨域聚合培训认证 + 质量（偏差/变更/CAPA） + 药物警戒（SAE） + 审计数据，输出合规聚合报告。</p>
+        <p><strong>工具</strong>：<code>["aggregate_training", "aggregate_quality", "report"]</code></p>
+        <p><strong>关注点</strong>：认证到期预警、未关闭 critical 偏差、未关闭 CAPA、紧急时限 SAE、审计证据缺口。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">6-10. 其他 Agent</div>
+    <div class="knowledge-body">
+        <table>
+            <tr><th>Agent</th><th>职责</th><th>特点</th></tr>
+            <tr><td>ExplainAgent</td><td>条款讲解</td><td>LLM 逐条解读法规条款含义</td></tr>
+            <tr><td>PathAgent</td><td>路径规划</td><td>合规路径指引（模板/LLM）</td></tr>
+            <tr><td>AuditAgent</td><td>审计准备</td><td>检查表草稿 + 证据缺口识别</td></tr>
+            <tr><td>KbOpsAgent</td><td>法规库运维</td><td>版本差异扫描 + FAQ 候选生成</td></tr>
+            <tr><td>TrainingAgent</td><td>培训考核</td><td>组卷快照 + 批改建议 + 认证建议</td></tr>
+        </table>
+    </div>
+</div>
+
+<h3>4.5 Agent 设计约束：不写库原则</h3>
+<div class="callout callout-danger">
+    <strong>核心设计约束</strong>：所有 Agent 的 <code>run()</code> 方法只输出建议/草稿/分析报告，<strong>严禁直接写数据库</strong>。写操作全部由服务层 API + 人工完成。
+    <br><br>
+    <strong>设计理由</strong>：
+    <ul>
+        <li><strong>合规要求</strong>：制药行业关键操作（偏差分级、变更审批、SAE 上报）需要人工复核与电子签名</li>
+        <li><strong>可审计性</strong>：所有状态变更必须经过 API 层，留下哈希链审计日志</li>
+        <li><strong>安全隔离</strong>：AI 只做辅助建议，不直接改变业务状态，避免误操作</li>
+        <li><strong>测试友好</strong>：Agent 不依赖写操作，可在无数据库环境下用 context 传入数据做单元测试</li>
+    </ul>
+</div>
+
+<h3>4.6 服务层状态机 — 偏差管理流程图</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">偏差管理状态机流程图（quality_service.py）</div>
+    <div class="arch-fig-sub">6 态流转 · critical 自动批次挂起 · 关闭前置三重检查 · 可回退到 reported</div>
+    <div class="fc-flow">
+        <div class="fc-sm-flow" style="gap:4px;">
+            <div class="fc-state fc-state-initial">reported<small>上报</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">classify_deviation()</div>
+            </div>
+            <div class="fc-state">classified<small>分级</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">start_investigation()</div>
+            </div>
+            <div class="fc-state">investigating<small>调查中</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">qa_review()</div>
+            </div>
+            <div class="fc-state">qa_review<small>QA审核</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">link_capa()</div>
+            </div>
+            <div class="fc-state">capa_linked<small>关联CAPA</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">close_deviation()</div>
+            </div>
+            <div class="fc-state fc-state-final">closed<small>关闭(终态)</small></div>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--danger);">critical 自动挂起</strong><br>
+                分级为 critical 时自动创建 BatchHold（批次挂起）<br>
+                关闭偏差前必须解除所有 held 状态的挂起
+            </div>
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--warning);">关闭三重前置检查</strong><br>
+                ① 必须关联 CAPA<br>
+                ② CAPA 状态必须为 verified<br>
+                ③ 无 held 状态的 BatchHold
+            </div>
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--primary);">回退路径</strong><br>
+                每个状态可回退到 reported<br>
+                closed 为终态，转换集合为空 set()<br>
+                编号格式: DEV-{year}-{seq:04d}
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：偏差管理状态机（6 态 + guard 条件 + 回退路径 + 自动 BatchHold + CAPA 前置检查）</div>
+</div>
+
+<h3>4.7 服务层状态机 — 变更管理与四眼原则</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">变更管理状态机流程图（quality_service.py）</div>
+    <div class="arch-fig-sub">5 态流转 · 无回退 · 四眼原则 · CAPA 编号格式</div>
+    <div class="fc-flow">
+        <div class="fc-sm-flow" style="gap:4px;">
+            <div class="fc-state fc-state-initial">submitted<small>提交</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">assess_change()</div>
+            </div>
+            <div class="fc-state">assessed<small>评估</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">approve_change()<br>⚠️ 四眼原则</div>
+            </div>
+            <div class="fc-state">approved<small>批准</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">implement()</div>
+            </div>
+            <div class="fc-state">implemented<small>实施</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">verify()</div>
+            </div>
+            <div class="fc-state">verified<small>验证</small></div>
+            <div class="fc-sm-arrow">
+                <span>→</span>
+                <div class="fc-sm-label">close()</div>
+            </div>
+            <div class="fc-state fc-state-final">closed<small>关闭(终态)</small></div>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--danger);">四眼原则 (Four-Eye Principle)</strong><br>
+                approve_change() 中校验:<br>
+                <code>if initiator_id == approver_id:<br>&nbsp;&nbsp;raise FourEyeError</code><br>
+                变更发起人不能同时是审批人
+            </div>
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--warning);">无回退设计</strong><br>
+                变更状态机不允许回退<br>
+                每一步只能前进到下一态<br>
+                与偏差状态机设计理念不同
+            </div>
+            <div class="fc-detail" style="max-width:260px;">
+                <strong style="color:var(--primary);">编号格式</strong><br>
+                CHG-{year}-{seq:04d}<br>
+                CAPA-{year}-{seq:04d}<br>
+                自动生成 · 全局唯一
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：变更管理状态机（5 态 + 无回退 + 四眼原则 + 自动编号）</div>
+</div>
+
+<h3>4.8 SAE 上报状态机</h3>
+<table>
+    <tr><th>业务域</th><th>状态流转</th><th>服务文件</th></tr>
+    <tr>
+        <td>SAE 上报</td>
+        <td><code>recorded → pv_reviewed → draft → signed → submitted → archived</code></td>
+        <td>sae_service.py</td>
+    </tr>
+</table>
+
+<h3>4.9 幻觉防护校验流程图</h3>
+<div class="arch-fig">
+    <div class="arch-fig-title">幻觉防护双重校验流程图（hallucination.py）</div>
+    <div class="arch-fig-sub">草稿答案 → 条款存在性验证 → 声明蕴含校验 → 置信度计算 → 阻断门控</div>
+    <div class="fc-flow">
+        <!-- 输入 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#db2777;">输入：LLM 草稿答案 + 检索上下文</div>
+            <div class="fc-nodes">
+                <div class="fc-node svc">draft_answer<small>LLM 生成 / stub 拼接</small></div>
+                <div class="fc-node svc">context_text<small>检索 top 8 候选文本</small></div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- 第一重 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#db2777;">第一重：条款存在性验证</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">正则提取条款号<small>第X条</small></div>
+                    <div class="fc-detail">CLAUSE_PATTERN = re.compile(<br>"第[一二三四...\\d]+条")</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">查 MySQL RegClause<small>验证条款是否存在</small></div>
+                    <div class="fc-detail">select(RegClause)<br>.where(clause_no.contains(...))<br>miss → clause_hit_rate 降低</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">输出 clause_hit_rate<small>命中率</small></div>
+                    <div class="fc-detail">= 命中条款数 / 引用条款数<br>编造条款号 → rate 暴跌</div>
+                </div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- 第二重 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#db2777;">第二重：声明蕴含校验</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">按句切分<small>split_sentences()</small></div>
+                    <div class="fc-detail">中文标点。；！？\n</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">模态词过滤<small>仅校验关键句</small></div>
+                    <div class="fc-detail">必须/应当/不得/禁止<br>要求/规定 (+建议 in stub)<br>含条款号的句子也校验</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">LLM 逐句裁判<small>temperature=0.0</small></div>
+                    <div class="fc-detail">"声明是否有上下文依据？"<br>只回答 yes/no<br>temp=0 保证确定性</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h chk">
+                    <div class="fc-step-h-body">输出 claim_pass_rate<small>声明通过率</small></div>
+                    <div class="fc-detail">= yes 数 / 校验句数<br>stub: 逐字匹配替代 LLM</div>
+                </div>
+            </div>
+        </div>
+        <div class="fc-arrow"><span>▼</span></div>
+
+        <!-- 置信度 + 门控 -->
+        <div class="fc-layer">
+            <div class="fc-layer-tag" style="background:#d97706;">置信度计算与阻断门控</div>
+            <div class="fc-flow-h">
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="background:#fef3c7;border-color:#d97706;color:#d97706;">compute_confidence()</div>
+                    <div class="fc-detail">0.5×min(rerank,1.0)<br>+0.3×clause_hit_rate<br>+0.2×claim_pass_rate</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-step-h">
+                    <div class="fc-step-h-body" style="border-color:#dc2626;color:#dc2626;">should_block()</div>
+                    <div class="fc-detail">conf &lt; 0.6 → 阻断<br>unverified &gt; 30% → 阻断<br>stub rerank &lt; 0.45 → 阻断</div>
+                </div>
+                <div class="fc-arrow-h">→</div>
+                <div class="fc-branch" style="gap:8px;">
+                    <div class="fc-branch-path">
+                        <div class="fc-node danger" style="font-size:11px;min-width:80px;padding:4px 8px;">阻断<small>needs_human_review</small></div>
+                    </div>
+                    <div class="fc-branch-path">
+                        <div class="fc-node" style="background:#ecfdf5;border-color:#a7f3d0;font-size:11px;min-width:80px;padding:4px 8px;">通过<small>retrieval</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="arch-caption">图：幻觉防护双重校验完整管线（条款存在性 → 声明蕴含 → 置信度加权 → 阻断门控）</div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ============ 五、知识点详解 ============ -->
+<!-- ================================================================ -->
+<h2 id="sec5" class="section-anchor">五、知识点详细讲解</h2>
+
+<!-- ===== RAG 知识点 ===== -->
+<h3>5.1 RAG 检索链路知识点</h3>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 1：向量数据库 — Milvus</div>
+    <div class="knowledge-body">
+        <h4>基本概念</h4>
+        <p>Milvus 是开源的向量数据库，专门用于存储、索引和检索高维向量数据。给定一个查询向量，快速找到与之最相似的 N 个向量。</p>
+        <h4>在本项目中的应用</h4>
+        <pre><code># Milvus 集合 Schema
+schema.add_field("id", DataType.INT64, is_primary=True)        # 主键
+schema.add_field("vector", DataType.FLOAT_VECTOR, dim=1024)     # 1024维向量
+schema.add_field("entity_id", DataType.INT64)                   # 关联MySQL条款ID
+schema.add_field("text", DataType.VARCHAR, max_length=4096)     # 原文
+schema.add_field("doc_version", DataType.VARCHAR, max_length=64) # 版本标识
+schema.add_field("tenant_id", DataType.INT64)                  # 多租户隔离
+
+# 索引：AUTOINDEX + COSINE 度量
+idx_params.add_index(field_name="vector", index_type="AUTOINDEX", metric_type="COSINE")</code></pre>
+        <h4>关键设计点</h4>
+        <ul>
+            <li><strong>AUTOINDEX</strong>：Milvus 自动选择最优索引类型（HNSW/IVF 等），无需手动调参</li>
+            <li><strong>COSINE 余弦相似度</strong>：适合语义相似度计算，对向量长度不敏感</li>
+            <li><strong>多租户过滤</strong>：<code>filter=f"tenant_id == {tenant_id}"</code>，检索时按租户隔离</li>
+            <li><strong>异步加载</strong>：<code>ensure_loaded()</code> 轮询 0.5s 间隔等待加载完成，超时 30s</li>
+            <li><strong>etcd + MinIO</strong>：元数据存 etcd，向量数据存 MinIO（S3 兼容）</li>
+        </ul>
+        <h4>面试要点</h4>
+        <div class="callout callout-info">
+            <p><strong>Q: 为什么选 Milvus 而不是 FAISS/Chroma/Pinecone？</strong></p>
+            <p>A: ① Milvus 支持十亿级向量，可水平扩展；② 原生支持多租户过滤（filter 表达式）；③ AUTOINDEX 自动优化；④ Docker 部署简单；⑤ 开源可本地部署，满足制药行业数据不出内网要求。</p>
+        </div>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 2：Embedding 模型 — BGE-M3</div>
+    <div class="knowledge-body">
+        <h4>基本概念</h4>
+        <p><strong>BGE-M3</strong> 是智源研究院（BAAI）开源的多语言、多粒度 Embedding 模型。"M3" = Multi-Linguality + Multi-Granularity + Multi-Functionality。</p>
+        <ul>
+            <li><strong>维度</strong>：1024 维</li>
+            <li><strong>语言</strong>：支持 100+ 语言，中英文表现优异</li>
+            <li><strong>功能</strong>：稠密检索（Dense）、稀疏检索（Sparse）、多向量检索（ColBERT）三合一</li>
+        </ul>
+        <h4>在本项目中的应用</h4>
+        <pre><code># 通过本地模型服务调用（:8081 /embed 端点）
+class Embedder:
+    async def embed(self, texts: list[str]) -> list[list[float]]:
+        resp = await client.post(f"{self.base_url}/embed",
+            json={"input": texts, "model": "bge-m3"})
+        return [item["embedding"] for item in data["data"]]
+
+# 本地推理服务（deploy/models_server.py）
+from sentence_transformers import SentenceTransformer
+model = SentenceTransformer("models/bge-m3")</code></pre>
+        <h4>面试要点</h4>
+        <div class="callout callout-info">
+            <p><strong>Q: Embedding 模型选型考虑什么？</strong></p>
+            <p>A: ① <strong>语言支持</strong>：法规文本是中文，需要中文表现好的模型；② <strong>维度</strong>：1024 维在精度和性能间平衡；③ <strong>部署方式</strong>：本地部署满足数据不出内网；④ <strong>MTEB 排行榜</strong>：bge-m3 中文检索任务排名前列。</p>
+        </div>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 3：文档分块策略 — 基于条款的语义分块</div>
+    <div class="knowledge-body">
+        <h4>在本项目中的实现</h4>
+        <p>本项目采用<strong>基于法规结构的语义分块</strong>，而非固定长度分块：</p>
+        <pre><code># Step 1: Parser 解析法规结构（章/条）
+CLAUSE_PATTERN = re.compile(r"第([一二三四五六七八九十百零]+|\d+)条")
+SECTION_PATTERN = re.compile(r"第([一二三四五六七八九十百零]+|\d+)章")
+# → 提取出"第三十五条"等条款，中文数字转整数
+
+# Step 2: Chunker 按条款内句子边界分块
+MAX_CHUNK_TOKENS = 512
+APPROX_CHARS_PER_TOKEN = 1.5  # 中文约 1.5 字符/token
+max_chars = int(512 * 1.5)     # = 768 字符
+
+# 按中文标点切句，保证句子完整性
+sentences = re.split(r"(?<=[。；！？\n])", content)</code></pre>
+        <h4>设计理由</h4>
+        <ul>
+            <li><strong>法规天然有结构</strong>：中国法规以"第X章→第X条"组织，按条款分块天然语义完整</li>
+            <li><strong>引用溯源需要</strong>：每个 chunk 绑定 <code>clause_id</code>，答案可溯源到具体条款号</li>
+            <li><strong>512 token 上限</strong>：控制 Embedding 输入长度，保证向量质量</li>
+            <li><strong>句子边界切分</strong>：不会把一句话切两半，保证语义完整</li>
+        </ul>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 4：意图分类与查询重写</div>
+    <div class="knowledge-body">
+        <h4>意图分类</h4>
+        <p><span class="tag tag-primary">关键词匹配</span> 非LLM分类，基于硬编码关键词：</p>
+        <table>
+            <tr><th>场景</th><th>触发关键词</th><th>通道权重</th><th>策略</th></tr>
+            <tr><td>qa（常规）</td><td>—</td><td>doc:0.7, faq:0.2, case:0.1</td><td>优先检索法规条款</td></tr>
+            <tr><td>faq_match</td><td>口径/怎么办/如何处理/标准</td><td>doc:0.3, faq:0.6, case:0.1</td><td>优先标准口径</td></tr>
+            <tr><td>deviation</td><td>案例/历史/发生过/之前</td><td>doc:0.3, faq:0.1, case:0.6</td><td>优先历史案例</td></tr>
+        </table>
+        <h4>查询重写</h4>
+        <ul>
+            <li><strong>历史上下文补充</strong>：多轮对话中将上一轮用户问题与当前问题拼接</li>
+            <li><strong>缩写扩展</strong>：GMP→药品生产质量管理规范，GCP→药物临床试验质量管理规范，ICH→人用药品注册技术国际协调会议</li>
+            <li><strong>最多 2 个变体</strong>：控制检索次数，避免延迟</li>
+        </ul>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 5：CrossEncoder 重排序</div>
+    <div class="knowledge-body">
+        <h4>两阶段检索架构</h4>
+        <div class="arch-box">用户问题
+  │
+  ▼
+┌──────────────────────────────────┐
+│ 第一阶段：向量检索（双塔模型）   │  ← bge-m3 Embedding + Milvus
+│ 快速召回 top_k=40 候选            │  速度快，精度较低
+└──────────────┬───────────────────┘
+               │ 预剪枝 top 8×3=24
+               ▼
+┌──────────────────────────────────┐
+│ 第二阶段：CrossEncoder 精排      │  ← bge-reranker-large
+│ 对全部候选逐对打分，取 top 8     │  速度慢，精度高
+└──────────────┬───────────────────┘
+               │
+               ▼
+          送入 LLM 生成</div>
+        <h4>关键设计</h4>
+        <pre><code># top_n 覆盖全部候选（非 top_n=8）
+rerank_results = await reranker.rerank(query, doc_texts, top_n=len(doc_texts))
+# → 所有候选都有 rerank_score，避免未重排候选绕过门控
+# 失败回退：rerank 调用异常时回退到向量余弦分排序</code></pre>
+        <div class="callout callout-warning">
+            <strong>为什么 top_n=len(doc_texts)？</strong> 如果只取 top_n=8，其余候选没有 rerank 分，排序时回退到向量余弦分，低质量候选可能混入 top 8，绕过证据门控。全量 rerank 只增加返回序号开销，打分计算量不变。
+        </div>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 6：幻觉检测与防护机制</div>
+    <div class="knowledge-body">
+        <h4>第一重：条款存在性验证</h4>
+        <pre><code>CLAUSE_PATTERN = re.compile(r"第[一二三四五六七八九十百零\d]+条")
+clauses_found = CLAUSE_PATTERN.findall(draft_answer)
+for clause_no in clauses_found:
+    result = await db.execute(
+        select(RegClause).where(RegClause.clause_no.contains(clause_no))
+    )
+    # 条款不存在 → miss → clause_hit_rate 降低</code></pre>
+        <h4>第二重：声明蕴含校验</h4>
+        <pre><code>sentences = split_sentences(draft_answer)
+for sentence in sentences:
+    if CLAUSE_PATTERN.search(sentence) or any(
+        kw in sentence for kw in ["必须", "应当", "不得", "禁止", "要求", "规定"]
+    ):
+        verdict = await llm_client.chat([
+            {"role": "system", "content": "你是合规校验助手。判断声明是否被上下文支持，只回答 yes 或 no。"},
+            {"role": "user", "content": f"声明：{sentence}\n\n上下文：{context_text}\n\n该声明是否有上下文依据？"},
+        ], temperature=0.0)  # ← 保证确定性</code></pre>
+        <h4>置信度公式</h4>
+        <pre><code>score = 0.5 × min(rerank_score, 1.0)      # 检索相关度（最强信号）
+      + 0.3 × clause_hit_rate                # 条款引用准确率
+      + 0.2 × claim_pass_rate               # 声明通过率</code></pre>
+        <p><strong>权重设计理由</strong>：rerank_score 最强（0.5），直接反映检索内容匹配度；clause_hit_rate 次之（0.3），编造条款号是最危险幻觉；claim_pass_rate 最低（0.2），LLM 裁判本身有误差。</p>
+        <p><strong>Stub 模式</strong>：<code>verify_claims_stub()</code> 用逐字匹配替代 LLM 裁判，关键词集多含"建议"。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 7：置信度门控与阻断策略</div>
+    <div class="knowledge-body">
+        <table>
+            <tr><th>条件</th><th>阈值</th><th>结果</th></tr>
+            <tr><td>置信度 &lt; 0.6</td><td>confidence &lt; 0.6</td><td>阻断 → needs_human_review</td></tr>
+            <tr><td>未验证声明占比 &gt; 30%</td><td>unverified_ratio &gt; 0.3</td><td>阻断 → needs_human_review</td></tr>
+            <tr><td>Stub 模式证据不足</td><td>top_rerank &lt; 0.45</td><td>阻断 → needs_human_review</td></tr>
+        </table>
+        <div class="callout callout-danger">
+            <strong>设计理念</strong>：在制药合规场景中，<strong>"不知道"比"给错答案"更安全</strong>。置信度不足时宁可标记为需人工审核，也不展示可能误导的答案。
+        </div>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 8：Prompt 版本化管理</div>
+    <div class="knowledge-body">
+        <p>提示词文件化存放于 <code>docs/prompts/*.md</code>，<code>prompts.py</code> 的 <code>load_prompt()</code> 优先从文件读取，缺失时回退到内嵌模板并告警。</p>
+        <table>
+            <tr><th>模板</th><th>用途</th><th>文件</th></tr>
+            <tr><td>role_qa</td><td>规范答疑系统提示词</td><td>role_qa.md</td></tr>
+            <tr><td>role_faq</td><td>FAQ 标准口径提示词</td><td>role_faq.md</td></tr>
+            <tr><td>role_explain</td><td>条款讲解提示词</td><td>role_explain.md</td></tr>
+            <tr><td>claim_verifier</td><td>声明校验裁判提示词</td><td>claim_verifier.md</td></tr>
+        </table>
+        <h4>核心 Prompt 规则（role_qa.md）</h4>
+        <div class="callout callout-info">
+            1. 只依据"检索上下文"中的内容作答<br>
+            2. 每个关键事实主张必须标注对应条款号<br>
+            3. 严禁编造条款号或条款原文<br>
+            4. 检索上下文不足时回答"未检索到依据"
+        </div>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 9：SSE 流式输出</div>
+    <div class="knowledge-body">
+        <p>后端通过 <code>sse-starlette</code> 推送事件流，前端通过 <code>EventSource</code> 接收。相比 WebSocket，SSE 是单向推送（服务器→客户端），更适合 LLM 流式输出。</p>
+        <pre><code>yield {"type": "citation", "citations": citations}  # 先推送引用
+async for delta in llm_client.chat_stream(messages):
+    yield {"type": "delta", "content": delta}        # 逐 token
+yield {"type": "done", "confidence": confidence}    # 最终置信度
+# 或阻断
+yield {"type": "flag", "flag": "needs_human_review", ...}</code></pre>
+        <p>断线续传通过 <code>Last-Event-Id</code> 实现幂等重放。Stub 模式按 40 字符分块模拟流式。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 10：多版本知识库管理</div>
+    <div class="knowledge-body">
+        <p>法规会更新版本，系统支持多版本并行激活。每个 <code>KbVersion</code> 绑定独立的 doc/faq/case 三个 Milvus 集合。</p>
+        <pre><code>class KbVersion:
+    id: int
+    regulation: str          # "GMP" / "GCP"
+    version_label: str       # "2010版" / "2023版"
+    status: str              # "active" / "inactive"
+    doc_collection: str      # Milvus 集合名 "doc_gmp_2010"
+    faq_collection: str      # "faq_gmp_2010"
+    case_collection: str     # "case_gmp_2010"
+    activated_at: datetime</code></pre>
+        <p><code>retrieve()</code> 获取所有激活版本，对每个版本的每个通道分别检索，然后去重合并、统一 Rerank。支持新旧版本过渡期同时检索。</p>
+    </div>
+</div>
+
+<!-- ===== Agent 知识点 ===== -->
+<h3>5.2 多 Agent 编排知识点</h3>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 11：Supervisor 路由模式</div>
+    <div class="knowledge-body">
+        <h4>本项目实现</h4>
+        <pre><code>class Supervisor:
+    def __init__(self):
+        self.agents = AGENT_REGISTRY  # 10 个 Agent 实例
+
+    async def execute(self, query, roles, db, context, tenant_id):
+        visible = await get_visible_agents(roles)  # 角色矩阵
+        agent_key = await route_query(query, visible)  # 路由
+        if agent_key not in visible and "*" not in visible:
+            raise ForbiddenError(...)
+        agent = self.agents.get(agent_key)
+        result = await agent.run(query, context, db, tenant_id)
+        return result</code></pre>
+        <h4>与其他模式对比</h4>
+        <table>
+            <tr><th>模式</th><th>代表框架</th><th>特点</th><th>本项目</th></tr>
+            <tr><td>Supervisor 路由</td><td>自研</td><td>中心化路由，简单可控</td><td><span class="tag tag-secondary">采用</span></td></tr>
+            <tr><td>图状态机</td><td>LangGraph</td><td>显式状态流转，条件分支</td><td>服务层状态机</td></tr>
+            <tr><td>对话式协作</td><td>AutoGen</td><td>Agent 间对话协商</td><td>未采用</td></tr>
+            <tr><td>角色扮演</td><td>CrewAI</td><td>角色分工 + 任务委派</td><td>部分借鉴</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 12：BaseAgent 抽象基类</div>
+    <div class="knowledge-body">
+        <pre><code>class BaseAgent(ABC):
+    name: str = "base"
+    description: str = ""
+    tools: list[str] = []
+
+    @abstractmethod
+    async def run(self, query: str, context: dict | None = None) -> dict[str, Any]:
+        ...</code></pre>
+        <ul>
+            <li><strong>统一 <code>run()</code> 签名</strong>：所有 Agent 遵循相同接口</li>
+            <li><strong><code>tools</code> 是描述性字符串列表</strong>：Agent 内部直接实现工具逻辑</li>
+            <li><strong>统一返回格式</strong>：<code>{"agent": self.name, "output": {...}}</code></li>
+            <li><strong>context 字典传参</strong>：灵活携带 history、channels、deviation 等上下文</li>
+        </ul>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 13：角色矩阵与权限控制</div>
+    <div class="knowledge-body">
+        <pre><code>ROLE_AGENT_MATRIX = {
+    "operator": ["qa", "explain"],
+    "qa": ["qa", "deviation", "change", "path", "compliance_analysis"],
+    "investigator": ["qa", "sae", "explain"],
+    "pv": ["qa", "sae"],
+    "admin": ["*"],                          # 管理员：全部
+}</code></pre>
+        <p>Supervisor 路由后校验 <code>agent_key not in visible and "*" not in visible</code>，不满足抛 <code>ForbiddenError</code>。10 角色 × 10 Agent 的矩阵实现制药行业严格的角色分工。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 14：Agent 不写库设计约束</div>
+    <div class="knowledge-body">
+        <pre><code># DeviationAgent 输出
+return {
+    "agent": "偏差处理",
+    "output": {
+        "mode": "advise",                    # ← 只给建议
+        "severity_suggestion": {...},
+        "investigation_plan_draft": {...},
+        "writes_disabled": True,              # ← 明确标记不写库
+        "persist_hint": "分级确认请调用 classify 接口",
+    },
+}</code></pre>
+        <table>
+            <tr><th>维度</th><th>理由</th></tr>
+            <tr><td>合规</td><td>关键操作需人工复核 + 电子签名</td></tr>
+            <tr><td>审计</td><td>状态变更需经 API 层留下哈希链审计日志</td></tr>
+            <tr><td>安全</td><td>AI 只做辅助，不直接改变业务状态</td></tr>
+            <tr><td>测试</td><td>不依赖写操作，context 传数据即可单测</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 15：服务层状态机</div>
+    <div class="knowledge-body">
+        <pre><code># 偏差管理状态机
+ALLOWED_TRANSITIONS = {
+    "reported":     {"classified", "reported"},
+    "classified":   {"investing", "reported"},
+    "investigating":{"qa_review", "reported"},
+    "qa_review":    {"capa_linked", "investigating", "reported"},
+    "capa_linked":  {"closed", "reported"},
+    "closed":       set(),                              # 终态
+}</code></pre>
+        <ul>
+            <li><strong>白名单转换</strong>：只有 set 中定义的目标状态才合法</li>
+            <li><strong>不可逆终态</strong>：<code>closed</code> 转换集合为空</li>
+            <li><strong>回退路径</strong>：多数状态可回退到 <code>reported</code></li>
+            <li><strong>critical 自动挂起</strong>：分级 critical 时自动创建 BatchHold</li>
+            <li><strong>关闭前置</strong>：关联 CAPA + CAPA verified + 无 held 挂起</li>
+            <li><strong>四眼原则</strong>：变更审批 <code>initiator_id ≠ approver_id</code></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ===== 基础设施知识点 ===== -->
+<h3>5.3 基础设施知识点</h3>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 16：哈希链审计日志</div>
+    <div class="knowledge-body">
+        <pre><code># 每条审计日志
+{
+    "action": "classify_deviation",
+    "prev_hash": "abc123...",     # ← 上一条的 SHA256 哈希
+    "data_hash": "def456...",    # ← 当前记录数据的哈希
+    "timestamp": "2026-09-10...", # naive UTC 秒级(去微秒)
+    "actor_id": 42,
+}
+
+# 哈希计算
+compute_hash = SHA256(prev_hash + timestamp + actor_id + action + payload)
+# payload = json.dumps({before, after}, sort_keys=True)
+
+# 定时校验
+verify_hash_chain()  # 全量遍历逐条重算，不一致立即告警</code></pre>
+        <p>时间戳使用 naive UTC 秒级精度（去微秒），避免 MySQL 截断导致校验失败。GMP/GCP 要求所有关键操作可追溯、不可篡改。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 17：电子签名（21 CFR Part 11）</div>
+    <div class="knowledge-body">
+        <ul>
+            <li><strong>PIN 码验证</strong>：用户输入独立 PIN 码进行二次验证</li>
+            <li><strong>幂等性密钥</strong>：<code>idempotency_key</code> 防止重复签名</li>
+            <li><strong>7 种签名场景</strong>：<code>SIGNATURE_MEANINGS</code> 枚举（SAE/变更/偏差/CAPA/法规库等）</li>
+            <li><strong>content_hash</strong> = SHA256(<code>record_type:record_id:user.id:meaning</code>)</li>
+            <li><strong>审计日志</strong>：每次签名写入哈希链审计日志</li>
+        </ul>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 18：多租户隔离</div>
+    <div class="knowledge-body">
+        <pre><code># Milvus 检索时按 tenant_id 过滤
+results = client.search(
+    collection_name=collection_name,
+    data=[query_vector],
+    filter=f"tenant_id == {tenant_id}",
+    output_fields=["entity_id", "text", "doc_version"],
+)</code></pre>
+        <p>所有核心数据表和 Milvus 集合都包含 <code>tenant_id</code> 字段，实现数据级隔离。</p>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 19：评估门禁</div>
+    <div class="knowledge-body">
+        <p><code>docs/eval_sets/qa_full_200.json</code>：200 条评估集（GMP 88 + GCP 88 条款级命中 + 24 幻觉注入），16 条子集用于快速回归。</p>
+        <table>
+            <tr><th>指标</th><th>阈值</th><th>说明</th></tr>
+            <tr><td>命中率</td><td>&gt;= 90%</td><td>检索到正确条款的比例</td></tr>
+            <tr><td>准确率</td><td>&gt;= 85%</td><td>答案内容的正确性</td></tr>
+            <tr><td>幻觉阻断率</td><td>100%</td><td>幻觉注入用例全部被阻断</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 20：LLM 客户端与重试机制</div>
+    <div class="knowledge-body">
+        <pre><code>class LLMClient:
+    # 同步：重试 3 次，指数退避 2-10s，超时 60s
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+    async def chat(self, messages, temperature=0.3) -> str: ...
+
+    # 流式：重试 2 次，指数退避 1-5s，超时 120s
+    @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, min=1, max=5))
+    async def chat_stream(self, messages, temperature=0.3) -> AsyncIterator[str]: ...</code></pre>
+        <ul>
+            <li><strong>OpenAI 兼容 API</strong>：<code>/chat/completions</code> 端点</li>
+            <li><strong>tenacity 重试</strong>：指数退避，避免雪崩</li>
+            <li><strong>流式解析</strong>：解析 <code>data: </code> SSE 格式，提取 <code>delta.content</code></li>
+        </ul>
+    </div>
+</div>
+
+<div class="knowledge-card">
+    <div class="knowledge-header">知识点 21：本地化模型部署</div>
+    <div class="knowledge-body">
+        <div class="arch-box">┌─────────────────────────────────────┐
+│  deploy/models_server.py (:8081)   │
+│                                     │
+│  POST /embed                        │
+│    → SentenceTransformer(bge-m3)   │
+│    → 1024 维向量                    │
+│                                     │
+│  POST /rerank                       │
+│    → CrossEncoder(bge-reranker)    │
+│    → relevance_score                │
+└─────────────────────────────────────┘
+         ↑ httpx 异步调用
+┌─────────────────────────────────────┐
+│  LLM (:8080/v1)                     │
+│    → qwen2.5-14b (OpenAI 兼容)     │
+│    → 或远程 API                     │
+└─────────────────────────────────────┘</div>
+        <p>制药行业数据敏感，法规文本不能上传外部 API。Embedding 和 Rerank 模型本地部署。</p>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="callout callout-success">
+    <strong>文档说明：</strong>本文档基于 PharmaReg 项目源码（<code>backend/app/rag/</code>、<code>backend/app/agents/</code>、<code>backend/app/ingestion/</code>、<code>deploy/</code> 等目录）编写，所有代码片段均来自实际项目文件。建议在面试前结合代码实现深入理解每个知识点的原理和设计决策。
+</div>
+
+</div>
+</body>
+</html>

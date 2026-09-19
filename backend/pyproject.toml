@@ -1,0 +1,62 @@
+[project]
+name = "pharmareg"
+version = "1.0.0"
+description = "PharmaReg 制药合规知识平台后端"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "pymysql>=1.1",
+    "aiomysql>=0.2",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.5",
+    "python-jose[cryptography]>=3.3",
+    "passlib[bcrypt]>=1.7",
+    "python-multipart>=0.0.9",
+    "redis>=5.0",
+    "pymilvus>=2.4",
+    "langgraph>=0.2",
+    "httpx>=0.27",
+    "sse-starlette>=2.1",
+    "python-jose[cryptography]>=3.3",
+    "websockets>=13.0",
+    "structlog>=24.1",
+    "tenacity>=9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5.0",
+    "httpx>=0.27",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+# E501: 中文/ORM查询行长属正常；E712: SQLAlchemy 条件需用 == False（not 会触发 Column bool 求值错误）
+extend-ignore = ["E501", "E712", "N818", "N805", "N814", "UP046"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
